@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="98bea82b-3a76-4037-baac-31ec422996c9" name="Default" comment="" />
+    <ignored path="pilot_remote.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <option name="FLATTEN" value="false" />
+    <option name="GROUP_BY_TYPE" value="true" />
+    <option name="SORT_CHILDREN" value="false" />
+    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="pilot_remote" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomEncoder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CustomEncoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1887">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBReleaseHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBReleaseHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5083">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dCacheLFCSiteMover.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dCacheLFCSiteMover.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4522">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="environment.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/environment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.7238806" vertical-offset="542" max-vertical-offset="2805">
+              <caret line="127" column="13" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SiteInformation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SiteInformation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="17935">
+              <caret line="189" column="37" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventRanges.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EventRanges.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EventService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2890">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventServiceFactory.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EventServiceFactory.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Experiment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Experiment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="11560" max-vertical-offset="15589">
+              <caret line="694" column="58" selection-start-line="694" selection-start-column="58" selection-end-line="694" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/environment.py" />
+        <option value="$PROJECT_DIR$/pUtil.py" />
+        <option value="$PROJECT_DIR$/glexec_utils.py" />
+        <option value="$PROJECT_DIR$/epic.py" />
+        <option value="$PROJECT_DIR$/pilot.py" />
+        <option value="$PROJECT_DIR$/Monitor.py" />
+        <option value="$PROJECT_DIR$/lcgcp2SiteMover.py" />
+        <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1874" />
+    <option name="height" value="1096" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pilot_remote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pilot_remote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pilot_remote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.lastSelected" value="preferences.sourceCode.Python" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings />
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dan\Projects\pilot_remote" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dan\Projects\pilot_remote" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pilot_remote" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="98bea82b-3a76-4037-baac-31ec422996c9" name="Default" comment="" />
+      <created>1426500659532</created>
+      <option name="number" value="Default" />
+      <updated>1426500659532</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Such work, so fix, wow">
+      <created>1426544892778</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1426544892778</updated>
+    </task>
+    <task id="LOCAL-00002" summary="It is about to work">
+      <created>1426690749703</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1426690749703</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Working out all well, except some configs">
+      <created>1426777844171</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1426777844171</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Working.">
+      <created>1427292652566</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1427292652566</updated>
+    </task>
+    <task id="LOCAL-00005" summary="path to var">
+      <created>1427379567410</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1427379567410</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.176957" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="Such work, so fix, wow" />
+    <MESSAGE value="It is about to work" />
+    <MESSAGE value="Working out all well, except some configs" />
+    <MESSAGE value="Working." />
+    <MESSAGE value="path to var" />
+    <option name="LAST_COMMIT_MESSAGE" value="path to var" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="6" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/RunJob.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12034" max-vertical-offset="24140">
+          <caret line="727" column="30" selection-start-line="727" selection-start-column="30" selection-end-line="727" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ATLASExperiment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="47042" max-vertical-offset="52377">
+          <caret line="2812" column="13" selection-start-line="2812" selection-start-column="13" selection-end-line="2812" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glexec_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2408" max-vertical-offset="3859">
+          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2272" max-vertical-offset="4216">
+          <caret line="169" column="51" selection-start-line="169" selection-start-column="51" selection-end-line="169" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/adaptors/slurm/slurm_job.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="20213">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glexec_aux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="952">
+          <caret line="41" column="68" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="280" max-vertical-offset="13974">
+          <caret line="21" column="34" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pilot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="43203" max-vertical-offset="46393">
+          <caret line="2543" column="44" selection-start-line="2543" selection-start-column="44" selection-end-line="2543" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="65669" max-vertical-offset="75531">
+          <caret line="3863" column="43" selection-start-line="3863" selection-start-column="43" selection-end-line="3863" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="2805">
+          <caret line="90" column="27" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configuration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1171" max-vertical-offset="2108">
+          <caret line="96" column="44" selection-start-line="96" selection-start-column="44" selection-end-line="96" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glexec_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1951" max-vertical-offset="4369">
+          <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobTitan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="11101">
+          <caret line="147" column="43" selection-start-line="147" selection-start-column="29" selection-end-line="147" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glexec_aux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/adaptors/shell/shell_job.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.485592" vertical-offset="18258" max-vertical-offset="25857">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/url.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/radical/utils/url.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="7514">
+          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/adaptors/shell/shell_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6987" max-vertical-offset="23851">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/filesystem/directory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3364" max-vertical-offset="4301">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/filesystem/file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2395" max-vertical-offset="6069">
+          <caret line="200" column="33" selection-start-line="200" selection-start-column="33" selection-end-line="200" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/namespace/entry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6171">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/namespace/directory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8500">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/job/job.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7956" max-vertical-offset="12835">
+          <caret line="489" column="0" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PandaServerClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2703" max-vertical-offset="14535">
+          <caret line="109" column="53" selection-start-line="109" selection-start-column="53" selection-end-line="109" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobTitan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3213" max-vertical-offset="11101">
+          <caret line="222" column="117" selection-start-line="222" selection-start-column="117" selection-end-line="222" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJob.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12034" max-vertical-offset="24140">
+          <caret line="727" column="30" selection-start-line="727" selection-start-column="30" selection-end-line="727" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="13974">
+          <caret line="21" column="34" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ATLASExperiment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="47042" max-vertical-offset="52377">
+          <caret line="2812" column="13" selection-start-line="2812" selection-start-column="13" selection-end-line="2812" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saga/adaptors/slurm/slurm_job.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="20213">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UpdateHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2720">
+          <caret line="80" column="59" selection-start-line="80" selection-start-column="59" selection-end-line="80" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Monitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3717" max-vertical-offset="23188">
+          <caret line="247" column="0" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glexec_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2408" max-vertical-offset="3859">
+          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChirpSiteMover.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5145946" vertical-offset="0" max-vertical-offset="5236">
+          <caret line="28" column="115" selection-start-line="28" selection-start-column="115" selection-end-line="28" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xrdcpSiteMover.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17493">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stormSiteMover.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1802">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lcgcp2SiteMover.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6103">
+          <caret line="430" column="23" selection-start-line="430" selection-start-column="23" selection-end-line="430" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glexec_aux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
+          <caret line="34" column="57" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="75531">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pilot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="43191" max-vertical-offset="46410">
+          <caret line="2554" column="55" selection-start-line="2554" selection-start-column="55" selection-end-line="2554" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="4318">
+          <caret line="105" column="57" selection-start-line="105" selection-start-column="57" selection-end-line="105" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configuration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1171" max-vertical-offset="2108">
+          <caret line="96" column="44" selection-start-line="96" selection-start-column="44" selection-end-line="96" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SiteInformation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="17935">
+          <caret line="189" column="37" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EventRanges.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EventService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2890">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EventServiceFactory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15589">
+          <caret line="694" column="58" selection-start-line="694" selection-start-column="58" selection-end-line="694" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="937">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CustomEncoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1887">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBReleaseHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5083">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dCacheLFCSiteMover.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4522">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.7238806" vertical-offset="542" max-vertical-offset="2805">
+          <caret line="127" column="13" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

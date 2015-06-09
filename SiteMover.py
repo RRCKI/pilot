@@ -304,22 +304,6 @@ class SiteMover(object):
         return status
     isTapeSite = staticmethod(isTapeSite)
 
-    def isTapeSiteRUCIO(sitename):
-        """ Check whether the Rucio site is a tape site or not """
-
-        status = False
-        try:
-            from rucio.client import Client
-            client = Client()
-            if client.get_rse(sitename)['rse_type']  == 'TAPE':
-                status = True
-        except:
-            tolog("Exception caught (assuming no tape site)")
-            status = False
-            
-        return status
-    isTapeSite = staticmethod(isTapeSite)
-
     def getDQ2SEType(dq2sitename):
         """ Return the corresponding setype for the site """
 
@@ -686,7 +670,7 @@ class SiteMover(object):
         # Special case for GROUPDISK
         # In this case, (e.g.) token = 'dst:AGLT2_PERF-MUONS'
         # Pilot should then consult TiersOfATLAS and get it from the corresponding srm entry 
-        if token != None and "dst:" in token:
+        if "dst:" in token:
             # if the job comes from a different cloud than the sites' cloud, destination will be set to "" and the
             # default space token will be used instead (the transfer to groupdisk will be handled by DDM not pilot) 
             destination = self.getGroupDiskPath(endpoint=token)
@@ -1125,45 +1109,6 @@ class SiteMover(object):
                     tolog("!!WARNING!!1113!! GUID = %s not found in DQ2 dataset (%s): %s" % (guid, dataset, e))
 
         return fileInDataset
-
-    def getFileInfoFromRucio(self, scope, dataset, guid):
-        """ Get the file size and checksum from Rucio """
-
-        filesize = ""
-        checksum = ""
-
-        tolog("scope=%s"%scope)
-        tolog("dataset=%s"%dataset)
-        tolog("guid=%s"%guid)
-        pre = scope + ":"
-        if dataset.startswith(pre):
-            dataset = dataset.replace(pre, "")
-        try:
-            from rucio.client import Client
-            client = Client()
-            replica_list = [i for i in client.list_files(scope, dataset)]
-        except Exception, e:
-            tolog("!!WARNING!!2233!! Exception caught: %s" % (e))
-        else:
-            # Extract the info for the correct guid
-            tolog("Rucio returned a replica list with %d entries" % (len(replica_list)))
-            for i in range(0, len(replica_list)):
-                # replica = {u'adler32': u'9849e8ae', u'name': u'EVNT.01580095._002901.pool.root.1', u'bytes': 469906, u'scope': u'mc12_13TeV', u'guid': u'F88E0A836696344981358463A641A486', u'events': None}
-                # Is it the replica we are looking for?
-                if not "-" in replica_list[i]['guid']:
-                    # Convert the guid (guids in Rucio might not have dashes)
-                    guid = guid.replace('-', '')
-                if guid == replica_list[i]['guid']:
-                    checksum = replica_list[i]['adler32']
-                    filesize = str(replica_list[i]['bytes'])
-                    events = replica_list[i]['events']
-                    if events != None:
-                        tolog("File %s has checksum %s, size %s and %d events" % (replica_list[i]['name'], checksum, filesize, str(replica_list[i]['events'])))
-                    else:
-                        tolog("File %s has checksum %s and size %s (no recorded events)" % (replica_list[i]['name'], checksum, filesize))
-                    break
-
-        return filesize, checksum
 
     def getFileInfoFromDQ2(self, dataset, guid):
         """ Get the file size and checksum from DQ2 """

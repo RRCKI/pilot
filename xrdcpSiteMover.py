@@ -164,7 +164,7 @@ class xrdcpSiteMover(SiteMover.SiteMover):
         si = getSiteInformation(experiment)
         self._defaultSetup = self.getLocalROOTSetup(si)
 
-        _setupStr = self._defaultSetup #self.getSetup()
+        _setupStr = self.getSetup()
 
         # get the user proxy if available
         envsetupTest = _setupStr.strip()
@@ -633,7 +633,7 @@ class xrdcpSiteMover(SiteMover.SiteMover):
         """ get checksum from xrdcp --chksum command output"""
         remote_checksum = None
         # get remote checksum from the command output
-        if "xrootd" in output or "XRootD" in output or "adler32" in output:
+        if "xrootd" in output or "XRootD" in output:
             status = False
             # define the search patterns
             if "md5:" in output:

@@ -37,10 +37,6 @@ class TimerCommand(object):
 
         thread.join(timeout)
         if thread.is_alive():
-            if self.stdout:
-                self.stdout += "Command Timeout(%s seconds)." % timeout
-            else:
-                self.stdout = "Command Timeout(%s seconds)." % timeout
             try:
                 # print 'TimeOut. Terminating process'
                 self.process.terminate()

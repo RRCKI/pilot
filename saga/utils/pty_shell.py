@@ -36,6 +36,11 @@ STDOUT   = 3    # fetch stdout only, discard stderr
 STDERR   = 4    # fetch stderr only, discard stdout
 
 
+# ------------------------------------------------------------------------------
+#
+DEFAULT_PROMPT = "[\$#%>\]]\s*$"
+
+
 # --------------------------------------------------------------------
 #
 class PTYShell (object) :
@@ -181,42 +186,40 @@ class PTYShell (object) :
 
     # ----------------------------------------------------------------
     #
-    def __init__ (self, url, session=None, logger=None, init=None, opts={}, posix=True) :
+    def __init__ (self, url, session=None, logger=None, opts=None, posix=True):
 
-      # print 'new pty shell to %s' % url
+        if logger : self.logger  = logger
+        else      : self.logger  = rul.getLogger('saga', 'PTYShell') 
 
-        if   logger  : self.logger  = logger
-        else         : self.logger  = rul.getLogger ('saga', 'PTYShell') 
+        if session: self.session = session
+        else      : self.session = ss.Session(default=True)
 
-        if   session : self.session = session
-        else         : self.session = ss.Session (default=True)
+        if opts   : self.options = opts   
+        else      : self.options = dict()
 
         self.logger.debug ("PTYShell init %s" % self)
 
         self.url         = url      # describes the shell to run
-        self.init        = init     # call after reconnect
-        self.opts        = opts     # options...
         self.posix       = posix    # /bin/sh compatible?
         self.latency     = 0.0      # set by factory
         self.cp_slave    = None     # file copy channel
 
-        self.prompt      = "[\$#%>\]]\s*$"
-        self.prompt_re   = re.compile ("^(.*?)%s\s*$" % self.prompt, re.DOTALL)
         self.initialized = False
 
         self.pty_id       = PTYShell._pty_id
         PTYShell._pty_id += 1
 
-        # get prompt pattern from config
-        self.cfg       = self.session.get_config('saga.utils.pty')
+        self.cfg = self.session.get_config('saga.utils.pty')
 
-        if  'prompt_pattern' in self.cfg :
-            self.prompt    = self.cfg['prompt_pattern'].get_value ()
-            self.prompt_re = re.compile ("^(.*?)%s" % self.prompt, re.DOTALL)
-        else :
-            self.prompt    = "[\$#%>\]]\s*$"
-            self.prompt_re = re.compile ("^(.*?)%s" % self.prompt, re.DOTALL)
+        # get prompt pattern from options, config, or use default
+        if 'prompt_pattern' in self.options:
+            self.prompt = self.options['prompt_pattern']
+        elif 'prompt_pattern' in self.cfg:
+            self.prompt = self.cfg['prompt_pattern'].get_value ()
+        else:
+            self.prompt = DEFAULT_PROMPT
 
+        self.prompt_re = re.compile ("^(.*?)%s" % self.prompt, re.DOTALL)
         self.logger.info ("PTY prompt pattern: %s" % self.prompt)
 
         # we need a local dir for file staging caches.  At this point we use
@@ -278,8 +281,8 @@ class PTYShell (object) :
                 command_shell = "exec /bin/sh -i"
 
                 # use custom shell if so requested
-                if  'shell' in self.opts and self.opts['shell'] :
-                    command_shell = "exec %s" % self.opts['shell']
+                if  'shell' in self.options and self.options['shell'] :
+                    command_shell = "exec %s" % self.options['shell']
                     self.logger.info ("custom  command shell: %s" % command_shell)
 
 
@@ -321,6 +324,7 @@ class PTYShell (object) :
                 
                 
 
+            self.pty_shell.flush ()
             self.initialized = True
             self.finalized   = False
 
@@ -641,6 +645,7 @@ class PTYShell (object) :
         with self.pty_shell.rlock :
          
             self._trace ("run sync  : %s" % command)
+            self.pty_shell.flush ()
 
             # we expect the shell to be in 'ground state' when running a syncronous
             # command -- thus we can check if the shell is alive before doing so,
@@ -760,7 +765,8 @@ class PTYShell (object) :
 
         with self.pty_shell.rlock :
 
-          # self._trace ("run async : %s" % command)
+            self._trace ("run async : %s" % command)
+            self.pty_shell.flush ()
 
             # we expect the shell to be in 'ground state' when running an asyncronous
             # command -- thus we can check if the shell is alive before doing so,
@@ -939,9 +945,11 @@ class PTYShell (object) :
         have to do a local expansion, and the to do the same for each entry...
         """
 
-        self._trace ("copy  to  : %s -> %s" % (src, tgt))
-
         with self.pty_shell.rlock :
+
+            self._trace ("copy  to  : %s -> %s" % (src, tgt))
+            self.pty_shell.flush ()
+
 
             info = self.pty_info
             repl = dict ({'src'      : src, 
@@ -949,8 +957,9 @@ class PTYShell (object) :
                           'cp_flags' : cp_flags}.items () + info.items ())
 
             # at this point, we do have a valid, living master
-            s_cmd = info['scripts'][info['copy_type']]['copy_to']    % repl
-            s_in  = info['scripts'][info['copy_type']]['copy_to_in'] % repl
+            s_cmd = info['scripts'][info['copy_mode']]['copy_to']    % repl
+            s_in  = info['scripts'][info['copy_mode']]['copy_to_in'] % repl
+            posix = info['scripts'][info['copy_mode']]['copy_is_posix']
 
             if  not s_in :
                 # this code path does not use an interactive shell for copy --
@@ -972,9 +981,11 @@ class PTYShell (object) :
             # run the actual copy command.
             if  not self.cp_slave :
                 self._trace ("get cp slave")
-                self.cp_slave = self.factory.get_cp_slave (s_cmd, info)
+                self.cp_slave = self.factory.get_cp_slave (s_cmd, info, posix)
 
+            self.cp_slave.flush ()
             prep = ""
+
             if  'sftp' in s_cmd :
                 # prepare target dirs for recursive copy, if needed
                 import glob
@@ -984,9 +995,9 @@ class PTYShell (object) :
                         prep += "mkdir %s/%s\n" % (tgt, os.path.basename (s))
 
 
+            self.cp_slave.flush ()
             _      = self.cp_slave.write    ("%s%s\n" % (prep, s_in))
             _, out = self.cp_slave.find     (['[\$\>\]]\s*$'], -1)
-            _, out = self.cp_slave.find     (['[\$\>\]]\s*$'], 1.0)
 
             # FIXME: we don't really get exit codes from copy
             # if  self.cp_slave.exit_code != 0 :
@@ -1046,9 +1057,10 @@ class PTYShell (object) :
         need to expand wildcards on the *remote* side :/
         """
 
-        self._trace ("copy  from: %s -> %s" % (src, tgt))
-
         with self.pty_shell.rlock :
+
+            self._trace ("copy  from: %s -> %s" % (src, tgt))
+            self.pty_shell.flush ()
 
             info = self.pty_info
             repl = dict ({'src'      : src, 
@@ -1056,8 +1068,9 @@ class PTYShell (object) :
                           'cp_flags' : cp_flags}.items ()+ info.items ())
 
             # at this point, we do have a valid, living master
-            s_cmd = info['scripts'][info['copy_type']]['copy_from']    % repl
-            s_in  = info['scripts'][info['copy_type']]['copy_from_in'] % repl
+            s_cmd = info['scripts'][info['copy_mode']]['copy_from']    % repl
+            s_in  = info['scripts'][info['copy_mode']]['copy_from_in'] % repl
+            posix = info['scripts'][info['copy_mode']]['copy_is_posix']
 
             if  not s_in :
                 # this code path does not use an interactive shell for copy --
@@ -1068,14 +1081,15 @@ class PTYShell (object) :
                 cp_proc = supp.PTYProcess (s_cmd)
                 cp_proc.wait ()
                 if  cp_proc.exit_code :
-                    raise ptye.translate_exception (se.NoSuccess ("file copy failed: %s" % out))
+                    raise ptye.translate_exception (se.NoSuccess ("file copy failed: exit code %s" % cp_proc.exit_code))
 
                 return list()
 
             if  not self.cp_slave :
                 self._trace ("get cp slave")
-                self.cp_slave = self.factory.get_cp_slave (s_cmd, info)
+                self.cp_slave = self.factory.get_cp_slave (s_cmd, info, posix)
 
+            self.cp_slave.flush ()
             prep = ""
 
             if  'sftp' in s_cmd :
@@ -1090,6 +1104,7 @@ class PTYShell (object) :
                         prep += "lmkdir %s/%s\n" % (tgt, os.path.basename (s))
 
 
+            self.cp_slave.flush ()
             _      = self.cp_slave.write    ("%s%s\n" % (prep, s_in))
             _, out = self.cp_slave.find     (['[\$\>\]] *$'], -1)
 
@@ -1140,6 +1155,5 @@ class PTYShell (object) :
             return files
 
 
-
-
+# ------------------------------------------------------------------------------
 

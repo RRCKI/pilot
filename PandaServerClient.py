@@ -4,10 +4,9 @@ from commands import getstatusoutput, getoutput
 from shutil import copy2
 
 from PilotErrors import PilotErrors
-from pUtil import tolog, readpar, timeStamp, getBatchSystemJobID, getCPUmodel, PFCxml, updateMetadata, addSkippedToPFC, makeHTTPUpdate, tailPilotErrorDiag, isLogfileCopied, updateJobState, updateXMLWithSURLs, getMetadata, toPandaLogger, getSiteInformation, getExperiment
+from pUtil import tolog, readpar, timeStamp, getBatchSystemJobID, getCPUmodel, PFCxml, updateMetadata, addSkippedToPFC, makeHTTPUpdate, tailPilotErrorDiag, isLogfileCopied, updateJobState, updateXMLWithSURLs, getMetadata, toPandaLogger, getSiteInformation
 from JobState import JobState
 from FileState import FileState
-from FileHandling import getJSONDictionary
 
 class PandaServerClient:
     """
@@ -104,17 +103,7 @@ class PandaServerClient:
         # format: nEvents=<int> nEventsW=<int> vmPeakMax=<int> vmPeakMean=<int> RSSMean=<int> JEM=<string>
         #         hs06=<float> shutdownTime=<int> cpuFactor=<float> cpuLimit=<float> diskLimit=<float> jobStart=<int> memLimit=<int> runLimit=<float>
 
-        # get the experiment object
-        thisExperiment = getExperiment(job.experiment)
-
         if job.coreCount:
-            # Always use the ATHENA_PROC_NUMBER first, if set
-            if os.environ.has_key('ATHENA_PROC_NUMBER'):
-                try:
-                    job.coreCount = int(os.environ['ATHENA_PROC_NUMBER'])
-                except Exception, e:
-                    tolog("ATHENA_PROC_NUMBER is not properly set: %s (will use existing job.coreCount value)" % (e))
-                    
             coreCount = job.coreCount
         else:
             try:
@@ -128,25 +117,12 @@ class PandaServerClient:
             jobMetrics += self.jobMetric(key="nEvents", value=job.nEvents)
         if job.nEventsW > 0:
             jobMetrics += self.jobMetric(key="nEventsW", value=job.nEventsW)
-
-        # Grab the memory monitor JSON dictionary if required
-        filename = os.path.join(self.__pilot_initdir, thisExperiment.getMemoryMonitorJSONFilename())
-        if os.path.exists(filename):
-            tolog("Found memory monitor JSON file, will add its dictionary to job metrics")
-
-            # Get the dictionary
-            d = getJSONDictionary(filename)
-            if d and d != {}:
-                jobMetrics += self.jobMetric(key="mem", value=str(d))
-        else:
-            tolog("Memory monitor JSON file does not exist: %s" % (filename))
-
-            if job.vmPeakMax > 0:
-                jobMetrics += self.jobMetric(key="vmPeakMax", value=job.vmPeakMax)
-            if job.vmPeakMean > 0:
-                jobMetrics += self.jobMetric(key="vmPeakMean", value=job.vmPeakMean)
-            if job.RSSMean > 0:
-                jobMetrics += self.jobMetric(key="RSSMean", value=job.RSSMean)
+        if job.vmPeakMax > 0:
+            jobMetrics += self.jobMetric(key="vmPeakMax", value=job.vmPeakMax)
+        if job.vmPeakMean > 0:
+            jobMetrics += self.jobMetric(key="vmPeakMean", value=job.vmPeakMean)
+        if job.RSSMean > 0:
+            jobMetrics += self.jobMetric(key="RSSMean", value=job.RSSMean)
 
         # hpc status
         if job.mode:
@@ -375,7 +351,7 @@ class PandaServerClient:
                 from SiteMoverFarm import getSiteMover
                 sitemover = getSiteMover(readpar('copytool'), "")
 
-                if os.environ.has_key('Nordugrid_pilot'):
+                if readpar('region') == 'Nordugrid':
                     fname = os.path.join(self.__pilot_initdir, job.logFile)
                 else:
                     fname = os.path.join(workdir, job.logFile)
@@ -414,7 +390,7 @@ class PandaServerClient:
                             f.close()
 
                             # transfer logfile.xml to pilot init dir for Nordugrid
-                            if os.environ.has_key('Nordugrid_pilot'):
+                            if readpar('region') == 'Nordugrid':
                                 try:
                                     copy2(fnamelog, self.__pilot_initdir)
                                 except Exception, e:
@@ -425,7 +401,7 @@ class PandaServerClient:
                 else: # log file does not exist anymore
                     if isLogfileCopied(workdir):
                         tolog("Log file has already been copied and removed")
-                        if not os.environ.has_key('Nordugrid_pilot'):
+                        if readpar('region') != 'Nordugrid':
                             # only send xml with log info if the log has been transferred
                             if xmlstr:
                                 node_xml = xmlstr
@@ -449,7 +425,7 @@ class PandaServerClient:
                         ec = addSkippedToPFC(fname, _skippedfname)
 
                     # transfer metadata to pilot init dir for Nordugrid
-                    if os.environ.has_key('Nordugrid_pilot'):
+                    if readpar('region') == 'Nordugrid':
                         try:
                             copy2(fname, self.__pilot_initdir)
                         except Exception, e:
@@ -463,7 +439,7 @@ class PandaServerClient:
                 node_xml = xmlstr
 
             # we don't need the job's log file anymore, delete it (except for NG)
-            if (job.result[0] == 'failed' or job.result[0] == 'finished') and not os.environ.has_key('Nordugrid_pilot'):
+            if (job.result[0] == 'failed' or job.result[0] == 'finished') and readpar('region') != 'Nordugrid':
                 try:
                     os.system("rm -rf %s/%s" % (workdir, job.logFile))
                 except OSError:
@@ -772,7 +748,7 @@ class PandaServerClient:
             experiment = "unknown"
 
         # do not make the update if Nordugrid (leave for ARC to do)
-        if os.environ.has_key('Nordugrid_pilot'):
+        if readpar('region') == 'Nordugrid':
             if final:
                 # update xml with SURLs stored in special SURL dictionary file
                 if self.updateOutputFilesXMLWithSURLs4NG(experiment, site.workdir, job.jobId, job.outputFilesXML):

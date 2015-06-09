@@ -22,15 +22,13 @@ import Job
 import Node
 import pUtil
 import glexec_utils
+import remoteMonitorStarter
 from Configuration import Configuration
 from WatchDog import WatchDog
 from Monitor import Monitor
 import subprocess
+import hashlib
 
-try:
-    from rucio.client import Client
-except Exception, e:
-    print "!!WARNING!!0000!! Exception caught:", e
 
 # Initialize the configuration singleton
 import environment
@@ -300,11 +298,6 @@ def argParser(argv):
 
         elif o == "-F": 
             env['experiment'] = a
-
-            # Special case for Nordugrid: define env variable already here
-            if "Nordugrid" in a:
-                os.environ['Nordugrid_pilot'] = ""
-                print "Created environment variable \'Nordugrid_pilot\'"
 
         elif o == "-G": 
             try:
@@ -2286,11 +2279,11 @@ def checkLocalDiskSpace(error):
     spaceleft = int(env['workerNode'].disk)*1024**2 # B (node.disk is in MB)
     _localspacelimit = env['localspacelimit0']*1024 # B
     pUtil.tolog("Local space limit: %d B" % (_localspacelimit))
-    if spaceleft < _localspacelimit:
-        pUtil.tolog("!!FAILED!!1999!! Too little space left on local disk to run job: %d B (need > %d B)" % (spaceleft, _localspacelimit))
-        ec = error.ERR_NOLOCALSPACE
-    else:
-        pUtil.tolog("Remaining local disk space: %d B" % (spaceleft))
+    # if spaceleft < _localspacelimit: #CLX
+    #     pUtil.tolog("!!FAILED!!1999!! Too little space left on local disk to run job: %d B (need > %d B)" % (spaceleft, _localspacelimit))
+    #     ec = error.ERR_NOLOCALSPACE
+    # else:
+    #     pUtil.tolog("Remaining local disk space: %d B" % (spaceleft))
 
     return ec
 
@@ -2382,6 +2375,7 @@ def runMain(runpars):
         # add the current dir to the path to make sure pilot modules can be found
         sys.path.append(os.path.abspath(os.curdir))
 
+
         # parse the pilot argument list (e.g. queuename is updated)
         argParser(runpars)
         args = [env['sitename'], env['appdir'], env['workdir'], env['dq2url'], env['queuename']]
@@ -2400,6 +2394,7 @@ def runMain(runpars):
 
         # the maximum time this pilot is allowed to run
         env['maxtime'] = getMaxtime()
+
 
         # get the experiment object
         thisExperiment = pUtil.getExperiment(env['experiment'])
@@ -2564,7 +2559,7 @@ def runMain(runpars):
                         env['pilotErrorDiag'] = "Post getjob actions failed - workdir does not exist, cannot create job log, see batch log"
                         pUtil.tolog("!!WARNING!!2233!! Work dir has not been created yet so cannot create job log in this case - refer to batch log")
                         updatePandaServer(env['job'], env['thisSite'], env['psport'], schedulerID = env['jobSchedulerId'], pilotID = env['pilotId'])
-#                        pUtil.postJobTask(env['job'], env['thisSite'], env['workerNode'], env['experiment'], jr=False)
+                        # pUtil.postJobTask(env['job'], env['thisSite'], env['workerNode'], env['experiment'], jr=False)
                         pUtil.fastCleanup(env['thisSite'].workdir, env['pilot_initdir'], env['rmwkdir'])
                         return pUtil.shellExitCode(ec)
                     except Exception, e:
@@ -2575,8 +2570,14 @@ def runMain(runpars):
             if env['glexec'] == 'False':
                 monitor = Monitor(env)
                 monitor.monitor_job()
-	    elif env['glexec'] == 'test':
-		pUtil.tolog('glexec is set to test, we will hard-fail miserably in case of errors')
+            elif env['glexec'] == 'remote':
+                pUtil.tolog('glexec is set to remote, using remoteMonitorStarter to start a remote process')
+                payload = 'python -m glexec_aux'
+                starter = remoteMonitorStarter.RemoteMonitorStarter(payload=payload)
+                starter.setup_and_run()
+                env['return']='break'
+            elif env['glexec'] == 'test':
+                pUtil.tolog('glexec is set to test, we will hard-fail miserably in case of errors')
                 payload = 'python -m glexec_aux'
                 my_proxy_interface_instance = glexec_utils.MyProxyInterface(env['userProxy'])
                 glexec_interface = glexec_utils.GlexecInterface(my_proxy_interface_instance, payload=payload)
@@ -2584,33 +2585,38 @@ def runMain(runpars):
             else:
                 # Try to ping the glexec infrastructure to test if it is ok.
                 # If it is ok, go ahead with glexec, if not, use the normal pilot mode without glexec.
+                temp_proxy_path = os.path.join('/tmp', str(hashlib.sha1(env['userProxy']).hexdigest()))
+                text_file = open(temp_proxy_path, 'w')
+                text_file.write(env['userProxy'])
+                text_file.close()
+                os.chmod(temp_proxy_path, 0700)
 
                 if os.environ.has_key('OSG_GLEXEC_LOCATION'):
-			if os.environ['OSG_GLEXEC_LOCATION'] != '':
-				glexec_path = os.environ['OSG_GLEXEC_LOCATION']
-     			else:
-			        glexec_path = '/usr/sbin/glexec'
-                                os.environ['OSG_GLEXEC_LOCATION'] = '/usr/sbin/glexec'
-                elif os.environ.has_key('GLEXEC_LOCATION'):
-			if os.environ['GLEXEC_LOCATION'] != '':
-	     			glexec_path = os.path.join(os.environ['GLEXEC_LOCATION'],'sbin/glexec')
-     			else:
-             			glexec_path = '/usr/sbin/glexec'
-                                os.environ['GLEXEC_LOCATION'] = '/usr'
-		elif os.path.exists('/usr/sbin/glexec'):
-			glexec_path = '/usr/sbin/glexec'
-	                os.environ['GLEXEC_LOCATION'] = '/usr'
-                elif os.environ.has_key('GLITE_LOCATION'):
-                        glexec_path = os.path.join(os.environ['GLITE_LOCATION'],
-                                             'sbin/glexec')
-                else:
-			pUtil.tolog("!!WARNING!! gLExec is probably not installed at the WN!")
+                    if os.environ['OSG_GLEXEC_LOCATION'] != '':
+                        glexec_path = os.environ['OSG_GLEXEC_LOCATION']
+                    else:
                         glexec_path = '/usr/sbin/glexec'
+                        os.environ['OSG_GLEXEC_LOCATION'] = '/usr/sbin/glexec'
+                elif os.environ.has_key('GLEXEC_LOCATION'):
+                    if os.environ['GLEXEC_LOCATION'] != '':
+                        glexec_path = os.path.join(os.environ['GLEXEC_LOCATION'],'sbin/glexec')
+                    else:
+                        glexec_path = '/usr/sbin/glexec'
+                        os.environ['GLEXEC_LOCATION'] = '/usr'
+                elif os.path.exists('/usr/sbin/glexec'):
+                    glexec_path = '/usr/sbin/glexec'
+                    os.environ['GLEXEC_LOCATION'] = '/usr'
+                elif os.environ.has_key('GLITE_LOCATION'):
+                    glexec_path = os.path.join(os.environ['GLITE_LOCATION'],'sbin/glexec')
+                else:
+                    pUtil.tolog("!!WARNING!! gLExec is probably not installed at the WN!")
+                    glexec_path = '/usr/sbin/glexec'
 
-                cmd = 'export GLEXEC_CLIENT_CERT=$X509_USER_PROXY;'+glexec_path + ' /bin/true'
+                cmd = 'export GLEXEC_CLIENT_CERT='+temp_proxy_path+';'+glexec_path + ' /bin/true'
                 stdout, stderr, status = execute(cmd)
                 pUtil.tolog('cmd: %s' % cmd)
                 pUtil.tolog('status: %s' % status)
+                os.remove(temp_proxy_path)
                 if not (status or stderr):
                         pUtil.tolog('glexec infrastructure seems to be working fine. Running in glexec mode!')
                         payload = 'python -m glexec_aux'

@@ -22,7 +22,6 @@ from pUtil import remove                        # Used to remove redundant file 
 from pUtil import extractFilePaths              # Used by verifySetupCommand
 from pUtil import getInitialDirs                # Used by getModernASetup()
 from PilotErrors import PilotErrors             # Error codes
-from FileHandling import readFile, writeFile    # File handling methods
 from RunJobUtilities import dumpOutput          # ASCII dump
 from RunJobUtilities import getStdoutFilename   #
 from RunJobUtilities import findVmPeaks         #
@@ -87,29 +86,6 @@ class ATLASExperiment(Experiment):
         tolog("cmd1 = %s" % (cmd1))
 
         return cmd1
-
-    def addMAKEFLAGS(self, jobCoreCount, cmd2):
-        """ Correct for multi-core if necessary (especially important in case coreCount=1 to limit parallel make) """
-
-        # ATHENA_PROC_NUMBER is set in Node.py using the schedconfig value
-        try:
-            coreCount = int(os.environ['ATHENA_PROC_NUMBER'])
-        except:
-            coreCount = -1
-        if coreCount == -1:
-            try:
-                coreCount = int(jobCoreCount)
-            except:
-                pass
-            else:
-                if coreCount >= 1:
-                    cmd2 += 'export MAKEFLAGS="j%d QUICK=1 -l1";' % (coreCount)
-                    tolog("Added multi-core support to cmd2: %s" % (cmd2))
-        # make sure that MAKEFLAGS is always set
-        if not "MAKEFLAGS=" in cmd2:
-            cmd2 += 'export MAKEFLAGS="j1 QUICK=1 -l1";'
-
-        return cmd2
 
     def getJobExecutionCommand(self, job, jobSite, pilot_initdir):
         """ Define and test the command(s) that will be used to execute the payload """
@@ -327,7 +303,22 @@ class ATLASExperiment(Experiment):
                 special_setup_cmd = self.getSpecialSetupCommand()
 
                 # correct for multi-core if necessary (especially important in case coreCount=1 to limit parallel make)
-                cmd2 = self.addMAKEFLAGS(job.coreCount, cmd2)
+                try:
+                    coreCount = int(os.environ['ATHENA_PROC_NUMBER'])
+                except:
+                    coreCount = -1
+                if coreCount == -1:
+                    try:
+                        coreCount = int(job.coreCount)
+                    except:
+                        pass
+                    else:
+                        if coreCount >= 1:
+                            cmd2 += 'export MAKEFLAGS="j%d QUICK=1 -l1";' % (coreCount)
+                            tolog("Added multi-core support to cmd2: %s" % (cmd2))
+                # make sure that MAKEFLAGS is always set
+                if not "MAKEFLAGS=" in cmd2:
+                    cmd2 += 'export MAKEFLAGS="j1 QUICK=1 -l1";'
 
                 # Prepend cmd0 to cmd1 if set and if release < 16.1.0
                 if cmd0 != "" and job.release < "16.1.0":
@@ -432,14 +423,10 @@ class ATLASExperiment(Experiment):
                     tolog("cacheDir = %s" % (cacheDir))
                     tolog("cacheVer = %s" % (cacheVer))
                     if cacheDir != "" and cacheVer != "":
+                        asetup = "export AtlasSetup=%s/%s/%s/%s/AtlasSetup; " % (swbase, cacheDir, cmtconfig, cacheVer)
+                        asetup += "source $AtlasSetup/scripts/asetup.sh %s,%s;" % (cacheDir, cacheVer)
 
-                        #asetup = "export AtlasSetup=%s/%s/%s/%s/AtlasSetup; " % (swbase, cacheDir, cmtconfig, cacheVer)
-                        #asetup += "source $AtlasSetup/scripts/asetup.sh %s,%s --cmtconfig=%s;" % (cacheDir, cacheVer, cmtconfig)
-
-                        asetup = self.getModernASetup()
-                        asetup += " %s,%s --cmtconfig=%s;" % (cacheDir, cacheVer, cmtconfig)
-
-                        # now squeeze it back in
+                        # now squeeze it in
                         cmd = cmd.replace('./' + trfName, asetup + './' + trfName)
                         tolog("Updated run command for special homePackage: %s" % (cmd))
                     else:
@@ -494,6 +481,9 @@ class ATLASExperiment(Experiment):
         elif '--enable-jem' in cmd:
             tolog("!!WARNING!!1111!! JEM can currently only be used on certain sites in DE")
 
+        # Pipe stdout/err for payload to files
+        if 'HPC_' not in readpar("catchall"):
+            cmd += " 1>%s 2>%s" % (job.stdout, job.stderr)
         tolog("\nCommand to run the job is: \n%s" % (cmd))
 
         tolog("ATLAS_PYTHON_PILOT = %s" % (os.environ['ATLAS_PYTHON_PILOT']))
@@ -1729,7 +1719,7 @@ class ATLASExperiment(Experiment):
         _sitename = 'export PANDA_RESOURCE=\"%s\";' % (sitename)
         _frontier1 = 'export FRONTIER_ID=\"[%s]\";' % (jobId)
         _frontier2 = 'export CMSSW_VERSION=$FRONTIER_ID;'
-        _ttc = ''
+        _ttc = 'export ROOT_TTREECACHE_SIZE=1;'
 
         # Unset ATHENA_PROC_NUMBER if set for event service Merge jobs
         if "Merge_tf" in cmd and os.environ.has_key('ATHENA_PROC_NUMBER'):
@@ -1739,7 +1729,6 @@ class ATLASExperiment(Experiment):
 
         _coreCount = ""
         if analysisJob:
-            _ttc = 'export ROOT_TTREECACHE_SIZE=1;'
             try:
                 coreCount = int(os.environ['ATHENA_PROC_NUMBER'])
             except:
@@ -1878,9 +1867,10 @@ class ATLASExperiment(Experiment):
         if not cmtconfig_alternatives:
             cmtconfig_alternatives = [_cmtconfig]
 
-        if swbase[-len('builds'):] == 'builds':
-            status = True
-            return ec, pilotErrorDiag, status, swbase, _cmtconfig
+        if readpar('region') == 'CERN':
+            if swbase[-len('builds'):] == 'builds':
+                status = True
+                return ec, pilotErrorDiag, status, swbase, _cmtconfig
 
         # loop over all available cmtconfig's until a working one is found (the default cmtconfig value is the first to be tried)
         for cmtconfig in cmtconfig_alternatives:
@@ -1954,6 +1944,97 @@ class ATLASExperiment(Experiment):
                     tolog("!!WARNING!!1996!! %s" % (pilotErrorDiag))
                     ec = self.__error.ERR_SETUPFAILURE
                     continue
+
+        # reset errors if siteroot was found
+        if status:
+            ec = 0
+            pilotErrorDiag = ""
+        return ec, pilotErrorDiag, status, siteroot, cmtconfig
+
+    def getProperSiterootAndCmtconfigOld(self, swbase, release, homePackage, _cmtconfig, cmtconfig_alternatives=None):
+        """ return a proper $SITEROOT and cmtconfig """
+
+        status = False
+        siteroot = ""
+        ec = 0 # only non-zero for fatal errors (missing installation)
+        pilotErrorDiag = ""
+
+        # make sure the cmtconfig_alternatives is not empty/not set
+        if not cmtconfig_alternatives:
+            cmtconfig_alternatives = [_cmtconfig]
+
+        if readpar('region') == 'CERN':
+            if swbase[-len('builds'):] == 'builds':
+                status = True
+                return ec, pilotErrorDiag, status, swbase, _cmtconfig
+
+        # loop over all available cmtconfig's until a working one is found (the default cmtconfig value is the first to be tried)
+        for cmtconfig in cmtconfig_alternatives:
+            ec = 0
+            pilotErrorDiag = ""
+            tolog("Testing cmtconfig=%s" % (cmtconfig))
+
+            if self.useAtlasSetup(swbase, release, homePackage, cmtconfig):
+                cmd = self.getProperASetup(swbase, release, homePackage, cmtconfig, tailSemiColon=True)
+                cmd += " echo SITEROOT=$SITEROOT"
+            elif "slc5" in cmtconfig and "gcc43" in cmtconfig:
+                cmd = "source %s/%s/cmtsite/setup.sh -tag=AtlasOffline,%s,%s,runtime; echo SITEROOT=$SITEROOT" % (swbase, release, release, cmtconfig)
+            else:
+                cmd = "source %s/%s/cmtsite/setup.sh -tag=AtlasOffline,%s,runtime; echo SITEROOT=$SITEROOT" % (swbase, release, release)
+
+            # verify that the setup path actually exists before attempting the source command
+            ec, pilotErrorDiag = self.verifySetupCommand(cmd)
+            if ec != 0:
+                pilotErrorDiag = "getProperSiterootAndCmtconfig: Missing installation: %s" % (pilotErrorDiag)
+                tolog("!!WARNING!!1996!! %s" % (pilotErrorDiag))
+                ec = self.__error.ERR_MISSINGINSTALLATION
+                continue
+
+            (exitcode, output) = timedCommand(cmd, timeout=getProperTimeout(cmd))
+
+            if exitcode != 0 or "Error:" in output or "(ERROR):" in output:
+                # if time out error, don't bother with trying another cmtconfig
+
+                tolog("ATLAS setup for SITEROOT failed")
+                if "No such file or directory" in output:
+                    pilotErrorDiag = "getProperSiterootAndCmtconfig: Missing installation: %s" % (output)
+                    tolog("!!WARNING!!1996!! %s" % (pilotErrorDiag))
+                    ec = self.__error.ERR_MISSINGINSTALLATION
+                    continue
+                elif "Error:" in output:
+                    pilotErrorDiag = "getProperSiterootAndCmtconfig: Caught CMT error: %s" % (output)
+                    tolog("!!WARNING!!1996!! %s" % (pilotErrorDiag))
+                    ec = self.__error.ERR_SETUPFAILURE
+                    continue
+                elif "AtlasSetup(ERROR):" in output:
+                    pilotErrorDiag = "getProperSiterootAndCmtconfig: Caught AtlasSetup error: %s" % (output)
+                    tolog("!!WARNING!!1996!! %s" % (pilotErrorDiag))
+                    ec = self.__error.ERR_SETUPFAILURE
+                    continue
+
+            if output:
+                tolog("Command output: %s" % (output))
+                if 'SITEROOT' in output:
+                    re_sroot = re.compile('SITEROOT=(.+)')
+                    _sroot = re_sroot.search(output)
+                    if _sroot:
+                        siteroot = _sroot.group(1)
+                        status = True
+                        break
+                    else:
+                        # should this case be accepted?
+                        ec = self.__error.ERR_SETUPFAILURE
+                        pilotErrorDiag = "SITEROOT not found in command output: %s" % (output)
+                        tolog("WARNING: %s" % (pilotErrorDiag))
+                        continue
+                else:
+                    siteroot = os.path.join(swbase, release)
+                    siteroot = siteroot.replace('//','/')
+                    status = True
+                    break
+            else:
+                pilotErrorDiag = "getProperSiterootAndCmtconfig: Command produced no output"
+                tolog("WARNING: %s" % (pilotErrorDiag))
 
         # reset errors if siteroot was found
         if status:
@@ -2038,7 +2119,7 @@ class ATLASExperiment(Experiment):
 
         # need to tell asetup where the compiler is in the US (location of special config file)
         _path = "%s/AtlasSite/AtlasSiteSetup" % (path)
-        if readpar('cloud') == "US" and os.path.exists(_path):
+        if readpar('region') == "US" and os.path.exists(_path):
             _input = "--input %s" % (_path)
         else:
             _input = ""
@@ -2234,7 +2315,7 @@ class ATLASExperiment(Experiment):
         except Exception, e:
             tolog("WARNING: os.environ.has_key failed: %s" % str(e))
 
-        if os.environ.has_key("VO_ATLAS_SW_DIR") and not "CERNVM" in sitename and not os.environ.has_key('Nordugrid_pilot'):
+        if os.environ.has_key("VO_ATLAS_SW_DIR") and not "CERNVM" in sitename and readpar('region') != "Nordugrid":
             vo_atlas_sw_dir = os.environ["VO_ATLAS_SW_DIR"]
             if vo_atlas_sw_dir != "":
                 # on cvmfs the following dirs are symbolic links, so all tests are needed
@@ -2403,7 +2484,7 @@ class ATLASExperiment(Experiment):
         failed = out_of_memory # failed boolean used below
 
         # Always look for the max and average VmPeak?
-        if not self.__analysisJob and not self.shouldExecuteMemoryMonitor():
+        if not self.__analysisJob:
             setup = getSourceSetup(runCommandList[0])
             job.vmPeakMax, job.vmPeakMean, job.RSSMean = findVmPeaks(setup)
 
@@ -2645,7 +2726,8 @@ class ATLASExperiment(Experiment):
         # Verify the validity of the release string in case it is not set (as can be the case for prun jobs)
         release = verifyReleaseString(release)
 
-        if os.environ.has_key('Nordugrid_pilot'):
+        region = readpar('region')
+        if region == 'Nordugrid':
             if os.environ.has_key('RUNTIME_CONFIG_DIR'):
                 _swbase = os.environ['RUNTIME_CONFIG_DIR']
                 if os.path.exists(_swbase):
@@ -2893,7 +2975,7 @@ class ATLASExperiment(Experiment):
         # Used in the case of payload using multiple steps with different release versions
         # E.g. release = "19.0.0\n19.1.0" -> ['19.0.0', '19.1.0']
 
-        if os.environ.has_key('Nordugrid_pilot') and os.environ.has_key('ATLAS_RELEASE'):
+        if readpar('region') == 'Nordugrid':
             return os.environ['ATLAS_RELEASE'].split(",")
         else:
             return release.split("\n")
@@ -2991,73 +3073,6 @@ class ATLASExperiment(Experiment):
         # are reported by the pilot to the DQ2 Tracing Service if this method returns True
 
         return True
-
-    # Optional
-    def updateJobDefinition(self, job, filename):
-        """ Update the job definition file and object before using it in RunJob """
-
-        # This method is called from Monitor, before RunJob is launched, which allows to make changes to the job object after it was downloaded from the job dispatcher
-        # (used within Monitor) and the job definition file (which is used from RunJob to recreate the same job object as is used in Monitor).
-        # 'job' is the job object, defined in Job.py, while 'filename' is the name of the file containing the job definition information.
-
-        # Update the job definition in case ATHENA_PROC_NUMBER has been set
-        if os.environ.has_key('ATHENA_PROC_NUMBER'):
-            try:
-                coreCount = int(os.environ['ATHENA_PROC_NUMBER'])
-            except Exception, e:
-                tolog("!!WARNING!!2332!! ATHENA_PROC_NUMBER not an integer (can not update job definition): %s" % (e))
-            else:
-                tolog("ATHENA_PROC_NUMBER set to %d - will update job object and job definition file" % (coreCount))
-                job.coreCount = coreCount
-
-                # Get the contents of the job definition
-                contents = readFile(filename)
-                if contents != "":
-                    # Parse the job definition and extract the coreCount string + value
-                    pattern = re.compile(r"coreCount\=([A-Za-z0-9]+)?")
-                    found = re.findall(pattern, contents)
-                    if len(found) > 0: # ie found a least 'coreCount='
-                        try:
-                            coreCount_string = "coreCount=%s" % found[0] # might or might not add an int, or even NULL
-                        except Exception, e:
-                            tolog("!!WARNING!!2333!! Failed to extract coreCount from job definition: %s" % (e))
-                        else:
-                            tolog("Extracted \'%s\' from job definition" % (coreCount_string))
-
-                            # Update the coreCount
-                            new_coreCount = "coreCount=%d" % (coreCount)
-                            updated_contents = contents.replace(coreCount_string, new_coreCount)
-                            if writeFile(filename, updated_contents):
-                                tolog("Updated job definition with: \'%s\'" % (new_coreCount))
-                            else:
-                                tolog("!!WARNING!!2336!! Failed to update coreCount in job definition")
-                    else:
-                        tolog("!!WARNING!!2334!! coreCount could not be extracted from job definition")
-                else:
-                    tolog("!!WARNING!!2335!! Empty job definition")
-        else:
-            tolog("ATHENA_PROC_NUMBER is not set, will not update coreCount in job definition")
-
-        return job
-
-    # Optional
-    def shouldExecuteMemoryMonitor(self):
-        """ Determine where a memory utility monitor should be executed """ 
-
-        # The RunJob class has the possibility to execute a memory utility monitor that can track the memory usage
-        # of the payload. The monitor is executed if this method returns True. The monitor is expected to produce
-        # a summary JSON file whose name is defined by the getMemoryMonitorJSONFilename() method. The contents of
-        # this file (ie. the full JSON dictionary) will be added to the jobMetrics at the end of the job (see
-        # PandaServerClient class).
-
-        return False
-
-    # Optional
-    def getMemoryMonitorJSONFilename(self):
-        """ Return the filename of the memory monitor JSON file """
-
-        # For explanation, see shouldExecuteMemoryMonitor()
-        return "memory_monitor_summary.json"
 
 if __name__ == "__main__":
 

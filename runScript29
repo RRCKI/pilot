@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#PD=`pwd`
+
+#cd /s/ls2/home/users/poyda/testpilot/
+#export VO_ATLAS_SW_DIR=.
+export VO_ATLAS_SW_DIR=/cvmfs/atlas.cern.ch/repo/sw
+export X509_USER_PROXY=/tmp/x509up_u500
+#source /s/ls2/home/users/poyda/testpilot/emi-wn-cvmfs-environment.sh
+
+export RUCIO_AUTH_TYPE="x509_proxy"
+#export X509_USER_PROXY=/tmp/x509up_u500
+export RUCIO_HOME=/cvmfs/atlas.cern.ch/repo/sw/ddm/rucio-clients/latest
+export RUCIO_ACCOUNT=pilot
+source /s/ls2/users/poyda/testpilot/emi-wn-cvmfs-environment.sh
+#python ./pilot.py -d /s/ls2/home/users/poyda/testpilot/ -s ANALY_RRC-KI-HPC -h ANALY_RRC-KI-HPC -w https://vcloud30.grid.kiae.ru -p 25443 -u user -j false -b 2 -k 1000
+python ./pilot.py -d `pwd` -s ANALY_RRC-KI-HPC -h ANALY_RRC-KI-HPC -w https://vcloud29.grid.kiae.ru -p 25443 -u user -j false -b 2 -k 1000
+

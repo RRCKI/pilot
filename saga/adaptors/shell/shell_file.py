@@ -266,12 +266,6 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
         self.valid       = False # will be set by initialize
         self.lm          = session._lease_manager
 
-        # cwd is where this directory is in, so the path w/o the last element
-        path             = self.url.path.rstrip ('/')
-        self.cwd         = sumisc.url_get_dirname (path)
-        self.cwdurl      = saga.Url (url) # deep copy
-        self.cwdurl.path = self.cwd
-
         def _shell_creator (url) :
             return sups.PTYShell (url, self.session, self._logger)
         self.shell_creator = _shell_creator
@@ -300,7 +294,7 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
     def _command (self, command, location=None, make_location=False) :
 
         if  not location :
-            location = self.cwdurl
+            location = self.url
         else :
             location = saga.Url (location)
 
@@ -308,7 +302,7 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
         with self.lm.lease (lease_tgt, self.shell_creator, location) \
              as cmd_shell :
 
-            if  make_location :
+            if  make_location and location.path :
                 pre_cmd = "mkdir -p %s &&" % location.path
             else :
                 pre_cmd = ""
@@ -325,15 +319,19 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
         # to the initial (or later current) working directory.
 
         cmd = ""
+        mkl = False    # make location on command execution
 
         if  self.flags & saga.filesystem.CREATE_PARENTS :
             cmd = " mkdir -p '%s' ;  cd '%s'" % (self.url.path, self.url.path)
+            mkl = True
         elif self.flags & saga.filesystem.CREATE :
             cmd = " mkdir    '%s' ;  cd '%s'" % (self.url.path, self.url.path)
+            mkl = False
         else :
             cmd = " test -d  '%s' && cd '%s'" % (self.url.path, self.url.path)
+            mkl = False
 
-        ret, out, _ = self._command (cmd)
+        ret, out, _ = self._command (cmd, make_location=mkl)
 
         if  ret != 0 :
             raise saga.BadParameter ("invalid dir '%s': %s" % (self.url.path, out))
@@ -542,8 +540,8 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
                     sumisc.url_is_compatible (cwdurl, tgt) :
 
                   # print "from local to remote: %s -> %s" % (src.path, tgt.path)
-                    lease_tgt = self._adaptor.get_lease_target (self.cwdurl)
-                    with self.lm.lease (lease_tgt, self.shell_creator, self.cwdurl) \
+                    lease_tgt = self._adaptor.get_lease_target (self.url)
+                    with self.lm.lease (lease_tgt, self.shell_creator, self.url) \
                         as copy_shell :
                         files_copied = copy_shell.stage_to_remote (src.path, tgt.path, rec_flag)
 
@@ -551,8 +549,8 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
                      sumisc.url_is_compatible (cwdurl, src) :
 
                   # print "from remote to local: %s -> %s" % (src.path, tgt.path)
-                    lease_tgt = self._adaptor.get_lease_target (self.cwdurl)
-                    with self.lm.lease (lease_tgt, self.shell_creator, self.cwdurl) \
+                    lease_tgt = self._adaptor.get_lease_target (self.url)
+                    with self.lm.lease (lease_tgt, self.shell_creator, self.url) \
                         as copy_shell :
                         files_copied = copy_shell.stage_from_remote (src.path, tgt.path, rec_flag)
 
@@ -751,9 +749,12 @@ class ShellDirectory (saga.adaptors.cpi.filesystem.Directory) :
         options = ""
 
         if  flags & saga.filesystem.CREATE_PARENTS : 
-            self._command (" mkdir -p '%s'" % tgt.path, make_location=True)
+            ret, out, _ = self._command (" mkdir -p '%s'" % tgt.path, make_location=True)
         else :
-            self._command (" mkdir '%s'" % tgt.path)
+            ret, out, _ = self._command (" mkdir '%s'" % tgt.path)
+
+        if  ret != 0 :
+            raise saga.NoSuccess ("make_dir (%s) faild: %s" % tgt_in, out)
 
    
     # ----------------------------------------------------------------

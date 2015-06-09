@@ -698,6 +698,7 @@ def getFileInfo(region, ub, guids, dsname, dsdict, lfns, pinitdir, analysisJob, 
             if "__DQ2" in _lfn:
                 _lfn = stripDQ2FromLFN(_lfn)
             fsize, fchecksum = getFileInfoFromDispatcher(_lfn, fileInfoDictionaryFromDispatcher)
+            tolog("lfn=%s, fsize=%s, fchecksum=%s" % (_lfn, fsize, fchecksum))
 
             # get the file info from the metadata [from LFC]
             if not fsize or not fchecksum:
@@ -711,7 +712,7 @@ def getFileInfo(region, ub, guids, dsname, dsdict, lfns, pinitdir, analysisJob, 
                     _dataset = dsname
                 else:
                     _dataset = getDataset(os.path.basename(gpfn), dsdict)
-                _filesize, _checksum = sitemover.getFileInfoFromRucio(scope_dict[_lfn], _dataset, guid)
+                _filesize, _checksum = sitemover.getFileInfoFromDQ2(_dataset, guid)
                 if _filesize != "" and _checksum != "":
                     if _filesize != fsize:
                         tolog("!!WARNING!!1001!! LFC file size (%s) not the same as DQ2 file size (%s) (using DQ2 value)" % (fsize, _filesize))
@@ -2998,11 +2999,7 @@ def getProperSpaceTokenList(spacetokenlist, listSEs, jobCloud, analysisJob, alt=
                     else:
                         if not analysisJob:
                             # __defaulttoken = "ATLASPRODDISK"
-                            if "dst:" in properspacetokenlist[i]:
-                                tolog("Note: schedconfig.cloud != job.cloud, but skipping reset of space token since group disk is requested")
-                                __defaulttoken = properspacetokenlist[i]
-                            else:
-                                tolog("Note: schedconfig.cloud != job.cloud: Space token set to %s" % (__defaulttoken))
+                            tolog("Note: schedconfig.cloud != job.cloud: Space token set to %s" % (__defaulttoken))
                         else:
                             tolog("schedconfig.cloud = %s" % str(cloud))
                             tolog("job.cloud = %s" % str(jobCloud))
@@ -3106,13 +3103,10 @@ def getDDMStorage(ub, analysisJob, region, eventService, jobId):
 
     # special paths are used for event service
     if eventService:
-        _path = getFilePathForObjectStore(filetype="eventservice")
-        if _path == "":
-            pilotErrorDiag = "No path to object store"
-        return _path, pilotErrorDiag
+        return getFilePathForObjectStore(filetype="eventservice"), pilotErrorDiag
 
     # skip this function unless we are running in the US or on NG
-    if not (region == 'US' or os.environ.has_key('Nordugrid_pilot')):
+    if not (region == 'US' or region == 'Nordugrid'):
         return ddm_storage, pilotErrorDiag
 
     # get the storage paths
@@ -3815,11 +3809,11 @@ def getPoolFileCatalog(ub, guids, lfns, pinitdir, analysisJob, tokens, workdir, 
         # create a pool file catalog
         xml_from_PFC = createPoolFileCatalog(file_dict, pfc_name=pfc_name)
 
-    if xml_from_PFC == '' and not os.environ.has_key('Nordugrid_pilot'):
+    if xml_from_PFC == '' and region != 'Nordugrid':
         # fetch the input file xml from the dq2 server
         xml_from_PFC, xml_source = getPoolFileCatalogDQ2(ub, guids)
 
-    if os.environ.has_key('Nordugrid_pilot') or region == 'testregion':
+    if region == 'Nordugrid' or region == 'testregion':
         # build a new PFC for NG
         ec, pilotErrorDiag, xml_from_PFC, xml_source = getPoolFileCatalogNG(guids, lfns, pinitdir)
 
@@ -3896,7 +3890,7 @@ def getPoolFileCatalogDQ2(baseURL, guids):
 
     # In LCG land use dq2_poolFCjobO
     region = readpar('region')
-    if region != 'US' and not os.environ.has_key('Nordugrid_pilot'):
+    if region != 'US' and region != 'Nordugrid':
         tolog("!!FAILED!!2999!! Can not get PFC with LRC method for region %s" % (region))
         return '', xml_source
 
@@ -4177,6 +4171,17 @@ def getLocalSpace(path):
     thisWorkNode.collectWNInfo(path)
     return int(thisWorkNode.disk)*1024**2 # convert from MB to B
 
+def getLocalSpaceLimit(_maxinputsize):
+    """ Return the minimum local space needed to run a job """
+
+    from pilot import localspacelimit0, localsizelimit_stdout
+    # convert from kB to B
+    _localspacelimit0 = localspacelimit0*1024           # 5 GB, max output file size
+    _localsizelimit_stdout = localsizelimit_stdout*1024 # 2 GB, max job stdout/log size
+    # _maxinputsize = getMaxInputSize() # typically 14 GB, max total size of input files
+
+    return _maxinputsize + _localspacelimit0 + _localsizelimit_stdout
+
 def verifyInputFileSize(totalFileSize, _maxinputsize, error):
     """ Verify that the total input file size is within the allowed limit """
 
@@ -4202,7 +4207,7 @@ def verifyAvailableSpace(sitemover, totalFileSize, path, error):
     pilotErrorDiag = ""
 
     # skip for now: add the 5 GB + 2 GB limits for output and log files to the total input file size
-    _neededSpace = totalFileSize
+    _neededSpace = totalFileSize # getLocalSpaceLimit(totalFileSize)
     tolog("Needed space: %d B" % (_neededSpace))
     # get the locally available space
     _availableSpace = getLocalSpace(path)
@@ -4335,7 +4340,7 @@ def getFileInfoFromMetadata(thisfile, guid, replicas_dic, region, sitemover, err
     dic['adler32'] = ""
     dic['fsize'] = ""
     csumtype = "unknown"
-    if not os.environ.has_key('Nordugrid_pilot'):
+    if region != "Nordugrid":
         # extract the filesize and checksum
         try:
             # always use the first replica (they are all supposed to have the same file sizes and checksums)
@@ -4432,7 +4437,6 @@ def getRucioReplicaDictionary(cat, dictionary):
     # surl1='srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/atlas/atlasdatadisk/rucio/mc12_8TeV/cf/8f/EVNT.01365724._000001.pool.root.1'
     # guid1='28FB7AE9-2234-F644-962A-17EA1D279AA7'
 
-    tolog("cat = %s" % (cat))
     dictionaryReplicas = {}
     try:
         from dq2.filecatalog import create_file_catalog
@@ -4446,7 +4450,6 @@ def getRucioReplicaDictionary(cat, dictionary):
             catalog.connect()
             dictionaryReplicas = catalog.bulkFindReplicas(dictionary)
             catalog.disconnect()
-            tolog("dictionaryReplicas = %s" % str(dictionaryReplicas))
         except:
             import traceback
             tolog("!!WARNING!!3334!! Exception caught in Mover: %s" % str(traceback.format_exc()))

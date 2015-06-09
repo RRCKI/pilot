@@ -203,21 +203,10 @@ class NordugridATLASExperiment(ATLASExperiment):
         # Used in the case of payload using multiple steps with different release versions
         # E.g. release = "19.0.0\n19.1.0" -> ['19.0.0', '19.1.0']
 
-        if os.environ.has_key('Nordugrid_pilot') and os.environ.has_key('ATLAS_RELEASE'):
+        if readpar('region') == 'Nordugrid':
             return os.environ['ATLAS_RELEASE'].split(",")
         else:
             return release.split("\n")
-
-    def checkSpecialEnvVars(self, sitename):
-        """ Check special environment variables """
-
-        # Set a special env variable that will be used to identify Nordugrid in other pilot classes
-        os.environ['Nordugrid_pilot'] = ""
-
-        # Call the method from the parent class
-        ec = super(NordugridATLASExperiment, self).checkSpecialEnvVars(sitename)
-
-        return ec
 
 if __name__ == "__main__":
 

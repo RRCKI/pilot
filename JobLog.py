@@ -639,7 +639,7 @@ class JobLog:
                 # OutputFiles.xml now contains all the xml for all output files and log (and additional file info for CERNVM)
                 # copy it to the init dir (only necessary for NG not for CERNVM)
                 # (actually it can be transferred with the mv site mover just like it is done for CERNVM, skip for now)
-                if os.environ.has_key('Nordugrid_pilot'):
+                if readpar('region') == 'Nordugrid':
                     try:
                         copy2(fname, self.__env['pilot_initdir'])
                     except Exception, e:
@@ -853,8 +853,9 @@ class JobLog:
         logMsg = self.addTimingInfo(logMsg, job.timeGetJob, job.timeStageIn, job.timeExe, job.timeStageOut, job.timeCleanUp)
 
         # write and transfer log extracts to pilot init dir for Nordugrid
-        if os.environ.has_key('Nordugrid_pilot') and job.result[0] == 'failed':
+        if readpar('region') == 'Nordugrid' and job.result[0] == 'failed':
             self.transferLogExtracts(logMsg)
+
 
         # update the SURLs info
         if strXML and strXML != "":
@@ -890,7 +891,7 @@ class JobLog:
         if ret == 0:
             tolog("Successfully updated panda server at %s" % timeStamp())
 
-            if not (os.environ.has_key('Nordugrid_pilot') or site.sitename == 'CERNVM'):
+            if not (readpar('region') == 'Nordugrid' or site.sitename == 'CERNVM'):
                 # remove the job state file for finished and failed jobs (recovery will never be necessary for them)
                 error = PilotErrors()
                 recoverable = error.isRecoverableErrorCode(job.result[2])
@@ -1109,24 +1110,17 @@ class JobLog:
         # input and output files should already be removed from the workdir in child process
         tarballNM = "%s.tar" % (job.newDirNM)
         try:
-            cmd = "mv %s %s" % (job.workdir, job.newDirNM)
-            tolog("Executing command: %s" % (cmd))
-            os.system(cmd)
+            os.system("mv %s %s" % (job.workdir, job.newDirNM))
         except OSError:
             tolog("!!WARNING!!1400!! Could not move job workdir %s to %s" % (job.workdir, job.newDirNM))
         else:
             try:
-                cmd = "pwd;tar cvf %s %s --dereference" % (tarballNM, job.newDirNM)
-                tolog("Executing command: %s" % (cmd))
-                os.system(cmd)
+                os.system("pwd;tar cvf %s %s --dereference" % (tarballNM, job.newDirNM))
             except OSError:
                 tolog("!!WARNING!!1400!! Could not create tarball %s" % tarballNM)
             else:
-                tolog("Tarball created: %s" % (tarballNM))
                 try:
-                    cmd = "gzip -f %s" % (tarballNM)
-                    tolog("Executing command: %s" % (cmd))
-                    os.system(cmd)
+                    os.system("gzip -f %s" % (tarballNM))
                 except OSError:
                     tolog("!!WARNING!!1400!! Could not gzip tarball")
                 else:
@@ -1135,7 +1129,6 @@ class JobLog:
                     except OSError:
                         tolog("!!WARNING!!1400!! Could not rename gzipped tarball %s" % job.logFile)
                     else:
-                        tolog("Tarball renamed to %s" % (job.logFile))
                         status = True
 
         return status

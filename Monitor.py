@@ -286,7 +286,7 @@ class Monitor:
                     else:
                         self.__env['create_softlink'] = False
                 else:
-                    pUtil.tolog("(%s has not been created yet)" % (_stdout))
+                    pUtil.tolog("(%s(%s) has not been created yet)" % (_stdout,filename))
     
     def create_softlink(self):
         """
@@ -852,7 +852,7 @@ class Monitor:
                     prodJobDone = True
     
                 # for NG write the error code, if any
-                if os.environ.has_key('Nordugrid_pilot') and (perr != 0 or terr != 0):
+                if pUtil.readpar('region') == "Nordugrid" and (perr != 0 or terr != 0):
                     if perr != 0:
                         ec = perr
                     else:
@@ -1157,9 +1157,6 @@ class Monitor:
                 else:
                     # copy all python files to workdir
                     pUtil.stageInPyModules(self.__env['thisSite'].workdir, self.__env['jobDic']["prod"][1].workdir)
-
-                    # update the job definition file (and env object) before using it in RunJob (if necessary)
-                    self.__env['job'] = thisExperiment.updateJobDefinition(self.__env['job'], self.__env['pandaJobDataFileName'])
 
                     # backup job definition
                     self.__backupJobDef()
