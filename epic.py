@@ -25,14 +25,14 @@ import re
 saga_context = None
 saga_session = None
 
-queue="bamboo-1w"
+queue="pledged"
 
-ssh_user="poyda"
+ssh_user="apfc"
 ssh_pass=""
-ssh_keypath="/home/apf/.ssh/sk_poyda_rsa"
-ssh_server="ui2.computing.kiae.ru"
-ssh_remote_home="/s/ls2/groups/g0037/panda"
-ssh_remote_temp="/s/ls2/groups/g0037/tmp"
+ssh_keypath="/home/apf/.ssh/apfc_rsa"
+ssh_server="192.168.23.71"
+ssh_remote_home="/home/apfc"
+ssh_remote_temp="/tmp"
 ssh_remote_path=None
 
 __jobs={}

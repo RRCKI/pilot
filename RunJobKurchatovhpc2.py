@@ -142,32 +142,6 @@ class RunJobKurchatovhpc2(RunJobHPC):
 
         return False
 
-
-    def initSaga(self):
-        """ inits Saga context, session and service """
-        if not self.__saga_service:
-            try:
-                self.__saga_context=saga.Context("ssh")
-                self.__saga_context.user_id   = self.ssh_user
-                self.__saga_context.user_cert = self.ssh_keypath # private key derived from cert
-                self.__saga_context.user_pass = self.ssh_pass
-
-                self.__saga_session = saga.Session()
-                self.__saga_session.add_context(self.__saga_context)
-
-                self.__saga_service = saga.job.Service("slurm+ssh://%s" % self.ssh_server,
-                                  session=self.__saga_session)
-
-            except saga.SagaException, ex:
-                # Catch all saga exceptions
-                tolog("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-                # Trace back the exception. That can be helpful for debugging.
-                tolog(" \n*** Backtrace:\n %s" % ex.traceback)
-                self.__saga_service=None
-
-        return self.__saga_service
-
-
     '''
     def get_backfill(self, partition, max_nodes = None):
     
@@ -244,10 +218,10 @@ class RunJobKurchatovhpc2(RunJobHPC):
         res = {}
         
         if showbf_str:
-                nodes = int(showbf_str);
+                nodes = int(showbf_str)
                 if max_nodes:
                     nodes = max_nodes if nodes > max_nodes else nodes
-                wal_time_sec = self.PartitionWalltimePerNode*nodes*60;      
+                wal_time_sec = self.PartitionWalltimePerNode*nodes*60
                 res.update({nodes:wal_time_sec})
         
         return res
@@ -278,282 +252,44 @@ class RunJobKurchatovhpc2(RunJobHPC):
         tolog("Job state changed to '%s'" % value)
         return True
 
-    def getRemoteLog(self):
-	try:
-	    tolog("recieve remote log")
-	    #outfilesource = 'sftp://ui2.computing.kiae.ru/s/ls2/home/users/poyda/sagatest/d/examplejob4.out
-	    outfilesource = 'ssh://ui2.computing.kiae.ru/'+job.workdir+'/'+job.stdout
-	    #outfilesource = 'sftp://gw68.quarry.iu.teragrid.org/users/oweidner/mysagajob.stdout'
-	    outfiletarget = 'file://'+job.workdir+'/'
-	    print("copy %s to %s" % (outfilesource, outfiletarget) )
-	    out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    out.copy(outfiletarget)
-	    outfilesource = 'ssh://ui2.computing.kiae.ru/'+job.workdir+'/'+job.stderr
-	    out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    out.copy(outfiletarget)
-    	    out.close()
-	    tolog("log files transfered")
-	except saga.SagaException, ex:
-	    # Catch all saga exceptions
-	    print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-	    # Trace back the exception. That can be helpful for debugging.
-	    print(" \n*** Backtrace:\n %s" % ex.traceback)
-	    try:
-	      out
-	    except NameError:
-	        pass
-	    else:
-	        out.close()
-	    
-	    
-    def getRemoteFiles(self):
-	try:
-	    tolog("recieve remote files")
-	    #outfilesource = 'sftp://ui2.computing.kiae.ru/s/ls2/home/users/poyda/sagatest/d/examplejob4.out
-	    outfilesource = 'ssh://ui2.computing.kiae.ru/'+job.workdir+'/'
-	    #outfilesource = 'sftp://gw68.quarry.iu.teragrid.org/users/oweidner/mysagajob.stdout'
-	    outfiletarget = 'file://'+job.workdir+'/'
-	    print("copy %s to %s" % (outfilesource, outfiletarget) )
-	    #out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    #out.copy(outfiletarget)
-	    #outfilesource = 'sftp://ui2.computing.kiae.ru/'+job.workdir+'/'+job.stderr
-	    #out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    #out.copy(outfiletarget)
-    	    #out.close()
-    	    #outfilesource = 'ssh://ui2.computing.kiae.ru/'+job.workdir+'/results'
-    	    #outfiletarget = 'file:///home/apf/'
-    	    #print("copy %s to %s" % (outfilesource, outfiletarget) )
-	    #out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    #out.copy(outfiletarget)
-	    #out.close()
-	    dir_remote = saga.filesystem.Directory(outfilesource)
-	    files = dir_remote.list()
-	    for f in files:
-		if ('stdout.txt' in f.path) or ('stderr.txt' in f.path):
-		    tolog("copy %s to %s" % (f, outfiletarget) )
-		    dir_remote.copy(f, outfiletarget)
-		    tolog("copy %s to /home/apf/tmp/d" % f )
-		    dir_remote.copy(f, "file:///home/apf/tmp/d")
-		elif f.path in job.outFiles:
-		    lfile = open(job.workdir+"/"+f.path,"wb");
-		    lfile.seek(dir_remote.get_size(f)-1)
-		    lfile.write("\0")
-		    lfile.close()
-		    print "File %s created" % (job.workdir+"/"+f.path)
-		else:
-		    print "file %s is ignored" % f.path
-	    dir_remote.close()                                                
-	    tolog("remte files transfered")
-	except saga.SagaException, ex:
-	    # Catch all saga exceptions
-	    print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-	    # Trace back the exception. That can be helpful for debugging.
-	    print(" \n*** Backtrace:\n %s" % ex.traceback)
-	    try:
-	      out
-	    except NameError:
-	        pass
-	    else:
-	        out.close()
-	        
-    def putCertificate(self):
-	try:
-	    tolog("certificate transfer....")
-	    #for param in os.environ.keys():
-	    #    print "%20s %s" % (param,os.environ[param])
-	    #info['ssh_env']
-	    #env['pilot_initdir']
-	    #outfilesource = 'sftp://ui2.computing.kiae.ru/s/ls2/home/users/poyda/sagatest/d/examplejob4.out
-	    #outfilesource = 'ssh://ui2.computing.kiae.ru/'+job.workdir+'/'
-	    #print("OK")
-	    cert_path = os.environ['X509_USER_PROXY']
-	    print("cert_path = %s" % cert_path )
-	    #pilot_initdir = os.getcwd();
-	    
-	    #print("pilot_initdir = %s" % pilot_initdir)
-	    outfilesource = 'file://localhost'+cert_path
-	    #outfilesource = 'sftp://gw68.quarry.iu.teragrid.org/users/oweidner/mysagajob.stdout'
-	    #outfiletarget = 'file://'+job.workdir+'/'
-	    dirtarget = "ssh://ui2.computing.kiae.ru/"+job.workdir+"/../"
-	    print("copy %s to %s" % (outfilesource, dirtarget) )
-	    #out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    #out.copy(outfiletarget)
-	    #outfilesource = 'sftp://ui2.computing.kiae.ru/'+job.workdir+'/'+job.stderr
-	    #out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    #out.copy(outfiletarget)
-    	    #out.close()
-    	    #outfilesource = 'ssh://ui2.computing.kiae.ru/'+job.workdir+'/results'
-    	    #outfiletarget = 'file:///home/apf/'
-    	    #print("copy %s to %s" % (outfilesource, outfiletarget) )
-	    #out = saga.filesystem.File(outfilesource, session=self.__saga_session)
-	    #out.copy(outfiletarget)
-	    #out.close()
-	    fl = saga.filesystem.File(outfilesource)
-	    #tolog("OK")
-	    fl.copy(dirtarget+"X509up_u500")
-	    
-	except saga.SagaException, ex:
-	    # Catch all saga exceptions
-	    print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-	    # Trace back the exception. That can be helpful for debugging.
-	    print(" \n*** Backtrace:\n %s" % ex.traceback)
-	tolog("done");
-	
-    def create_remote_SLURM_session(self):
-    	ctx=saga.Context("ssh")
-    	ctx.user_id   = "poyda"
-    	ctx.user_cert = "/home/apf/.ssh/sk_poyda_rsa" # private key derived from cert
-    	ctx.user_pass = ""
 
-    	session = saga.Session()
-    	session.add_context(ctx)
-
-    	js = saga.job.Service("slurm+ssh://ui2.computing.kiae.ru",
-              session=session)
-    	return
-
-    def getFilesRemote_SLURM(self, local_dir_path, remote_machine, remote_file_path):
+    def getFilesRemote_SLURM(self):
         # epic.cd(remote_file_path)
-        files=epic.ls(remote_file_path)
-        if local_dir_path[-1:]!='/':
-            local_dir_path+='/'
+        files=epic.ls()
 
         for f in files:
             # if (name in job.outFiles) or (name in job.stdout) or (name in job.stderr) or (name.endswith(".xml")):
             if f in job.outFiles:
-                touch(os.path.join(local_dir_path,f))
+                touch(os.path.join(job.workdir,f))
             #if (name in job.stdout) or (name in job.stderr) or (name.endswith(".xml")):
             if (f in job.stderr) or (f.endswith(".xml")):
-                epic.fetch_file(os.path.join(remote_file_path,f), local_dir_path)
-        return
-        try:
-            remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + remote_file_path)
-        except saga.SagaException, ex:
-            print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-            print(" \n*** Backtrace:\n %s" % ex.traceback)
-            return
-
-        try:
-            local_path = "file://localhost"+local_dir_path
-            local_directory = saga.filesystem.Directory(local_path)
-        except saga.SagaException, ex:
-            print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-            print(" \n*** Backtrace:\n %s" % ex.traceback)
-            remote_directory.close()
-            return
-
-        try:
-            files = remote_directory.list()
-            for f in files:
-                if remote_directory.is_file(f):
-                    name = str(f)
-                    # if (name in job.outFiles) or (name in job.stdout) or (name in job.stderr) or (name.endswith(".xml")):
-                    if name in job.outFiles:
-                        touch(os.path.join(local_dir_path,name))
-                    #if (name in job.stdout) or (name in job.stderr) or (name.endswith(".xml")):
-                    if (name in job.stderr) or (name.endswith(".xml")):
-                        remote_directory.move(f, local_path)
-                #else:
-                #    name = "%s" % f
-                #    local_directory.make_dir(name+"/")
-                #    self.getFilesRemote_SLURM(local_dir_path+"/"+name, remote_machine, remote_file_path+"/"+name)
-
-            # remote_directory.remove(remote_file_path, saga.filesystem.RECURSIVE)
-            remote_directory.close()
-            local_directory.close()
-        except saga.SagaException, ex:
-            print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-            print(" \n*** Backtrace:\n %s" % ex.traceback)
-
-        remote_directory.close()
-        local_directory.close()
+                epic.fetch_file(f,os.path.join(job.workdir,f))
         return
 
 
-    def putFilesRemote_SLURM(self, local_dir_path, remote_machine, remote_file_path):
+    def putFilesRemote_SLURM(self):
         list_trf = job.trf.split(',')
         trf_names = []
         for trf in list_trf:
             trf_names.append( trf.strip().split('/')[-1] )
-        if remote_file_path[-1:]!='/':
-            remote_file_path+='/'
+
         from os import walk
-        for (dirpath, dirnames, filenames) in walk(local_dir_path):
+        for (dirpath, dirnames, filenames) in walk(job.workdir):
             for name in filenames:
-                if ( (name in job.inFiles) or (name in trf_names) or (name.endswith(".xml")) ):
-                    epic.push_file(os.path.join(local_dir_path,name),remote_file_path)
+                if ((name in job.inFiles) or (name in trf_names) or (name.endswith(".xml")) ):
+                    epic.push_file(os.path.join(job.workdir,name))
             return
-        try:
-            #remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + remote_file_path+"/../../")
-            #list_tokens = remote_file_path.split('/')
-            #f1=list_tokens[:-1]
-            #remote_directory.make_dir(f1, saga.filesystem.CREATE)
-            #remote_directory.close()
-            #remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + f1)
-            #remote_directory.make_dir(remote_file_pat, saga.filesystem.CREATE)
-            #remote_directory.close()
-            #remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + remote_file_pat)
-            
-            #remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + remote_file_path)
-            #remote_directory = saga.namespace.Directory("sftp://" + remote_machine + remote_file_path+"/A1/A2/../../")
-            #remote_directory.open_dir('/dat', saga.namespace.CREATE)
-            #remote_directory.make_dir(remote_file_path+"/A1/A2/", saga.filesystem.CREATE)
-            #remote_directory.close()
-            #remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + remote_file_path + "/A1/A2/")
-                            
-            
-            remote_directory = saga.filesystem.Directory("sftp://" + remote_machine)
-            remote_directory.make_dir(remote_file_path, saga.filesystem.CREATE|saga.filesystem.CREATE_PARENTS)
-            remote_directory.close()
-            remote_directory = saga.filesystem.Directory("sftp://" + remote_machine + remote_file_path)
-            #print("OK")
-             
-   	except saga.SagaException, ex:
-            print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-            print(" \n*** Backtrace:\n %s" % ex.traceback)
-            sys.stdout.flush()
-            return
-
-        try:
-            local_path = "file://localhost"+local_dir_path
-            local_directory = saga.filesystem.Directory(local_path)
-        except saga.SagaException, ex:
-            print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-            print(" \n*** Backtrace:\n %s" % ex.traceback)
-            remote_directory.close()
-            return
-
-        try:
-            #files = remote_directory.list()
-            files = local_directory.list()
-            for f in files:
-                if local_directory.is_file(f):
-                    name=str(f)
-                    if ( (name in job.inFiles) or (name in trf_names) or (name.endswith(".xml")) ):
-                        local_directory.copy(f, "sftp://" + remote_machine + remote_file_path)
-                #else:
-                #    name = "%s" % f
-                #    remote_directory.make_dir(name+"/")
-                #    self.putFilesRemote_SLURM(local_dir_path+"/"+name, remote_machine, remote_file_path+"/"+name)
-
-    	except saga.SagaException, ex:
-            print("An exception occured: (%s) %s " % (ex.type, (str(ex))))
-            print(" \n*** Backtrace:\n %s" % ex.traceback)
-
-        remote_directory.close()
-        local_directory.close()
-        return
         
     #poyda
     def update_record_status(self, pid, status):
-	try:
-	    sql = "UPDATE pilots SET status=\'%s\' WHERE id=%d"%(status,pid)
-	    conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
-	    cur = conn.cursor()
-	    cur.execute(sql, {})
-	    conn.commit()
-	except Exception, e:
-	    pilotErrorDiag = "Coudn't update record in DB: %s" % str(e)
+        try:
+            sql = "UPDATE pilots SET status=\'%s\' WHERE id=%d"%(status,pid)
+            conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
+            cur = conn.cursor()
+            cur.execute(sql, {})
+            conn.commit()
+        except Exception, e:
+            pilotErrorDiag = "Coudn't update record in DB: %s" % str(e)
             tolog("!!WARNING!! %s" % (pilotErrorDiag))
 
 	    
@@ -605,9 +341,8 @@ class RunJobKurchatovhpc2(RunJobHPC):
             #to_script = "%s\naprun -n%s -S4 -j1 %s %s" % (to_script, cpu_number/2 ,cmd["payload"], cmd["parameters"])
 
             thisExperiment.updateJobSetupScript(job.workdir, to_script=to_script)
-            self.putFilesRemote_SLURM(job.workdir, 'ui2.computing.kiae.ru', job.workdir)
-		    
             epic.cd(job.workdir)
+            self.putFilesRemote_SLURM()
             jid=epic.slurm(to_script,cpu_number,walltime,True)
             tolog("Local Job ID: %s" % jid)
             rt = RunJobUtilities.updatePilotServer(job, self.getPilotServer(), self.getPilotPort())
@@ -621,7 +356,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
 
             epic.slurm_wait(jid)
             tolog("after fork_job.wait")
-            self.getFilesRemote_SLURM(job.workdir, 'ui2.computing.kiae.ru', job.workdir)
+            self.getFilesRemote_SLURM()
 
 
             res_tuple = (epic.exit_code, "Look into: %s" % epic.output)
@@ -672,63 +407,63 @@ class RunJobKurchatovhpc2(RunJobHPC):
 
 
     def _prepareOutFiles(self, outFiles, logFile, workdir, fullpath=False):
-	""" verify and prepare and the output files for transfer """
-    
-	# fullpath = True means that the file in outFiles already has a full path, adding it to workdir is then not needed
+        """ verify and prepare and the output files for transfer """
+
+        # fullpath = True means that the file in outFiles already has a full path, adding it to workdir is then not needed
 	ec = 0
-	pilotErrorDiag = ""
-	outs = []
-	modt = []
+        pilotErrorDiag = ""
+        outs = []
+        modt = []
     
-	from SiteMover import SiteMover
-	for outf in outFiles:
-	    if outf and outf != 'NULL': # non-empty string and not NULL
-		#if (not os.path.isfile("%s/%s" % (workdir, outf)) and not fullpath) or (not os.path.isfile(outf) and fullpath): # expected output file is missing
-		    #pilotErrorDiag = "Expected output file %s does not exist" % (outf)
-		    #tolog("!!FAILED!!3000!! %s" % (pilotErrorDiag))
-		    #error = PilotErrors()
-		    #ec = error.ERR_MISSINGOUTPUTFILE
-		    #break
-		#else:
-		tolog("outf = %s" % (outf))
-		if fullpath:
-		    # remove the full path here from outf
-		    workdir = os.path.dirname(outf)
-		    outf = os.path.basename(outf)
-		    
-		outs.append(outf)
+        from SiteMover import SiteMover
+        for outf in outFiles:
+            if outf and outf != 'NULL': # non-empty string and not NULL
+                #if (not os.path.isfile("%s/%s" % (workdir, outf)) and not fullpath) or (not os.path.isfile(outf) and fullpath): # expected output file is missing
+                    #pilotErrorDiag = "Expected output file %s does not exist" % (outf)
+                    #tolog("!!FAILED!!3000!! %s" % (pilotErrorDiag))
+                    #error = PilotErrors()
+                    #ec = error.ERR_MISSINGOUTPUTFILE
+                    #break
+                #else:
+                tolog("outf = %s" % (outf))
+                if fullpath:
+                    # remove the full path here from outf
+                    workdir = os.path.dirname(outf)
+                    outf = os.path.basename(outf)
+
+                outs.append(outf)
 		
-		# get the modification time for the file (needed by NG)
-		modt.append(SiteMover.getModTime(workdir, outf))
-		
-		#tolog("Output file(s):")
-		    #try:
-		    #    _ec, _rs = commands.getstatusoutput("ls -l %s/%s" % (workdir, outf))
-		    #except Exception, e:
-		    #    tolog(str(e))
-		    #else:
-		    #    tolog(_rs)
-	if ec == 0:
-	    # create a dictionary of the output files with matched modification times (needed to create the NG OutputFiles.xml)
-	    outsDict = dict(zip(outs, modt))
-	    # add the log file with a fictious date since it has not been created yet
-	    outsDict[logFile] = ''
-	else:
-	    outsDict = {}
-    
-	return ec, pilotErrorDiag, outs, outsDict
+                # get the modification time for the file (needed by NG)
+                modt.append(SiteMover.getModTime(workdir, outf))
+
+                #tolog("Output file(s):")
+                    #try:
+                    #    _ec, _rs = commands.getstatusoutput("ls -l %s/%s" % (workdir, outf))
+                    #except Exception, e:
+                    #    tolog(str(e))
+                    #else:
+                    #    tolog(_rs)
+        if ec == 0:
+            # create a dictionary of the output files with matched modification times (needed to create the NG OutputFiles.xml)
+            outsDict = dict(zip(outs, modt))
+            # add the log file with a fictious date since it has not been created yet
+            outsDict[logFile] = ''
+        else:
+            outsDict = {}
+
+        return ec, pilotErrorDiag, outs, outsDict
 	
     
     #poyda
     def create_record(self, pid, status, cpu=0, mem=0, hd=0):
-	try:
-	    sql = "INSERT INTO pilots (id, status, cpu, mem, hdd) VALUES (%d, %s, %d, %d, %d)"%(pid, status, cpu, mem, hdd)
-	    conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
-	    cur = conn.cursor()
-	    cur.execute(sql, {})
-	    conn.commit()
-	except Exception, e:
-	    pilotErrorDiag = "Coudn't add record in DB: %s" % str(e)
+        try:
+            sql = "INSERT INTO pilots (id, status, cpu, mem, hdd) VALUES (%d, %s, %d, %d, %d)"%(pid, status, cpu, mem, hdd)
+            conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
+            cur = conn.cursor()
+            cur.execute(sql, {})
+            conn.commit()
+        except Exception, e:
+            pilotErrorDiag = "Coudn't add record in DB: %s" % str(e)
             tolog("!!WARNING!! %s" % (pilotErrorDiag))
     
 
@@ -745,21 +480,16 @@ if __name__ == "__main__":
     
     #runJob.cpu_number_per_node = 16
     runJob.cpu_number_per_node = 8 #Poyda: IKI - 8 cores
-    runJob.walltime = 120 #?Piyda: ?? no change?
+    runJob.walltime = 120 #Poyda: ?? no change?
     runJob.max_nodes =  50 #2000 
     runJob.number_of_threads = 8  # 1 - one thread per task
     runJob.min_walltime = 60
     runJob.waittime = 5
     runJob.nodes = 1
-    runJob.partition_comp = 'bamboo-1w'
     runJob.project_id = "CSC108" #Poyda: what is it?
     #runJob.executed_queue = readpar('localqueue') 
     runJob.executed_queue = readpar('localqueue') #Poyda: Sash Novikov said that in ouer queudata this param has value 'ATLAS'
     runJob.PartitionWalltimePerNode = 7*24 #Poyda added
-
-    runJob.ssh_user="poyda"
-    runJob.ssh_keypath="/home/apf/.ssh/sk_poyda_rsa"
-    runJob.ssh_server="ui2.computing.kiae.ru"
     
     #poyda temp
     my_pid = os.getpid()
