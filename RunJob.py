@@ -20,14 +20,14 @@ from optparse import OptionParser
 import Site, pUtil, Job, Node, RunJobUtilities
 import Mover as mover
 from pUtil import debugInfo, tolog, isAnalysisJob, readpar, createLockFile, getDatasetDict, getChecksumCommand,\
-     tailPilotErrorDiag, getFileAccessInfo, processDBRelease, getCmtconfig, getExtension, getExperiment, getGUID, dumpFile
+     tailPilotErrorDiag, getFileAccessInfo, processDBRelease, getCmtconfig, getExtension, getExperiment, getGUID
 from JobRecovery import JobRecovery
 from FileStateClient import updateFileStates, dumpFileStates
 from ErrorDiagnosis import ErrorDiagnosis # import here to avoid issues seen at BU with missing module
 from PilotErrors import PilotErrors
 from ProxyGuard import ProxyGuard
 from shutil import copy2
-from FileHandling import tail
+
 
 # remove logguid, dq2url, debuglevel - not needed
 # rename lfcRegistration to catalogRegistration
@@ -466,16 +466,6 @@ class RunJob(object):
         if docleanup:
             self.sysExit(job)
 
-    def isMultiTrf(self, parameterList):
-        """ Will we execute multiple jobs? """
-
-        if len(parameterList) > 1:
-            multi_trf = True
-        else:
-            multi_trf = False
-
-        return multi_trf
-
     def setup(self, job, jobSite, thisExperiment):
         """ prepare the setup and get the run command list """
 
@@ -492,7 +482,10 @@ class RunJob(object):
         releaseList = thisExperiment.getRelease(job.release)
 
         tolog("Number of transformations to process: %s" % len(jobParameterList))
-        multi_trf = self.isMultiTrf(jobParameterList)
+        if len(jobParameterList) > 1:
+            multi_trf = True
+        else:
+            multi_trf = False
 
         # verify that the multi-trf job is setup properly
         ec, job.pilotErrorDiag, releaseList = RunJobUtilities.verifyMultiTrf(jobParameterList, jobHomePackageList, jobTrfList, releaseList)
@@ -668,36 +661,11 @@ class RunJob(object):
 
         return _obj
 
-    def getMemoryUtilityCommand(self, pid, summary="summary.json"):
-        """ Prepare the memory utility command string """
-
-        interval = 60
-        path = "/afs/cern.ch/work/n/nrauschm/public/MemoryMonitoringTool/MemoryMonitor"
-        cmd = ""
-
-        try:
-            tolog("2. Process id of job command: %d" % (pid))
-        except Exception, e:
-            tolog("Exception caught: %s" % (e))
-
-        # Construct the name of the output file using the summary variable
-        if summary.endswith('.json'):
-            output = summary.replace('.json', '.txt')
-        else:
-            output = summary + '.txt'
-
-        if os.path.exists(path):
-            cmd = "%s --pid %d --filename %s --json-summary %s --interval %d" % (path, pid, output, summary, interval)
-        else:
-            tolog("Path does not exist: %s" % (path))
-
-        return cmd
-
     def executePayload(self, thisExperiment, runCommandList, job):
         """ execute the payload """
 
         # do not hide the proxy for PandaMover since it needs it or for sites that has sc.proxy = donothide
-        # if 'DDM' not in jobSite.sitename and readpar('proxy') != 'donothide':
+        #if 'DDM' not in jobSite.sitename and readpar('proxy') != 'donothide':
         #    # create the proxy guard object (must be created here before the sig2exc())
         #    proxyguard = ProxyGuard()
         #
@@ -711,94 +679,28 @@ class RunJob(object):
         tolog("t0 = %s" % str(t0))
         res_tuple = (0, 'Undefined')
 
-        multi_trf = self.isMultiTrf(runCommandList)
-        _stdout = job.stdout
-        _stderr = job.stderr
-
         # loop over all run commands (only >1 for multi-trfs)
         current_job_number = 0
         getstatusoutput_was_interrupted = False
         number_of_jobs = len(runCommandList)
         for cmd in runCommandList:
             current_job_number += 1
-
-            # create the stdout/err files
-            if multi_trf:
-                job.stdout = _stdout.replace(".txt", "_%d.txt" % (current_job_number))
-                job.stderr = _stderr.replace(".txt", "_%d.txt" % (current_job_number))
-            file_stdout, file_stderr = self.getStdoutStderrFileObjects(stdoutName=job.stdout, stderrName=job.stderr)
-            if not (file_stdout and file_stderr):
-                res_tuple = (1, "Could not open stdout/stderr files, piping not possible")
-                tolog("!!WARNING!!2222!! %s" % (res_tuple[1]))
-                break
-
             try:
                 # add the full job command to the job_setup.sh file
                 to_script = cmd.replace(";", ";\n")
                 thisExperiment.updateJobSetupScript(job.workdir, to_script=to_script)
 
-                tolog("Executing job command %d/%d" % (current_job_number, number_of_jobs))
-
-                # Start the subprocess
-                main_subprocess = self.getSubprocess(thisExperiment, cmd, stdout=file_stdout, stderr=file_stderr)
-
-                if main_subprocess:
-                    time.sleep(2)
-                    try:
-                        tolog("Process id of job command: %d" % (main_subprocess.pid))
-                    except Exception, e:
-                        tolog("1. Exception caught: %s" % (e))
-                    # Start the memory utility if required
-                    mem_subprocess = None
-                    if thisExperiment.shouldExecuteMemoryMonitor():
-                        summary = thisExperiment.getMemoryMonitorJSONFilename()
-                        mem_cmd = self.getMemoryUtilityCommand(main_subprocess.pid, summary=summary)
-                        if mem_cmd != "":
-                            mem_subprocess = self.getSubprocess(thisExperiment, mem_cmd)
-                            if mem_subprocess:
-                                try:
-                                    tolog("Process id of memory monitor: %d" % (mem_subprocess.pid))
-                                except Exception, e:
-                                    tolog("3. Exception caught: %s" % (e))
-                        else:
-                            tolog("Could not launch memory monitor since the command path does not exist")
-                    else:
-                        tolog("Not required to run memory monitor")
-
-                    # Loop until the main subprocess has finished
-                    while main_subprocess.poll() is None:
-                        # ..
-
-                        # Take a short nap
-                        time.sleep(1)
-
-                    # Stop the memory monitor
-                    if mem_subprocess:
-                        mem_subprocess.send_signal(signal.SIGUSR1)
-                        tolog("Terminated the memory monitor subprocess")
-
-                        # Move the output JSON to the pilots init dir
-                        try:
-                            copy2("%s/*.json" % (job.workdir), "%s/." % (self.__pworkdir))
-                        except Exception, e:
-                            tolog("!!WARNING!!2222!! Caught exception while trying to copy JSON files: %s" % (e))
-
-                    # Handle main subprocess errors
-                    try:
-                        stdout = open(job.stdout, 'r')
-                        res_tuple = (main_subprocess.returncode, tail(stdout))
-                    except Exception, e:
-                        tolog("!!WARNING!!3002!! Failed during tail operation: %s" % (e))
-                    else:
-                        tolog("Tail:\n%s" % (res_tuple[1]))
-                        stdout.close()
-
-                else:
-                    res_tuple = (1, "Popen ended prematurely (payload command failed to execute, see stdout/err)")
-                    tolog("!!WARNING!!3001!! %s" % (res_tuple[1]))
+                tolog("Executing job command %d/%d: %s" % (current_job_number, number_of_jobs, cmd))
+                # Eddie: Commented out the part where we execute ONLY the payload under GLExec as now everything is under a glexec'ed environment
+                #if readpar('glexec').lower() in ['true', 'uid']: 
+                #    # execute trf under glexec
+                #    res_tuple = executePayloadGLExec(cmd, job)
+                #else:
+                #    # execute trf normally
+                res_tuple = commands.getstatusoutput(cmd)
 
             except Exception, e:
-                tolog("!!FAILED!!3000!! Failed to run command: %s" % str(e))
+                tolog("!!FAILED!!3000!! Failed to run command %s" % str(e))
                 getstatusoutput_was_interrupted = True
                 if self.__failureCode:
                     job.result[2] = self.__failureCode
@@ -931,7 +833,8 @@ class RunJob(object):
 
         # convert the preliminary metadata-<jobId>.xml file to OutputFiles-<jobId>.xml for NG and for CERNVM
         # note: for CERNVM this is only really needed when CoPilot is used
-        if os.environ.has_key('Nordugrid_pilot') or sitename == 'CERNVM':
+        region = readpar("region")
+        if region == 'Nordugrid' or sitename == 'CERNVM':
             if RunJobUtilities.convertMetadata4NG(os.path.join(job.workdir, job.outputFilesXML), _fname, outsDict, dsname, datasetDict):
                 tolog("Metadata has been converted to NG/CERNVM format")
             else:
@@ -1087,25 +990,6 @@ class RunJob(object):
         except IOError, e:
             pass
         tolog(out)
-
-    def getStdoutStderrFileObjects(self, stdoutName="stdout.txt", stderrName="stderr.txt"):
-        """ Create stdout/err file objects """
-
-        try:
-            stdout = open(os.path.join(os.getcwd(), stdoutName), "w")
-            stderr = open(os.path.join(os.getcwd(), stderrName), "w")
-        except Exception, e:
-            tolog("!!WARNING!!3330!! Failed to open stdout/err files: %s" % (e))
-            stdout = None
-            stderr = None
-
-        return stdout, stderr
-
-    def getSubprocess(self, thisExperiment, runCommand, stdout=None, stderr=None):
-        """ Execute a command as a subprocess """
-
-        # Execute and return the subprocess object
-        return thisExperiment.getSubprocess(runCommand, stdout=stdout, stderr=stderr)
 
     # Methods used by event service RunJob* modules ..............................................................
 
@@ -1269,6 +1153,7 @@ if __name__ == "__main__":
         if runJob.getCache():
             thisExperiment.setCache(runJob.getCache())
 
+        region = readpar('region')
         JR = JobRecovery()
         try:
             job = Job.Job()

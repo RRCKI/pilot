@@ -159,7 +159,6 @@ class Experiment(object):
 
     def specialChecks(self, **kwargs):
         """ Implement special checks here """
-
         # Return False if fatal failure, otherwise return True
         # The pilot will abort if this method returns a False
 
@@ -330,6 +329,7 @@ class Experiment(object):
 
         # get the queuedata info
         # (directAccess info is stored in the copysetup variable)
+        region = readpar('region')
 
         # get relevant file transfer info
         dInfo, useCopyTool, useDirectAccess, useFileStager, oldPrefix, newPrefix, copysetup, usePFCTurl, lfcHost =\
@@ -339,6 +339,7 @@ class Experiment(object):
         _copysetup = self.getSetupFromCopysetup(copysetup)
         if _copysetup != "" and os.path.exists(_copysetup):
             run_command = 'source %s;' % (_copysetup)
+            run_command += "export FRONTIER_SERVER=\"(serverurl=http://ccfrontier.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli02.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli01.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://lcgft-atlas.gridpp.rl.ac.uk:3128/frontierATLAS)(serverurl=http://lcgvo-frontier03.gridpp.rl.ac.uk:3128/frontierATLAS)(serverurl=http://lcgvo-frontier02.gridpp.rl.ac.uk:3128/frontierATLAS)(serverurl=http://lcgvo-frontier01.gridpp.rl.ac.uk:3128/frontierATLAS)(proxyurl=http://quid.hpc2.computing.kiae.ru:3128)(proxyurl=http://quid1.hpc2.computing.kiae.ru:3128)(proxyurl=http://quid2.hpc2.computing.kiae.ru:3128)\""
 
         # add the user proxy
         if os.environ.has_key('X509_USER_PROXY'):
@@ -918,35 +919,6 @@ class Experiment(object):
         # are reported by the pilot to the DQ2 Tracing Service if this method returns True
 
         return False
-
-    # Optional
-    def updateJobDefinition(self, job, filename):
-        """ Update the job definition file and object before using it in RunJob """
-
-        # This method is called from Monitor, before RunJob is launched, which allows to make changes to the job object after it was downloaded from the job dispatcher
-        # (used within Monitor) and the job definition file (which is used from RunJob to recreate the same job object as is used in Monitor).
-        # 'job' is the job object, defined in Job.py, while 'filename' is the name of the file containing the job definition information.
-
-        return job
-
-    # Optional
-    def shouldExecuteMemoryMonitor(self):
-        """ Determine where a memory utility monitor should be executed """ 
-
-        # The RunJob class has the possibility to execute a memory utility monitor that can track the memory usage
-        # of the payload. The monitor is executed if this method returns True. The monitor is expected to produce
-        # a summary JSON file whose name is defined by the getMemoryMonitorJSONFilename() method. The contents of
-        # this file (ie. the full JSON dictionary) will be added to the jobMetrics at the end of the job (see
-        # PandaServerClient class).
-
-        return False
-
-    # Optional
-    def getMemoryMonitorJSONFilename(self):
-        """ Return the filename of the memory monitor JSON file """
-
-        # For explanation, see shouldExecuteMemoryMonitor()
-        return "memory_monitor_summary.json"
 
 if __name__ == "__main__":
 

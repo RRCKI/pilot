@@ -29,9 +29,11 @@ def set_environment():
     env['abortDQSpace'] = 10                   # Unit is in GB
     env['warnDQSpace'] = 100                   # Unit is in GB
     env['localsizelimit_stdout'] = 2*1024**2   # Size limit of payload stdout size during running. unit is in kB
-    env['localspacelimit'] = 2*1024**2         # Space limit of remaining local disk size during running. unit is in kB
+    #env['localspacelimit'] = 2*1024**2         # Space limit of remaining local disk size during running. unit is in kB
+    env['localspacelimit'] = 2*1024         # Space limit of remaining local disk size during running. unit is in kB
     env['localspacelimit_user'] = 7*1024**2    # Maximum size of user work area. unit is in kB
-    env['localspacelimit0'] = 5*1024**2        # Initial space limit before asking for a job. unit is in kB
+    #env['localspacelimit0'] = 5*1024**2        # Initial space limit before asking for a job. unit is in kB
+    env['localspacelimit0'] = 5*1024           # Initial space limit before asking for a job. unit is in kB
     env['outputlimit'] = 500*1024**3           # Maximum allowed size of an output file. unit is B
     env['pilotId'] = 'xtestP001'               # Pilot id
     env['jobSchedulerId'] = 'xtestJS001'       # Scheduler id

@@ -1,0 +1,1287 @@
+OFound string /s/ls2/users/poyda/testpilot in file PILOT_INITDIR
+ORunJobEvent caught exception: No module named yampl
+OFound string /s/ls2/users/poyda/testpilot in file PILOT_INITDIR
+OFound string /s/ls2/users/poyda/testpilot in file PILOT_INITDIR
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3518| Panda Pilot, version PICARD 60c
+O
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3519| Version tag = PR
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3520| PilotId = xtestP001, jobSchedulerId = xtestJS001
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3521| Current time: 2015-04-29T13:42:35+-300
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3522| Run by Python 2.6.6 (r266:84292, Jan 22 2014, 09:42:36) 
+O[GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3523| 64 bit OS
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3524| Pilot init dir: /s/ls2/users/poyda/testpilot
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3526| All output written to file: pilotlog.out
+O29 Apr 10:42:35| pUtil.py    |dumpPilotInf:3527| Pilot executed by: apf
+O29 Apr 10:42:35| pilot.py    |argParser   :  91| argParser arguments: ['-d', '/s/ls2/users/poyda/testpilot/', '-s', 'ANALY_RRC-KI-HPC', '-h', 'ANALY_RRC-KI-HPC', '-w', 'https://vcloud29.grid.kiae.ru', '-p', '25443', '-u', 'user', '-j', 'false', '-b', '2', '-k', '1000']
+O29 Apr 10:42:35| pilot.py    |argParser   : 329| Pilot user flag: user
+O29 Apr 10:42:35| pUtil.py    |handleQueued:3837| Processing queuedata
+O29 Apr 10:42:35| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:35| SiteInformat|getQueuedata: 295| Queuedata has already been downloaded by pilot wrapper script (will confirm validity)
+O29 Apr 10:42:35| SiteInformat|verifyQueued: 253| schedconfigDB returned: {\"gatekeeper\": null, \"objectstore\": null, \"cachedse\": 0, \"mintime\": 0, \"sysconfig\": \"manual\", \"celist\": null, \"copytool\": \"sshmv\", \"queuehours\": 0, \"maxinputsize\": 30000, \"wansinklimit\": null, \"python_path\": null, \"seprodpath\": null, \"dq2url\": null, \"httpredirector\": null, \"nodes\": 0, \"faxredirector\": null, \"dn\": null, \"appdir\": \"/cvmfs/atlas.cern.ch/repo/sw\", \"nqueue\": 0, \"maxtime\": 0, \"name\": \"default\", \"maxwdir\": 32000, \"cmd\": null, \"allowedgroups\": null, \"sepath\": null, \"pcache\": null, \"comment_\": null, \"lfcpath\": null, \"allowjem\": \"False\", \"defaulttoken\": null, \"copyprefixin\": null, \"minmemory\": 0, \"tmpdir\": null, \"copysetupin\": null, \"retry\": \"False\", \"copytoolin\": \"sshmv\", \"space\": 36475, \"envsetup\": null, \"corecount\": null, \"transferringlimit\": null, \"version\": null, \"ddm\": \"local\", \"allowhttp\": null, \"email\": null, \"envsetupin\": null, \"tspace\": \"2014-12-08T09:55:02\", \"lfchost\": null, \"seinopt\": null, \"gstat\": null, \"timefloor\": null, \"recoverdir\": null, \"proxy\": null, \"idlepilotsupression\": null, \"tags\": null, \"statusoverride\": \"offline\", \"region\": \"Russia\", \"queue\": null, \"siteid\": \"ANALY_RRC-KI-HPC\", \"special_par\": null, \"wansourcelimit\": null, \"validatedreleases\": \"False\", \"stageoutretry\": 2, \"catchall\": \"HPC_KurchatovHPC2\", \"cloud\": \"RU\", \"system\": \"lcg-cg\", \"allowdirectaccess\": \"False\", \"datadir\": null, \"memory\": 0, \"availablestorage\": null, \"lastmod\": \"2014-11-17T15:10:58\", \"lfcregister\": \"server\", \"releases\": null, \"jdltxt\": null, \"errinfo\": null, \"jdl\": null, \"fairsharepolicy\": null, \"cmtconfig\": null, \"seopt\": null, \"depthboost\": null, \"multicloud_append\": null, \"stageinretry\": 2, \"localqueue\": null, \"glexec\": null, \"sein\": null, \"gocname\": null, \"site\": \"RRC-KI-HPC\", \"countrygroup\": null, \"priorityoffset\": null, \"wntmpdir\": null, \"accesscontrol\": null, \"copyprefix\": null, \"maxmemory\": 0, \"pledgedcpu\": null, \"availablecpu\": null, \"environ\": null, \"setokens\": null, \"status\": \"online\", \"multicloud\": null, \"globusadd\": null, \"pilotlimit\": null, \"faxdoor\": null, \"tier\": null, \"nickname\": \"ANALY_RRC-KI-HPC\", \"allowednode\": null, \"copysetup\": \"/cvmfs/atlas.cern.ch/repo/sw/local/setup.sh\", \"allowfax\": \"False\", \"pledgedstorage\": null, \"jobmanager\": \"condor\", \"jdladd\": null, \"lfcprodpath\": null, \"auto_mcu\": 0, \"se\": null}
+O29 Apr 10:42:35| SiteInformat|getQueuedata: 298| Queuedata was successfully downloaded by pilot wrapper script
+O29 Apr 10:42:35| ATLASSiteInf|getQueuedata: 601| curl command returned valid queuedata
+O29 Apr 10:42:35| ATLASSiteInf|postProcessQ: 560| Site ANALY_RRC-KI-HPC is currently in online mode
+O29 Apr 10:42:35| ATLASSiteInf|postProcessQ: 568| Job recovery turned off
+O29 Apr 10:42:35| SiteInformat|evaluateQueu: 191| Evaluating queuedata
+O29 Apr 10:42:35| SiteInformat|setUnsetVars: 505| Setting unset pilot variables using queuedata
+O29 Apr 10:42:35| SiteInformat|setUnsetVars: 516| appdir: /cvmfs/atlas.cern.ch/repo/sw
+O29 Apr 10:42:35| SiteInformat|setUnsetVars: 522| Note: dq2url not set
+O29 Apr 10:42:35| pUtil.py    |handleQueued:3861| File registration will be done by server
+O29 Apr 10:42:35| pUtil.py    |getStagingRe:3826| Updated stage-in retry number to 2
+O29 Apr 10:42:35| pUtil.py    |getStagingRe:3826| Updated stage-out retry number to 2
+O29 Apr 10:42:35| pUtil.py    |verifyReleas:1885| Detected unset (NULL) release/homepackage string
+O29 Apr 10:42:35| ATLASExperim|getSwbase   :2762| Got a plain appdir from queuedata: /cvmfs/atlas.cern.ch/repo/sw
+O29 Apr 10:42:35| ATLASExperim|verifySwbase:2454| Application dir confirmed: /cvmfs/atlas.cern.ch/repo/sw/software
+O29 Apr 10:42:35| pilot.py    |runMain     :2398| Pilot will serve experiment: ATLAS
+O29 Apr 10:42:35| ATLASExperim|displayArchi:2272| Architecture information:
+O29 Apr 10:42:35| ATLASExperim|displayArchi:2275| Excuting command: lsb_release -a
+O29 Apr 10:42:35| ATLASExperim|displayArchi:2286| 
+OLSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
+ODistributor ID:	CentOS
+ODescription:	CentOS release 6.6 (Final)
+ORelease:	6.6
+OCodename:	Final
+O29 Apr 10:42:35| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:35| ATLASExperim|displayChang: 669| appdirs = ['/cvmfs/atlas.cern.ch/repo/sw']
+O29 Apr 10:42:36| ATLASExperim|displayChang: 680| head of /cvmfs/atlas.cern.ch/repo/sw/ChangeLog: 
+O--------------------------------------------------------------------------------
+O2015-04-29 12:00:11 Alessandro De Salvo
+O	* + GroupData 201504291200
+O
+O2015-04-29 08:01:10 Alessandro De Salvo
+O	* + AGISData 20150429080109
+O
+O2015-04-29 02:00:25 Alessandro De Salvo
+O	* + AGISData 20150429020025
+O
+O2015-04-28 20:46:44 Alessandro De Salvo
+O--------------------------------------------------------------------------------
+O29 Apr 10:42:36| ATLASExperim|setPilotPyth:2823| ATLAS_PYTHON_PILOT set to /usr/bin/python
+O29 Apr 10:42:36| Node.py     |setNumberOfC:  67| corecount not an integer in queuedata
+O29 Apr 10:42:36| Node.py     |setNumberOfC:  77| Will not set ATHENA_PROC_NUMBER
+O29 Apr 10:42:36| Node.py     |collectMachi: 162| Collecting machine features
+O29 Apr 10:42:36| Node.py     |collectMachi: 180| $MACHINEFEATURES not defined locally
+O29 Apr 10:42:36| Node.py     |collectMachi: 206| $JOBFEATURES not defined locally
+O29 Apr 10:42:36| Node.py     |collectMachi: 209| Executing command: hostname -i
+O29 Apr 10:42:36| Node.py     |collectMachi: 211| IP number of worker node: 192.168.23.43
+O29 Apr 10:42:36| pilot.py    |createSiteWo:1761| Will attempt to create workdir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:36| pilot.py    |createSiteWo:1796| Removed old file: /s/ls2/users/poyda/testpilot/CURRENT_SITEWORKDIR
+O29 Apr 10:42:36| pilot.py    |createSiteWo:1797| Creating file: /s/ls2/users/poyda/testpilot/CURRENT_SITEWORKDIR
+O29 Apr 10:42:36| pUtil.py    |writeToFileW:1696| Wrote string \"/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155\" to file: /s/ls2/users/poyda/testpilot/CURRENT_SITEWORKDIR
+O29 Apr 10:42:36| ATLASExperim|checkSpecial:2325| ATLAS_POOLCOND_PATH not set by wrapper
+O29 Apr 10:42:36| ATLASExperim|checkSpecial:2336| /cvmfs/atlas.cern.ch/repo/sw confirmed
+O29 Apr 10:42:36| ATLASExperim|checkSpecial:2336| /cvmfs/atlas.cern.ch/repo/sw/software confirmed
+O29 Apr 10:42:36| ATLASExperim|checkSpecial:2346| /cvmfs/atlas.cern.ch/repo/sw/local confirmed
+O29 Apr 10:42:36| pilot.py    |diskCleanup :1709| Preparing to execute Cleaner
+O29 Apr 10:42:36| pilot.py    |diskCleanup :1718| Cleaning /s/ls2/users/poyda/testpilot/
+O29 Apr 10:42:36| Cleaner.py  |__init__    :  56| Cleaner initialized with clean-up limit: 2 hours
+O29 Apr 10:42:36| Cleaner.py  |__init__    :  65| Cleaner will scan for lost directories in verified path: /s/ls2/users/poyda/testpilot/
+O29 Apr 10:42:36| Cleaner.py  |cleanup     :  81| Executing empty dirs clean-up, stage 1/5
+O29 Apr 10:42:36| Cleaner.py  |purgeEmptyDi: 212| Purged 0 empty directories
+O29 Apr 10:42:36| Cleaner.py  |cleanup     :  84| Executing work dir clean-up, stage 2/5
+O29 Apr 10:42:36| Cleaner.py  |purgeWorkDir: 253| Purged 0 single workDirs directories
+O29 Apr 10:42:36| Cleaner.py  |cleanup     :  87| Executing maxed-out dirs clean-up, stage 3/5
+O29 Apr 10:42:36| Cleaner.py  |purgeMaxedou: 327| Purged 0 empty directories
+O29 Apr 10:42:36| Cleaner.py  |cleanup     :  90| Executing AthenaMP clean-up, stage 4/5 <SKIPPED>
+O29 Apr 10:42:36| Cleaner.py  |cleanup     :  95| Executing PanDA Pilot dir clean-up, stage 5/5
+O29 Apr 10:42:36| Cleaner.py  |cleanup     : 103| Number of found job state files: 0
+O29 Apr 10:42:36| Cleaner.py  |cleanup     : 166| No job state files were found, aborting clean-up
+O29 Apr 10:42:36| pilot.py    |setUpdateFre:1837| Update frequencies:
+O29 Apr 10:42:36| pilot.py    |setUpdateFre:1838| ...Processes: 300 s
+O29 Apr 10:42:36| pilot.py    |setUpdateFre:1839| .......Space: 600 s
+O29 Apr 10:42:36| pilot.py    |setUpdateFre:1840| ......Server: 1800 s
+O29 Apr 10:42:36| pUtil.py    |getTimeFloor:2718| Timefloor not set in queuedata (multi-jobs disabled)
+O29 Apr 10:42:36| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:36| pilot.py    |runMain     :2480| Using site information for experiment: ATLAS
+O29 Apr 10:42:36| pUtil.py    |chdir       :2876| chdir to: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:36| pUtil.py    |chdir       :2878| current dir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1670| Pilot options:................................................
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1671| appdir: /cvmfs/atlas.cern.ch/repo/sw
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1672| debugLevel: 2
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1673| dq2url: 
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1674| jobrec: False
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1675| jobRequestFlag: True
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1676| jobSchedulerId: xtestJS001
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1677| maxjobrec: 20
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1678| maxNumberOfRecoveryAttempts: 15
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1679| pilotId: xtestP001
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1680| pshttpurl: https://vcloud29.grid.kiae.ru
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1681| psport: 25443
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1682| queuename: ANALY_RRC-KI-HPC
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1683| rmwkdir: None
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1684| sitename: ANALY_RRC-KI-HPC
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1685| stageinretry: 2
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1686| stageoutretry: 2
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1687| uflag: user
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1688| workdir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1689| logFileDir: 
+O29 Apr 10:42:36| pilot.py    |dumpVars    :1690| ..............................................................
+O29 Apr 10:42:36| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:36| ATLASExperim|verifyProxy :2882| Executing command: export X509_USER_PROXY=/tmp/x509up_u500;. /cvmfs/atlas.cern.ch/repo/sw/arc/client/latest/slc6/x86_64/setup.sh;arcproxy -i vomsACvalidityLeft
+O29 Apr 10:42:38| ATLASExperim|interpretPro:2936| ec=0 output=330487
+O29 Apr 10:42:38| ATLASExperim|interpretPro:2971| Voms proxy verified (330487s)
+O29 Apr 10:42:38| ATLASExperim|verifyProxy :2889| Voms proxy verified using arcproxy
+O29 Apr 10:42:38| pilot.py    |runMain     :2511| Collecting WN info from: /s/ls2/users/poyda/testpilot
+O29 Apr 10:42:38| pilot.py    |getsetWNMem :2307| Got max memory limit: 0 MB (from queuedata)
+O29 Apr 10:42:38| pilot.py    |getsetWNMem :2345| Max memory will not be set
+O29 Apr 10:42:38| pilot.py    |checkLocalDi:2279| Local space limit: 5242880 B
+O29 Apr 10:42:38| pilot.py    |checkLocalDi:2284| Remaining local disk space: 10394533888 B
+O29 Apr 10:42:38| pilot.py    |getJob      :2234| Pilot will attempt single job download for a maximum of 180 seconds
+O29 Apr 10:42:38| pUtil.py    |getMaxInputS:2699| Max input size = 30000 MB (pilot default)
+O29 Apr 10:42:38| pilot.py    |getNewJob   :2018| Available WN disk space: 9913 MB
+O29 Apr 10:42:38| pilot.py    |getNewJob   :2020| Sending disk space 9913 MB to dispatcher
+O29 Apr 10:42:38| pilot.py    |getDispatche:1886| Node name: vcloud23.grid.kiae.ru
+O29 Apr 10:42:38| pilot.py    |getDispatche:1898| No country group selected
+O29 Apr 10:42:38| pilot.py    |getDispatche:1904| No working group selected
+O29 Apr 10:42:38| pilot.py    |getDispatche:1927| prodSourceLabel: user
+O29 Apr 10:42:38| pilot.py    |getNewJob   :2081| Looking for a primary job (contacting server at https://vcloud29.grid.kiae.ru:25443/server/panda)
+O29 Apr 10:42:38| pUtil.py    |httpConnect : 211| Will not send attemptNr for cmd=getJob
+O29 Apr 10:42:38| pUtil.py    |toServer    :2118| toServer: cmd = getJob
+O29 Apr 10:42:38| pUtil.py    |toServer    :2119| toServer: len(data) = 9
+O29 Apr 10:42:38| pUtil.py    |toServer    :2120| data = {'node': 'vcloud23.grid.kiae.ru', 'mem': 0, 'getProxyKey': 'False', 'computingElement': 'ANALY_RRC-KI-HPC', 'diskSpace': 9913.0, 'siteName': 'ANALY_RRC-KI-HPC', 'workingGroup': '', 'cpu': 3000.1060000000002, 'prodSourceLabel': 'user'}
+O29 Apr 10:42:38| pUtil.py    |post        :1994| Executing command: curl --silent --show-error --connect-timeout 100 --max-time 120 --insecure --compressed --capath /cvmfs/grid.cern.ch/etc/grid-security/certificates --cert /tmp/x509up_u500 --cacert /tmp/x509up_u500 --key /tmp/x509up_u500 --config /s/ls2/users/poyda/testpilot/curl.config https://vcloud29.grid.kiae.ru:25443/server/panda/getJob
+O29 Apr 10:42:40| pUtil.py    |toServer    :2141| Elapsed seconds: 2
+O29 Apr 10:42:40| pUtil.py    |parseDispatc:2415| Dispatcher response: [('jobsetID', 'NULL'), ('logGUID', '46df2a3a-8c38-4e23-a163-c034ca450cd7'), ('cmtConfig', 'NULL'), ('prodDBlocks', 'user.ruslan:user.ruslan.data.dataset1'), ('dispatchDBlockTokenForOut', 'NULL,NULL'), ('destinationDBlockToken', 'NULL,NULL'), ('destinationSE', 'ANALY_RRC-KI-HPC'), ('realDatasets', 'panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2,user.ruslan:user.ruslan.data.dataset1'), ('prodUserID', '/C=RU/O=RDIG/OU=users/OU=lebedev.ru/CN=Ruslan Mashinistov/CN=proxy'), ('GUID', 'NULL'), ('realDatasetsIn', 'user.ruslan:user.ruslan.data.dataset1'), ('nSent', '0'), ('cloud', 'RU'), ('StatusCode', '0'), ('homepackage', 'NULL'), ('inFiles', 'add_env3.txt'), ('processingType', 'NULL'), ('fsize', '0'), ('fileDestinationSE', 'ANALY_RRC-KI-HPC,ANALY_RRC-KI-HPC'), ('scopeOut', 'user.ruslan:user'), ('minRamCount', '0'), ('jobDefinitionID', '9982'), ('scopeLog', 'panda:panda'), ('transformation', '/s/ls2/users/poyda/bio/runbio_wr.py'), ('maxDiskCount', '0'), ('coreCount', 'NULL'), ('prodDBlockToken', 'NULL'), ('transferType', 'NULL'), ('destinationDblock', 'panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2,user.ruslan:user.ruslan.data.dataset1'), ('dispatchDBlockToken', 'NULL'), ('jobPars', ' '), ('attemptNr', '1'), ('swRelease', 'NULL'), ('maxCpuCount', '0'), ('outFiles', 'user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1,user.ruslan.results3.txt.1'), ('currentPriority', '996'), ('scopeIn', 'user.ruslan'), ('PandaID', '92'), ('sourceSite', 'NULL'), ('dispatchDblock', 'NULL'), ('prodSourceLabel', 'user'), ('checksum', 'NULL'), ('jobName', 'user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147'), ('taskID', '2'), ('logFile', 'user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1')]
+O29 Apr 10:42:40| pilot.py    |writeDispatc:1978| Removed existing STATUSCODE file
+O29 Apr 10:42:40| pUtil.py    |writeToFileW:1696| Wrote string \"0\" to file: /s/ls2/users/poyda/testpilot/STATUSCODE
+O29 Apr 10:42:40| pilot.py    |getNewJob   :2111| Attempt number from server: 1
+O29 Apr 10:42:40| pilot.py    |getNewJob   :2126| Job recovery is still switched off after job download
+O29 Apr 10:42:40| pilot.py    |getNewJob   :2134| Received nSent: 0
+O29 Apr 10:42:40| pilot.py    |backupDispat:2007| Job definition stored (for later backup) in file pandaJobData.out
+O29 Apr 10:42:40| pilot.py    |getNewJob   :2144| prodSourceLabel already set in job def data: user
+O29 Apr 10:42:40| SiteInformat|updateQueued: 461| called updateQueuedataFromJobParameters with:  
+O29 Apr 10:42:40| Job.py      |setJobDef   : 265| Normal job (not an eventService job)
+O29 Apr 10:42:40| Job.py      |setJobDef   : 270| jobsetID=NULL
+O29 Apr 10:42:40| Job.py      |setJobDef   : 373| outfList = ['user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1', 'user.ruslan.results3.txt.1']
+O29 Apr 10:42:40| Job.py      |setJobDef   : 375| outfdbList = ['panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2', 'user.ruslan:user.ruslan.data.dataset1']
+O29 Apr 10:42:40| Job.py      |setJobDef   : 399| destinationDBlockToken = ['NULL', 'NULL']
+O29 Apr 10:42:40| Job.py      |setJobDef   : 410| dispatchDBlockTokenForOut = ['NULL', 'NULL']
+O29 Apr 10:42:40| Job.py      |setJobDef   : 412| logFileDblock = panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+O29 Apr 10:42:40| pilot.py    |getNewJob   :2194| Got logGUID from server: 46df2a3a-8c38-4e23-a163-c034ca450cd7
+O29 Apr 10:42:41| pilot.py    |getNewJob   :2206| New job has prodSourceLabel=user
+O29 Apr 10:42:41| pilot.py    |getNewJob   :2219| no user proxy in data
+O29 Apr 10:42:41| pilot.py    |getJob      :2247| Increased job counter to 1
+O29 Apr 10:42:41| pilot.py    |getJob      :2249| Task ID set to: 2
+O29 Apr 10:42:41| pilot.py    |runMain     :2538| Using job definition id: 9982
+O29 Apr 10:42:41| ATLASExperim|verifyNCores:2726| Using core count values: None (job definition), None (schedconfig)
+O29 Apr 10:42:41| pilot.py    |runMain     :2544| postGetJobActions: OK
+O29 Apr 10:42:41| Monitor.py  |__verify_per: 619| (1b) Executing command: stat /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:41| Monitor.py  |__verify_per: 621| 
+O  File: '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155'
+O  Size: 4096      	Blocks: 8          IO Block: 4096   directory
+ODevice: fc01h/64513d	Inode: 673065      Links: 2
+OAccess: (0770/drwxrwx---)  Uid: (  500/     apf)   Gid: (  500/     apf)
+OAccess: 2015-04-29 13:42:36.667781016 +0300
+OModify: 2015-04-29 13:42:41.082781015 +0300
+OChange: 2015-04-29 13:42:41.082781015 +0300
+O29 Apr 10:42:41| Monitor.py  |monitor_job : 916| Pilot TCP server will use port: 9073
+O29 Apr 10:42:41| Monitor.py  |monitor_job : 920| 
+O
+OEntered multi-job loop. Current work dir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3518| Panda Pilot, version PICARD 60c
+O
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3519| Version tag = PR
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3520| PilotId = xtestP001, jobSchedulerId = xtestJS001
+O29 Apr 10:42:41| PilotTCPServ|run         :  35| ('PilotTCPServer',) starts
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3521| Current time: 2015-04-29T13:42:41+-300
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3522| Run by Python 2.6.6 (r266:84292, Jan 22 2014, 09:42:36) 
+O[GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3523| 64 bit OS
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3524| Pilot init dir: /s/ls2/users/poyda/testpilot
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3526| All output written to file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/pilotlog.txt
+O29 Apr 10:42:41| pUtil.py    |dumpPilotInf:3527| Pilot executed by: apf
+O29 Apr 10:42:41| Monitor.py  |monitor_job : 928| Entering main pilot loop: multi job disabled
+O29 Apr 10:42:41| Monitor.py  |monitor_job : 934| Collecting WN info from: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155 (again)
+O29 Apr 10:42:41| Monitor.py  |__getsetWNMe: 641| Got max memory limit: 0 MB (from queuedata)
+O29 Apr 10:42:41| Monitor.py  |__getsetWNMe: 685| Max memory will not be set
+O29 Apr 10:42:41| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:41| ATLASExperim|verifyProxy :2882| Executing command: export X509_USER_PROXY=/tmp/x509up_u500;. /cvmfs/atlas.cern.ch/repo/sw/arc/client/latest/slc6/x86_64/setup.sh;arcproxy -i vomsACvalidityLeft
+O29 Apr 10:42:41| ATLASExperim|interpretPro:2936| ec=0 output=330484
+O29 Apr 10:42:41| ATLASExperim|interpretPro:2971| Voms proxy verified (330484s)
+O29 Apr 10:42:41| ATLASExperim|verifyProxy :2889| Voms proxy verified using arcproxy
+O29 Apr 10:42:41| Monitor.py  |__checkLocal: 697| Local space limit: 5242880 B
+O29 Apr 10:42:41| Monitor.py  |__checkLocal: 702| Remaining local disk space: 10393485312 B
+O29 Apr 10:42:41| Monitor.py  |monitor_job : 963| Verifying that pilot TCP server is still alive...
+O29 Apr 10:42:41| UpdateHandle|handle      :  16| Connected from ('127.0.0.1', 33980)
+O29 Apr 10:42:41| UpdateHandle|handle      :  19| --- TCPServer: Message received from child is : ['']
+O29 Apr 10:42:41| Monitor.py  |monitor_job : 965| ...Pilot TCP server is still running
+O29 Apr 10:42:41| ATLASSiteInf|extractAppdi: 644| Extracting appdir (ATLAS: current value=/cvmfs/atlas.cern.ch/repo/sw)
+O29 Apr 10:42:41| ATLASSiteInf|extractAppdi: 696| Got plain appdir: /cvmfs/atlas.cern.ch/repo/sw
+O29 Apr 10:42:41| ATLASSiteInf|extractAppdi: 700| Software directory /cvmfs/atlas.cern.ch/repo/sw exists
+O29 Apr 10:42:41| SiteInformat|replaceQueue: 139| Successfully changed appdir to: /cvmfs/atlas.cern.ch/repo/sw
+O29 Apr 10:42:41| JobRecovery.|updateJobSta: 648| Successfully updated job state file with state: startup
+O29 Apr 10:42:41| pUtil.py    |stageInPyMod: 521| initdir is /s/ls2/users/poyda/testpilot 
+O29 Apr 10:42:41| pUtil.py    |stageInPyMod: 522| workdir is /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155 
+O29 Apr 10:42:41| pUtil.py    |getFileList :  44| Copying: ['RunJob.py', 'PilotUtils.py', 'Mover.py', 'WatchDog.py', 'TimerCommand.py', 'EventServiceFactory.py', 'testsage2.py', 'EventService.py', 'VmPeak.py', 'RunJobFactory.py', 'dCacheSiteMover.py', 'rfcpLFCSiteMover.py', 'xrootdSiteMover.py', 'NordugridATLASSiteInformation.py', 'FileStateClient.py', 'globusPilot.py', 'SiteMoverFarm.py', 'processes.py', 'RunJobUtilities.py', 'NordugridATLASExperiment.py', 'adler32cmd.py', 'ATLASEventService.py', 'FileHandling.py', 'JobLog.py', 'dataPilot.py', 'xrdcpSiteMover.py', 'xrootdObjectstoreSiteMover.py', 'AMSTaiwanExperiment.py', 'UpdateHandler.py', 'sshmvSM.py', 'ErrorDiagnosis.py', 'objectstoreSiteMover.py', 'stormSiteMover.py', 'JobState.py', 'GFAL2SiteMover.py', 'RunJobKurchatovhpc2_.py', 'RunJobHPC.py', 'RunJobHpcEvent.py', 'EventRanges.py', 'glexec_aux.py', 'timed_command.py', 'RunJobTitan.py', 'FAXSiteMover.py', 'futil.py', 'Site.py', 'remoteMonitorStarter.py', 'dCacheLFCSiteMover.py', 'config.py', 'test.py', 'sshlcgcpSiteMover_back.py', 'HUSiteMover.py', 'lcgcpSiteMover.py', 'mvSiteMover.py', 'SiteInformation.py', 'CustomEncoder.py', 'RunJobEvent.py', 'S3ObjectstoreSiteMover.py', 'RunJobEdison.py', 'JEMstub.py', 'BNLdCacheSiteMover.py', 'PandaServerClient.py', 'glexec_utils.py', 'sshlcgcpSiteMover.py', '__init__.py', 'fileinfos.py', 'aria2cSiteMover.py', 'SiteMover.py', 'ATLASSiteInformation.py', 'JobRecovery.py', 'SysLog.py', 'sshlcgcp2SM.py', 'sshlcgcpSiteMover_poyda.py', 'Monitor.py', 'SiteInformationFactory.py', 'RunJobHopper.py', 'ProxyGuard.py', 'LocalSiteMover.py', 'PilotErrors.py', 'castorSvcClassSiteMover.py', 'PilotTCPServer.py', 'AMSTaiwanSiteInformation.py', 'epic.py', 'RunJobNormal.py', 'PilotYamplServer.py', 'JobInfoXML.py', 'Diagnosis.py', 'lcgcp2SiteMover.py', 'myproxyUtils.py', 'RunJobKurchatovhpc2.py', 'RunJobMira.py', 'pilot.py', 'Experiment.py', 'build.py', 'ATLASExperiment.py', 'CMSSiteInformation.py', 'Configuration.py', 'pUtil.py', 'GSIftpSiteMover.py', 'RunJobAnselm.py', 'DBReleaseHandler.py', 'trivialPilot.py', 'Node.py', 'OtherSiteInformation.py', 'FileState.py', 'OtherSiteMover.py', 'S3SiteMover.py', 'StoppableThread.py', 'OtherExperiment.py', 'testsaga.py', 'CMSExperiment.py', 'environment.py', 'ThreadPool.py', 'curlSiteMover.py', 'Cleaner.py', 'Job.py', 'ChirpSiteMover.py', 'CastorSiteMover.py', 'ExperimentFactory.py', 'PILOTVERSION', 'saga', 'radical', 'HPC']
+O29 Apr 10:42:43| pUtil.py    |stageInPyMod: 544| Pilot modules have been copied to /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1023| Current time :2015-04-29T13:42:43+-300
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1024| The site this pilot runs on: ANALY_RRC-KI-HPC
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1025| Pilot executing on host: vcloud23.grid.kiae.ru
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1026| The workdir this pilot runs on:/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1027| The dq2url for this site is: 
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1028| The DQ2 SE has 999999 GB space left (NB: dCache is defaulted to 999999)
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1029| New job has prodSourceLabel: user
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1036| env =  
+O29 Apr 10:42:43| Monitor.py  |__getLooping: 727| Using looping job limit: 10800 s
+O29 Apr 10:42:43| Monitor.py  |__getLooping: 728| maxCpuCount: 0 s
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1049| Pilot executing job for user: /C=RU/O=RDIG/OU=users/OU=lebedev.ru/CN=Ruslan Mashinistov/CN=proxy
+O29 Apr 10:42:43| Monitor.py  |__createJobW: 765| Created job workdir at /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:42:43| Monitor.py  |__createJobW: 767| /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:42:43| Monitor.py  |__storePilot: 742| Creating file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/PILOT_INITDIR with content /s/ls2/users/poyda/testpilot
+O29 Apr 10:42:43| pUtil.py    |writeToFileW:1696| Wrote string \"/s/ls2/users/poyda/testpilot\" to file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/PILOT_INITDIR
+O29 Apr 10:42:43| ATLASExperim|updateJobSet:2835| Creating job setup script with stage-in and payload execution commands: job_setup.sh
+O29 Apr 10:42:43| Experiment.p|addToJobSetu: 882| Updated /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/job_setup.sh: #!/bin/bash
+O# job_setup.sh 29 Apr 2015 10:42:43
+O
+Oexport VO_ATLAS_SW_DIR=/cvmfs/atlas.cern.ch/repo/sw
+Oif [ -f $VO_ATLAS_SW_DIR/local/setup.sh ]; then
+O  source $VO_ATLAS_SW_DIR/local/setup.sh
+Ofi
+O29 Apr 10:42:43| FileState.py|__init__    :  68| File does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle (will be created)
+O29 Apr 10:42:43| FileState.py|resetStates : 190| Resetting file list: ['user.ruslan.results3.txt.1', 'user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1']
+O29 Apr 10:42:43| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 223| File name  /  File state  /  Registration state
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 235| 1. user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1	not_created	not_registered
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 235| 2. user.ruslan.results3.txt.1	not_created	not_registered
+O29 Apr 10:42:43| FileState.py|__init__    :  68| File does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-input-92.pickle (will be created)
+O29 Apr 10:42:43| FileState.py|resetStates : 190| Resetting file list: ['add_env3.txt']
+O29 Apr 10:42:43| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-input-92.pickle
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 225| File name  /  File state  /  Transfer mode
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:42:43| FileState.py|dumpFileStat: 235| 1. add_env3.txt	not_transferred	copy_to_scratch
+O29 Apr 10:42:43| pUtil.py    |verifyLFNLen:2781| LFN length verified for file user.ruslan.results3.txt.1
+O29 Apr 10:42:43| pUtil.py    |verifyLFNLen:2781| LFN length verified for file user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:42:43| Monitor.py  |monitor_job :1104| LFN length(s) verified, within allowed limit
+O29 Apr 10:42:43| Job.py      |displayJob  : 124| Dumping job specifics
+O29 Apr 10:42:43| Job.py      |displayJob  : 130| 
+OPandaID=92
+ORelease=NULL
+OhomePackage=NULL
+OtrfName=/s/ls2/users/poyda/bio/runbio_wr.py
+OinputFiles=['add_env3.txt']
+OrealDatasetsIn=['user.ruslan:user.ruslan.data.dataset1']
+OfilesizeIn=['0']
+OchecksumIn=['NULL']
+OprodDBlocks=['user.ruslan:user.ruslan.data.dataset1']
+OprodDBlockToken=['NULL']
+OprodDBlockTokenForOutput=['']
+OdispatchDblock=['NULL']
+OdispatchDBlockToken=['NULL']
+OdispatchDBlockTokenForOut=['NULL', 'NULL']
+OdestinationDBlockToken=['NULL', 'NULL']
+OoutputFiles=['user.ruslan.results3.txt.1', 'user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1']
+OdestinationDblock=['user.ruslan:user.ruslan.data.dataset1']
+OlogFile=user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+OlogFileDblock=panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+OjobPars= 
+OThe job state=['starting', 0, 0]
+OJob workdir=/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+OTarFileGuid=46df2a3a-8c38-4e23-a163-c034ca450cd7
+OoutFilesGuids=[]
+OdestinationSE=ANALY_RRC-KI-HPC
+OfileDestinationSE=ANALY_RRC-KI-HPC,ANALY_RRC-KI-HPC
+OprodSourceLabel=user
+Ospsetup=(not defined)
+Ocredname=None
+Omyproxy=None
+Ocloud=RU
+OtaskID=2
+OprodUserID=/C=RU/O=RDIG/OU=users/OU=lebedev.ru/CN=Ruslan Mashinistov/CN=proxy
+Odebug=False
+OtransferType=NULL
+OscopeIn=['user.ruslan']\scopeOut=['user.ruslan:user']
+OscopeLog=['panda:panda']
+O29 Apr 10:42:43| PandaServerC|updatePandaS: 590| Updating job status in updatePandaServer(): PandaId=92, result=['starting', 0, 0], time=2015-04-29T13:42:43+-300
+O29 Apr 10:42:43| PandaServerC|getNodeStruc: 207| Batch system type was not identified (will not be reported)
+O29 Apr 10:42:43| PandaServerC|getNodeStruc: 209| Will send pilotID: xtestP001|PR|PICARD 60c
+O
+O29 Apr 10:42:43| PandaServerC|getNodeStruc: 210| pilotId: xtestP001
+O29 Apr 10:42:43| PandaServerC|getJobMetric: 168| No job metrics (all values are zero)
+O29 Apr 10:42:43| PandaServerC|updatePandaS: 609| xmlstr = None
+O29 Apr 10:42:43| PandaServerC|getXML      : 323| getXML called
+O29 Apr 10:42:43| PandaServerC|updatePandaS: 650| Stdout tail will not be sent (debug=False)
+O29 Apr 10:42:43| pUtil.py    |updateJobSta:2866| Successfully updated job state file at: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/jobState-92.pickle
+O29 Apr 10:42:43| PandaServerC|getPayloadMe: 536| Trying alternative location: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:42:43| PandaServerC|getPayloadMe: 564| Did not find /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:42:43| PandaServerC|getPayloadMe: 571| WARNING: metadata file does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/metadata-92.xml.PAYLOAD
+O29 Apr 10:42:43| PandaServerC|getPayloadMe: 572| Looking for it in the pilot init dir..
+O29 Apr 10:42:43| pUtil.py    |makeHTTPUpda: 158| HTTP connect using server: https://vcloud29.grid.kiae.ru:25443/server/panda
+O29 Apr 10:42:43| pUtil.py    |httpConnect : 209| Sending attemptNr=1 for cmd=updateJob
+O29 Apr 10:42:43| pUtil.py    |toServer    :2118| toServer: cmd = updateJob
+O29 Apr 10:42:43| pUtil.py    |toServer    :2119| toServer: len(data) = 15
+O29 Apr 10:42:43| pUtil.py    |toServer    :2120| data = {'node': 'vcloud23.grid.kiae.ru', 'xml': '', 'workdir': '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163', 'jobMetrics': '', 'messageLevel': 'info', 'siteName': 'ANALY_RRC-KI-HPC', 'timestamp': '2015-04-29T13:42:43+-300', 'attemptNr': 1, 'jobId': '92', 'remainingSpace': 999999, 'state': 'starting', 'schedulerID': 'xtestJS001', 'pilotID': 'xtestP001|PR|PICARD 60c\n', 'jobSubStatus': '', 'cpuConsumptionUnit': 'QEMU Virtual CPU version 1.0 4096 KB'}
+O29 Apr 10:42:43| pUtil.py    |verifyJobSta:2099| Job state 'starting' is an allowed job state value
+O29 Apr 10:42:43| pUtil.py    |post        :1994| Executing command: curl --silent --show-error --connect-timeout 100 --max-time 120 --insecure --compressed --capath /cvmfs/grid.cern.ch/etc/grid-security/certificates --cert /tmp/x509up_u500 --cacert /tmp/x509up_u500 --key /tmp/x509up_u500 --config /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/curl.config https://vcloud29.grid.kiae.ru:25443/server/panda/updateJob
+O29 Apr 10:42:45| pUtil.py    |toServer    :2141| Elapsed seconds: 1
+O29 Apr 10:42:45| pUtil.py    |parseDispatc:2415| Dispatcher response: [('command', 'NULL'), ('StatusCode', '0')]
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 822| ret = (0, {'command': 'NULL', 'StatusCode': '0'}, 'command=NULL&StatusCode=0')
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 824| data = {'command': 'NULL', 'StatusCode': '0'}
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 835| jobDispatcher acknowledged with 0
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1116| Successfully updated panda server at 2015-04-29T13:42:45+-300
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1146| Starting child process in dir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:42:45| Experiment.p|getSubproces: 712| Selected subprocess: RunJobKurchatovhpc2
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1151| About to launch child process: RunJobKurchatovhpc2
+O29 Apr 10:42:45| Experiment.p|getSubproces: 725| Will set up subprocess arguments for type: RunJobKurchatovhpc2
+O29 Apr 10:42:45| Experiment.p|getSubproces: 767| Will use arguments: ['/usr/bin/python', 'RunJobKurchatovhpc2.py', '-a', '/cvmfs/atlas.cern.ch/repo/sw', '-b', 'ANALY_RRC-KI-HPC', '-d', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163', '-g', '/s/ls2/users/poyda/testpilot', '-i', '46df2a3a-8c38-4e23-a163-c034ca450cd7', '-k', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/pilotlog.txt', '-l', '/s/ls2/users/poyda/testpilot', '-m', '/s/ls2/users/poyda/testpilot', '-o', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155', '-p', '9073', '-q', '', '-s', 'ANALY_RRC-KI-HPC', '-t', 'True', '-x', '2', '-B', 'False', '-E', '2', '-F', 'ATLAS', '-H', '']
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1154| jobargs=['/usr/bin/python', 'RunJobKurchatovhpc2.py', '-a', '/cvmfs/atlas.cern.ch/repo/sw', '-b', 'ANALY_RRC-KI-HPC', '-d', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163', '-g', '/s/ls2/users/poyda/testpilot', '-i', '46df2a3a-8c38-4e23-a163-c034ca450cd7', '-k', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/pilotlog.txt', '-l', '/s/ls2/users/poyda/testpilot', '-m', '/s/ls2/users/poyda/testpilot', '-o', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155', '-p', '9073', '-q', '', '-s', 'ANALY_RRC-KI-HPC', '-t', 'True', '-x', '2', '-B', 'False', '-E', '2', '-F', 'ATLAS', '-H', '']
+O29 Apr 10:42:45| pUtil.py    |stageInPyMod: 521| initdir is /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155 
+O29 Apr 10:42:45| pUtil.py    |stageInPyMod: 522| workdir is /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163 
+O29 Apr 10:42:45| pUtil.py    |getFileList :  44| Copying: ['RunJob.py', 'PilotUtils.py', 'Mover.py', 'WatchDog.py', 'TimerCommand.py', 'EventServiceFactorNr=1 for cmd=updateJob
+O29 Apr 10:42:43| pUtil.py    |toServer    :2118| toServer: cmd = updateJob
+O29 Apr 10:42:43| pUtil.py    |toServer    :2119| toServer: len(data) = 15
+O29 Apr 10:42:43| pUtil.py    |toServer    :2120| data = {'node': 'vcloud23.grid.kiae.ru', 'xml': '', 'workdir': '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163', 'jobMetrics': '', 'messageLevel': 'info', 'siteName': 'ANALY_RRC-KI-HPC', 'timestamp': '2015-04-29T13:42:43+-300', 'attemptNr': 1, 'jobId': '92', 'remainingSpace': 999999, 'state': 'starting', 'schedulerID': 'xtestJS001', 'pilotID': 'xtestP001|PR|PICARD 60c\n', 'jobSubStatus': '', 'cpuConsumptionUnit': 'QEMU Virtual CPU version 1.0 4096 KB'}
+O29 Apr 10:42:43| pUtil.py    |verifyJobSta:2099| Job state 'starting' is an allowed job state value
+O29 Apr 10:42:43| pUtil.py    |post        :1994| Executing command: curl --silent --show-error --connect-timeout 100 --max-time 120 --insecure --compressed --capath /cvmfs/grid.cern.ch/etc/grid-security/certificates --cert /tmp/x509up_u500 --cacert /tmp/x509up_u500 --key /tmp/x509up_u500 --config /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/curl.config https://vcloud29.grid.kiae.ru:25443/server/panda/updateJob
+O29 Apr 10:42:45| pUtil.py    |toServer    :2141| Elapsed seconds: 1
+O29 Apr 10:42:45| pUtil.py    |parseDispatc:2415| Dispatcher response: [('command', 'NULL'), ('StatusCode', '0')]
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 822| ret = (0, {'command': 'NULL', 'StatusCode': '0'}, 'command=NULL&StatusCode=0')
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 824| data = {'command': 'NULL', 'StatusCode': '0'}
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 835| jobDispatcher acknowledged with 0
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1116| Successfully updated panda server at 2015-04-29T13:42:45+-300
+O29 Apr 10:42:45| pUtil.py    |writeToFileW:1696| Wrote string \"2861\" to file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PROCESSID
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1137| Parent process 2861 has set job state: running
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 590| Updating job status in updatePandaServer(): PandaId=92, result=['running', 0, 0], time=2015-04-29T13:42:45+-300
+O29 Apr 10:42:45| PandaServerC|getNodeStruc: 207| Batch system type was not identified (will not be reported)
+O29 Apr 10:42:45| PandaServerC|getNodeStruc: 209| Will send pilotID: xtestP001|PR|PICARD 60c
+O
+O29 Apr 10:42:45| PandaServerC|getNodeStruc: 210| pilotId: xtestP001
+O29 Apr 10:42:45| PandaServerC|getJobMetric: 168| No job metrics (all values are zero)
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 609| xmlstr = None
+O29 Apr 10:42:45| PandaServerC|getXML      : 323| getXML called
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 650| Stdout tail will not be sent (debug=False)
+O29 Apr 10:42:45| pUtil.py    |updateJobSta:2866| Successfully updated job state file at: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/jobState-92.pickle
+O29 Apr 10:42:45| PandaServerC|getPayloadMe: 536| Trying alternative location: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:42:45| PandaServerC|getPayloadMe: 564| Did not find /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:42:45| PandaServerC|getPayloadMe: 571| WARNING: metadata file does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/metadata-92.xml.PAYLOAD
+O29 Apr 10:42:45| PandaServerC|getPayloadMe: 572| Looking for it in the pilot init dir..
+O29 Apr 10:42:45| pUtil.py    |makeHTTPUpda: 158| HTTP connect using server: https://vcloud29.grid.kiae.ru:25443/server/panda
+O29 Apr 10:42:45| pUtil.py    |httpConnect : 209| Sending attemptNr=1 for cmd=updateJob
+O29 Apr 10:42:45| pUtil.py    |toServer    :2118| toServer: cmd = updateJob
+O29 Apr 10:42:45| pUtil.py    |toServer    :2119| toServer: len(data) = 13
+O29 Apr 10:42:45| pUtil.py    |toServer    :2120| data = {'node': 'vcloud23.grid.kiae.ru', 'xml': '', 'workdir': '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/Found string /s/ls2/users/poyda/testpilot in file PILOT_INITDIR
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 720| Starting RunJobKurchatovhpc2
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 759| argumentParser returned: ('ANALY_RRC-KI-HPC', '/cvmfs/atlas.cern.ch/repo/sw', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163', None, 'ANALY_RRC-KI-HPC')
+O29 Apr 10:42:46| Node.py     |setNumberOfC:  67| corecount not an integer in queuedata
+O29 Apr 10:42:46| Node.py     |setNumberOfC:  77| Will not set ATHENA_PROC_NUMBER
+O29 Apr 10:42:46| Node.py     |collectMachi: 162| Collecting machine features
+O29 Apr 10:42:46| Node.py     |collectMachi: 180| $MACHINEFEATURES not defined locally
+O29 Apr 10:42:46| Node.py     |collectMachi: 206| $JOBFEATURES not defined locally
+O29 Apr 10:42:46| Node.py     |collectMachi: 209| Executing command: hostname -i
+O29 Apr 10:42:46| Node.py     |collectMachi: 211| IP number of worker node: 192.168.23.43
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 778| Current job workdir is: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 779| Site workdir is: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 783| RunJob will serve experiment: ATLAS
+O29 Apr 10:42:46| Job.py      |setJobDef   : 265| Normal job (not an eventService job)
+O29 Apr 10:42:46| Job.py      |setJobDef   : 270| jobsetID=NULL
+O29 Apr 10:42:46| Job.py      |setJobDef   : 373| outfList = ['user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1', 'user.ruslan.results3.txt.1']
+O29 Apr 10:42:46| Job.py      |setJobDef   : 375| outfdbList = ['panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2', 'user.ruslan:user.ruslan.data.dataset1']
+O29 Apr 10:42:46| Job.py      |setJobDef   : 399| destinationDBlockToken = ['NULL', 'NULL']
+O29 Apr 10:42:46| Job.py      |setJobDef   : 410| dispatchDBlockTokenForOut = ['NULL', 'NULL']
+O29 Apr 10:42:46| Job.py      |setJobDef   : 412| logFileDblock = panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 848| Production job
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 849| runJob received a job with prodSourceLabel=user
+O29 Apr 10:42:46| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 107| filesAltStageOut not set
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 112| filesNormalStageOut not set
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 158| About to send TCP message to main pilot thread of length = 287
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 163| (Sent)
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 165| (Received)
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 172| Successfully sent and received TCP message
+O29 Apr 10:42:46| RunJobUtilit|updatePilotS: 208| Successfully updated local pilot TCP server at 2015-04-29T13:42:46+-300 (Trial 1/2)
+O29 Apr 10:42:46| RunJob.py   |setup       : 484| Number of transformations to process: 1
+O29 Apr 10:42:46| RunJobUtilit|verifyMultiT: 520| Multi-trf verification succeeded (single job)
+O29 Apr 10:42:46| RunJob.py   |setup       : 496| Current job workdir is /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:42:46| RunJob.py   |setup       : 504| Preparing setup 1/1
+O29 Apr 10:42:46| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:42:46| pUtil.py    |verifyReleas:1885| Detected unset (NULL) release/homepackage string
+O29 Apr 10:42:46| ATLASExperim|getSwbase   :2762| Got a plain appdir from queuedata: /cvmfs/atlas.cern.ch/repo/sw
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 130| Local software path: swbase = /cvmfs/atlas.cern.ch/repo/sw/software
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 134| Found alternatives to cmtconfig: ['', 'i686-slc5-gcc43-opt', 'x86_64-slc5-gcc43-opt', 'x86_64-slc6-gcc46-opt', 'x86_64-slc6-gcc47-opt', 'x86_64-slc6-gcc48-opt', 'x86_64-slc6-gcc49-opt'] (the first item is the default cmtconfig value)
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 394| Generic job
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 401| Warning: $SITEROOT unknown at this stage (3)
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 403| Will use $SITEROOT:  (3)
+O29 Apr 10:42:46| pUtil.py    |verifyReleas:1885| Detected unset (NULL) release/homepackage string
+O29 Apr 10:42:46| ATLASExperim|setPython   :1586| Using /usr/bin/python
+O29 Apr 10:42:46| pUtil.py    |verifyReleas:1885| Detected unset (NULL) release/homepackage string
+O29 Apr 10:42:46| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:46| ATLASExperim|isJEMAllowed:2597| JEM is not allowed
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 498| 
+OCommand to run the job is: 
+O{'environment': ['export PANDA_RESOURCE=\"ANALY_RRC-KI-HPC\";', 'export FRONTIER_ID=\"[92]\";', 'export CMSSW_VERSION=$FRONTIER_ID;', 'export ROOT_TTREECACHE_SIZE=1;', 'export RUCIO_APPID=\"NULL\";', 'export RUCIO_ACCOUNT=\"pilot\";'], 'interpreter': '/usr/bin/python', 'payload': '/s/ls2/users/poyda/bio/runbio_wr.py', 'parameters': ' '}
+O29 Apr 10:42:46| ATLASExperim|getJobExecut: 500| ATLAS_PYTHON_PILOT = /usr/bin/python
+O29 Apr 10:42:46| RunJob.py   |setup       : 537| Total setup time: 0 s
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 868| Setup has finished successfully
+O29 Apr 10:42:46| Job.py      |displayJob  : 124| Dumping job specifics
+O29 Apr 10:42:46| Job.py      |displayJob  : 130| 
+OPandaID=92
+ORelease=NULL
+OhomePackage=NULL
+OtrfName=/s/ls2/users/poyda/bio/runbio_wr.py
+OinputFiles=['add_env3.txt']
+OrealDatasetsIn=['user.ruslan:user.ruslan.data.dataset1']
+OfilesizeIn=['0']
+OchecksumIn=['NULL']
+OprodDBlocks=['user.ruslan:user.ruslan.data.dataset1']
+OprodDBlockToken=['NULL']
+OprodDBlockTokenForOutput=['']
+OdispatchDblock=['NULL']
+OdispatchDBlockToken=['NULL']
+OdispatchDBlockTokenForOut=['NULL', 'NULL']
+OdestinationDBlockToken=['NULL', 'NULL']
+OoutputFiles=['user.ruslan.results3.txt.1']
+OdestinationDblock=['user.ruslan:user.ruslan.data.dataset1']
+OlogFile=user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+OlogFileDblock=panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+OjobPars= 
+OThe job state=['setup', 0, 0]
+OJob workdir=/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+OTarFileGuid=a1bc8df2-3d2d-4685-a914-3a3cbed264dc
+OoutFilesGuids=[]
+OdestinationSE=ANALY_RRC-KI-HPC
+OfileDestinationSE=ANALY_RRC-KI-HPC,ANALY_RRC-KI-HPC
+OprodSourceLabel=user
+Ospsetup=(not defined)
+Ocredname=None
+Omyproxy=None
+Ocloud=RU
+OtaskID=2
+OprodUserID=/C=RU/O=RDIG/OU=users/OU=lebedev.ru/CN=Ruslan Mashinistov/CN=proxy
+Odebug=False
+OtransferType=NULL
+OscopeIn=['user.ruslan']\scopeOut=['user.ruslan:user']
+OscopeLog=['panda:panda']
+O29 Apr 10:42:46| RunJobKurcha|<module>    : 875| Setting stage-in state until all input files have been copied
+O{'LCG_GFAL_INFOSYS': 'truth.grid.kiae.ru:2170', 'LCG_LOCATION': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr', 'BDII_LIST': 'truth.grid.kiae.ru:2170', 'LESSOPEN': '||/usr/bin/lesspipe.sh %s', 'CVS_RSH': 'ssh', 'LOGNAME': 'apf', 'USER': 'apf', 'SRM_PATH': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/share/srm', 'PATH': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/bin:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/sbin:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/bin:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/sbin:/cvmfs/atlas.cern.ch/repo/sw/ddm/latest/DQ2Clients/opt/dq2/bin/:/cvmfs/atlas.cern.ch/repo/sw/ddm/rucio-clients/latest/bin/:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/apf/bin', 'QTDIR': '/usr/lib64/qt-3.3', 'VOMS_USERCONF': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/etc/vomses', 'GLITE_LOCATION_VAR': '/var', 'LD_LIBRARY_PATH': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/lib64:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/lib:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib64:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib', 'LANG': 'en_US.UTF-8', 'QTLIB': '/usr/lib64/qt-3.3/lib', 'TERM': 'xterm', 'SHELL': '/bin/bash', 'GLITE_LOCATION': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr', 'QTINC': '/usr/lib64/qt-3.3/include', 'G_BROKEN_FILENAMES': '1', 'HISTSIZE': '1000', 'X509_USER_PROXY': '/tmp/x509up_u500', 'MANPATH': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/share/man', 'GT_PROXY_MODE': 'old', 'RUCIO_HOME': '/cvmfs/atlas.cern.ch/repo/sw/ddm/rucio-clients/latest', 'JAVA_HOME': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre', 'HOME': '/home/apf', 'SITE_NAME': 'RRC-KI-HPC2', 'MYPROXY_SERVER': 'myproxy.cern.ch', 'PanDA_TaskID': '2', 'PYTHONPATH': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib64/python2.6/site-packages:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib/python2.6/site-packages:/cvmfs/atlas.cern.ch/repo/sw/ddm/latest/DQ2Clients/opt/dq2/lib:/cvmfs/atlas.cern.ch/repo/sw/ddm/rucio-clients/latest/lib/python2.6/site-packages:/cvmfs/atlas.cern.ch/repo/sw/ddm/rucio-clients/latest/externals/kerberos/lib.slc6-x86_64-2.6:/cvmfs/atlas.cern.ch/repo/sw/ddm/rucio-clients/latest/externals/kerberos/lib.slc6-i686-2.6:', 'RUCIO_AUTH_TYPE': 'x509_proxy', 'X509_CERT_DIR': '/cvmfs/grid.cern.ch/etc/grid-security/certificates', 'RUCIO_ACCOUNT': 'pilot', 'EMI_TARBALL_BASE': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2', 'X509_VOMS_DIR': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/etc/grid-security/vomsdir', '_': '/usr/bin/python', 'PandaID': '92', 'PERL5LIB': '/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib64/perl5/vendor_perl:/cvmfs/grid.cern.ch/emi-wn-3.7.3-1_sl6v2/usr/lib/perl5/vendor_perl', 'HOSTNAME': 'vcloud23.grid.kiae.ru', 'PilotHomeDir': '/s/ls2/users/poyda/testpilot', 'HISTCONTROL': 'ignoredups', 'SHLVL': '2', 'PWD': '/s/ls2/users/poyda/testpilot', 'ATLAS_PYTHON_PILOT': '/usr/bin/python', 'MAIL': '/var/spool/mail/apf', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:', 'VO_ATLAS_SW_DIR': '/cvmfs/atlas.cern.ch/repo/sw'}
+O29 Apr 10:42:46| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 107| filesAltStageOut not set
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 112| filesNormalStageOut not set
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 158| About to send TCP message to main pilot thread of length = 288
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 163| (Sent)
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 165| (Received)
+O29 Apr 10:42:46| RunJobUtilit|updateJobInf: 172| Successfully sent and received TCP message
+O29 Apr 10:42:46| RunJobUtilit|updatePilotS: 208| Successfully updated local pilot TCP server at 2015-04-29T13:42:46+-300 (Trial 1/2)
+O29 Apr 10:42:46| RunJobUtilit|prepareInFil: 330| Input file(s): (1 in total)
+O29 Apr 10:42:46| pUtil.py    |dumpOrderedI:2597| 1. add_env3.txt
+O29 Apr 10:42:46| RunJob.py   |stageIn     : 551| Preparing for get command
+O29 Apr 10:42:46| pUtil.py    |getFileAcces:2814| Copy tool will be used for stage-in
+O29 Apr 10:42:46| Mover.py    |createZipped:  64| Created dictionary: {'add_env3.txt': 'NULL'}
+O29 Apr 10:42:46| Mover.py    |createZipped:  64| Created dictionary: {'add_env3.txt': 'user.ruslan'}
+O29 Apr 10:42:46| DBReleaseHan|getDBRelease: 131| Local DBRelease path verified: /cvmfs/atlas.cern.ch/repo/sw/database/DBRelease (will attempt to skip DBRelease stage-in)
+O29 Apr 10:42:47| Mover.py    |get_data    : 128| Calling get function with dsname=user.ruslan:user.ruslan.data.dataset1, dsdict={'user.ruslan:user.ruslan.data.dataset1': ['add_env3.txt']}
+O29 Apr 10:42:47| Mover.py    |mover_get_da:1905| Mover get data started
+O29 Apr 10:42:47| Mover.py    |handleDBRele:1523| No DBRelease info found in job parameters
+O29 Apr 10:42:47| Mover.py    |isDBReleaseA:1487| Job parameters did not specify a DBRelease version (can not verify local availability)
+O29 Apr 10:42:47| Mover.py    |abortStageIn:1551| Number of locally available DBRelease files = 0 (1 files in total), continue with stage-in
+O29 Apr 10:42:47| Mover.py    |getInitialTr: 522| Using job definition id: 9982
+O29 Apr 10:42:47| Mover.py    |getInitialTr: 525| Trying to add additional info to tracing report
+O29 Apr 10:42:47| Mover.py    |getInitialTr: 533| Tracing report initialised with: {'protocol': None, 'duid': None, 'eventType': 'get_sm', 'suspicious': '0', 'timeEnd': None, 'dataset': 'user.ruslan:user.ruslan.data.dataset1', 'catStart': None, 'guid': None, 'transferStart': None, 'hostname': 'vcloud23', 'remoteSite': 'ANALY_RRC-KI-HPC', 'filename': None, 'version': None, 'filesize': None, 'ip': '192.168.23.43', 'usrdn': '/C=RU/O=RDIG/OU=users/OU=lebedev.ru/CN=Ruslan Mashinistov/CN=proxy', 'usr': 'dab0f78692bf7dee219c9116d61d50b0', 'eventVersion': 'pilot3', 'localSite': 'ANALY_RRC-KI-HPC', 'validateStart': None, 'uuid': 'dea09fc5d49e5c19a0ceeb9d43a32b9e', 'timeStart': 1430304167.0082171, 'relativeStart': None, 'appid': '92', 'clientState': 'INIT_REPORT'}
+O29 Apr 10:42:47| Mover.py    |copytool    :4060| Got copytool sshmv from queuedata file
+O29 Apr 10:42:47| Mover.py    |copytool    :4091| copysetup is: /cvmfs/atlas.cern.ch/repo/sw/local/setup.sh (file access verified)
+O29 Apr 10:42:47| SiteMoverFar|getSiteMover:  64| Looking for site mover sshmv, setup:/cvmfs/atlas.cern.ch/repo/sw/local/setup.sh, ar:(), kw:{}
+O29 Apr 10:42:47| SiteMoverFar|getSiteMover:  80| Returning site mover <class 'sshmvSM.sshmvSiteMover'> (setup: /cvmfs/atlas.cern.ch/repo/sw/local/setup.sh)
+O29 Apr 10:42:47| Mover.py    |getFileInfo : 599| Preparing to build paths for input files
+O29 Apr 10:42:47| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:42:47| Mover.py    |getFileInfo : 640| Getting file info on a Tier 3 site
+O/s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1
+Oadd_env3.txt
+O29 Apr 10:42:47| epic.py     |ssh         : 131| *********SAGA*********
+O29 Apr 10:42:47| epic.py     |ssh         : 132| Executing external command: python /s/ls2/groups/g0037/bin/fileinfos.py /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt
+O29 Apr 10:42:47| epic.py     |init_saga   : 103| *********SAGA INIT*********
+O29 Apr 10:42:47| epic.py     |write       : 397| Using temporary name: /tmp/tmpyh5IvZ
+O29 Apr 10:42:47| epic.py     |push_file   : 366| Pushing file: /tmp/tmpyh5IvZ
+O29 Apr 10:42:47| epic.py     |push_file   : 367| Remote file path: /s/ls2/groups/g0037/tmp/cmd_2861_41672691.sh
+O29 Apr 10:42:47| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:42:48| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:42:50| epic.py     |push_file   : 376| Closing file
+O29 Apr 10:42:50| epic.py     |write       : 406| Removing tmp file
+O29 Apr 10:42:50| epic.py     |ssh         : 147| SAGA service init
+O29 Apr 10:42:52| epic.py     |ssh         : 150| SAGA job init
+O29 Apr 10:42:52| epic.py     |ssh         : 152| SAGA Job run
+O29 Apr 10:42:52| epic.py     |ssh         : 164| SAGA Job ended with state OK
+O29 Apr 10:42:52| epic.py     |ssh         : 169| Exit code: 0
+O29 Apr 10:42:52| epic.py     |read        : 387| Using temporary name: /tmp/tmp0ggsQi
+O29 Apr 10:42:52| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2861_41672691.out
+O29 Apr 10:42:52| epic.py     |fetch_file  : 286| Local file path: /tmp/tmp0ggsQi
+O29 Apr 10:42:52| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:42:53| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:42:53| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:42:53| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:42:53| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:42:53| epic.py     |read        : 387| Using temporary name: /tmp/tmpbalZIT
+O29 Apr 10:42:53| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2861_41672691.err
+O29 Apr 10:42:53| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpbalZIT
+O29 Apr 10:42:53| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:42:53| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:42:54| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:42:54| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:42:54| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:42:54| epic.py     |ssh         : 176| Output file:
+O-----------------------------------------------------------------------------------------------------
+Omodtime:2015-04-28 12:59:28
+Ofsize:26
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:42:54| epic.py     |ssh         : 180| Error file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:42:54| epic.py     |delete      : 331| Deleting remote file: /s/ls2/groups/g0037/tmp/cmd_2861_41672691.sh
+O29 Apr 10:42:54| epic.py     |delete      : 334| Opening remote directory
+O29 Apr 10:42:54| epic.py     |delete      : 350| Removing recursively
+O29 Apr 10:42:55| epic.py     |ssh         : 190| *********END**********
+O['modtime:2015-04-28 12:59:28', 'fsize:26', '']
+O['fsize', '26']
+O29 Apr 10:42:55| sshmvSM.py  |getLocalFile:  75| Executing command: md5sum /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt
+O29 Apr 10:42:55| epic.py     |ssh         : 131| *********SAGA*********
+O29 Apr 10:42:55| epic.py     |ssh         : 132| Executing external command: md5sum /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt
+O29 Apr 10:42:55| epic.py     |write       : 397| Using temporary name: /tmp/tmphePAbf
+O29 Apr 10:42:55| epic.py     |push_file   : 366| Pushing file: /tmp/tmphePAbf
+O29 Apr 10:42:55| epic.py     |push_file   : 367| Remote file path: /s/ls2/groups/g0037/tmp/cmd_2861_41750512.sh
+O29 Apr 10:42:55| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:42:55| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:42:55| epic.py     |push_file   : 376| Closing file
+O29 Apr 10:42:55| epic.py     |write       : 406| Removing tmp file
+O29 Apr 10:42:55| epic.py     |ssh         : 147| SAGA service init
+O29 Apr 10:42:57| epic.py     |ssh         : 150| SAGA job init
+O29 Apr 10:42:57| epic.py     |ssh         : 152| SAGA Job run
+O29 Apr 10:42:58| epic.py     |ssh         : 164| SAGA Job ended with state OK
+O29 Apr 10:42:58| epic.py     |ssh         : 169| Exit code: 0
+O29 Apr 10:42:58| epic.py     |read        : 387| Using temporary name: /tmp/tmpCJplD3
+O29 Apr 10:42:58| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2861_41750512.out
+O29 Apr 10:42:58| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpCJplD3
+O29 Apr 10:42:58| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:42:58| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:42:59| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:42:59| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:42:59| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:42:59| epic.py     |read        : 387| Using temporary name: /tmp/tmpJjx6Ih
+O29 Apr 10:42:59| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2861_41750512.err
+O29 Apr 10:42:59| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpJjx6Ih
+O29 Apr 10:42:59| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:42:59| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:42:59| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:42:59| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:42:59| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:42:59| epic.py     |ssh         : 176| Output file:
+O-----------------------------------------------------------------------------------------------------
+O250505cbd66f4f5f58dbe50c05255cb8  /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:42:59| epic.py     |ssh         : 180| Error file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:42:59| epic.py     |delete      : 331| Deleting remote file: /s/ls2/groups/g0037/tmp/cmd_2861_41750512.sh
+O29 Apr 10:42:59| epic.py     |delete      : 334| Opening remote directory
+O29 Apr 10:43:00| epic.py     |delete      : 350| Removing recursively
+O29 Apr 10:43:00| epic.py     |ssh         : 190| *********END**********
+O29 Apr 10:43:00| sshmvSM.py  |getLocalFile:  86| Got checksum: 250505cbd66f4f5f58dbe50c05255cb8
+O29 Apr 10:43:00| Mover.py    |shouldPFC4TU:1465| TURL based PFC not required
+O29 Apr 10:43:00| pUtil.py    |getMaxInputS:2701| Max input size = 31457280000 B (pilot default)
+O29 Apr 10:43:00| Mover.py    |verifyInputF:4207| Total input file size 26 B within allowed limit 31457280000 B
+O29 Apr 10:43:00| Mover.py    |verifyAvaila:4220| Needed space: 26 B
+O29 Apr 10:43:00| Node.py     |setNumberOfC:  67| corecount not an integer in queuedata
+O29 Apr 10:43:00| Node.py     |setNumberOfC:  77| Will not set ATHENA_PROC_NUMBER
+O29 Apr 10:43:00| Node.py     |collectMachi: 162| Collecting machine features
+O29 Apr 10:43:00| Node.py     |collectMachi: 180| $MACHINEFEATURES not defined locally
+O29 Apr 10:43:00| Node.py     |collectMachi: 206| $JOBFEATURES not defined locally
+O29 Apr 10:43:00| Node.py     |collectMachi: 209| Executing command: hostname -i
+O29 Apr 10:43:00| Node.py     |collectMachi: 211| IP number of worker node: 192.168.23.43
+O29 Apr 10:43:00| Mover.py    |verifyAvaila:4223| Locally available space: 10376708096 B
+O29 Apr 10:43:00| Mover.py    |getReplicaDi: 464| Creating initial replica dictionary
+O29 Apr 10:43:00| Mover.py    |mover_get_da:2046| Files will be transferred one by one
+O29 Apr 10:43:00| Mover.py    |mover_get_da:2053| Will process 1 file(s)
+O29 Apr 10:43:00| Mover.py    |extractInput:1823| Extracted (guid, gpfn, fsize, fchecksum) = (NULL, /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt, 26, 250505cbd66f4f5f58dbe50c05255cb8)
+O29 Apr 10:43:00| Mover.py    |getDataset  :4415| File add_env3.txt belongs to dataset/container user.ruslan:user.ruslan.data.dataset1
+O29 Apr 10:43:00| Mover.py    |getDataset  :4415| File add_env3.txt belongs to dataset/container user.ruslan:user.ruslan.data.dataset1
+O29 Apr 10:43:00| Mover.py    |getFileScope:4273| file scope: user.ruslan
+O29 Apr 10:43:01| Mover.py    |updateReport:4290| DQ2 site name: None
+O29 Apr 10:43:01| Mover.py    |mover_get_da:2073| (Not a DBRelease file)
+O29 Apr 10:43:01| Mover.py    |mover_get_da:2075| Mover is preparing to copy file 1/1 (lfn: add_env3.txt guid: NULL dsname: user.ruslan:user.ruslan.data.dataset1)
+O29 Apr 10:43:01| Mover.py    |mover_get_da:2077| Copying /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt to /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163 (file catalog checksum: \"250505cbd66f4f5f58dbe50c05255cb8\", fsize: 26) using sshmv (/cvmfs/atlas.cern.ch/repo/sw/local/setup.sh)
+O29 Apr 10:43:01| Mover.py    |getFileAcces:4248| No special file access
+O29 Apr 10:43:01| Mover.py    |mover_get_da:2094| Get attempt 1/2
+Omylog_fields123: /s/ls2/users/poyda/data/user.ruslan/user.ruslan.data.dataset1/add_env3.txt, add_env3.txt, /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:43:01| epic.py     |ssh         : 131| *********SAGA*********
+O29 Apr 10:43:01| epic.py     |ssh         : 132| Executing external command: mkdir -p /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163;ln -s /s/ls2/users/poyda/data/input/user.ruslan/user.ruslan.data.dataset1/add_env3.txt /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/add_env3.txt
+O29 Apr 10:43:01| epic.py     |write       : 397| Using temporary name: /tmp/tmpSm95tH
+O29 Apr 10:43:01| epic.py     |push_file   : 366| Pushing file: /tmp/tmpSm95tH
+O29 Apr 10:43:01| epic.py     |push_file   : 367| Remote file path: /s/ls2/groups/g0037/tmp/cmd_2861_41818963.sh
+O29 Apr 10:43:01| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:43:02| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:43:02| epic.py     |push_file   : 376| Closing file
+O29 Apr 10:43:02| epic.py     |write       : 406| Removing tmp file
+O29 Apr 10:43:02| epic.py     |ssh         : 147| SAGA service init
+O29 Apr 10:43:04| epic.py     |ssh         : 150| SAGA job init
+O29 Apr 10:43:04| epic.py     |ssh         : 152| SAGA Job run
+O29 Apr 10:43:05| epic.py     |ssh         : 164| SAGA Job ended with state OK
+O29 Apr 10:43:05| epic.py     |ssh         : 169| Exit code: 0
+O29 Apr 10:43:05| epic.py     |read        : 387| Using temporary name: /tmp/tmpgmaY9J
+O29 Apr 10:43:05| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2861_41818963.out
+O29 Apr 10:43:05| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpgmaY9J
+O29 Apr 10:43:05| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:43:05| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:43:05| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:43:05| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:43:05| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:43:05| epic.py     |read        : 387| Using temporary name: /tmp/tmppD25Af
+O29 Apr 10:43:05| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2861_41818963.err
+O29 Apr 10:43:05| epic.py     |fetch_file  : 286| Local file path: /tmp/tmppD25Af
+O29 Apr 10:43:05| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:43:06| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:43:06| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:43:06| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:43:06| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:43:06| epic.py     |ssh         : 176| Output file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:06| epic.py     |ssh         : 180| Error file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:06| epic.py     |delete      : 331| Deleting remote file: /s/ls2/groups/g0037/tmp/cmd_2861_41818963.sh
+O29 Apr 10:43:06| epic.py     |delete      : 334| Opening remote directory
+O29 Apr 10:43:07| epic.py     |delete      : 350| Removing recursively
+O29 Apr 10:43:07| epic.py     |ssh         : 190| *********END**********
+O29 Apr 10:43:07| sshmvSM.py  |get_data    : 116| Command finished: 
+O29 Apr 10:43:07| Mover.py    |sitemover_ge:1614| File transfer finished correctly
+O29 Apr 10:43:07| Mover.py    |verifyPFCInt:1743| filelist_fromlfns = ['add_env3.txt']
+O29 Apr 10:43:07| Mover.py    |verifyPFCInt:1744| filelist_fromxml = ['add_env3.txt']
+O29 Apr 10:43:07| Mover.py    |verifyPFCInt:1758| Verified: PoolFileCatalog.xml contains at least as many files as the initial list
+O29 Apr 10:43:07| Mover.py    |createStanda:1782| No TURL based PFC was created earlier
+O29 Apr 10:43:07| Mover.py    |createPFC4TR: 760| Creating /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/PoolFileCatalog.xml
+O29 Apr 10:43:07| Mover.py    |createPFC4TR: 770| Processing file: add_env3.txt
+O29 Apr 10:43:07| Mover.py    |createPFC4TR: 783| Created PFC for trf/runAthena: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/PoolFileCatalog.xml
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1201| Dumping file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/PoolFileCatalog.xml (size: 291)
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| <!-- Edited By POOL -->
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| <!DOCTYPE POOLFILECATALOG SYSTEM \"InMemory\">
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| <POOLFILECATALOG>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| 
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212|   <File ID=\"NULL\">
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212|     <physical>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212|       <pfn filetype=\"ROOT_All\" name=\"add_env3.txt\"/>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212|     </physical>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212|     <logical/>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212|   </File>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| 
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1212| </POOLFILECATALOG>
+O29 Apr 10:43:07| pUtil.py    |dumpFile    :1216| Dumped 13 lines from file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/PoolFileCatalog.xml
+O29 Apr 10:43:07| Mover.py    |mover_get_da:2230| Number of identified root files     : 1
+O29 Apr 10:43:07| Mover.py    |mover_get_da:2231| Number of transferred non-root files: 0
+O29 Apr 10:43:07| Mover.py    |mover_get_da:2249| Get successful
+O29 Apr 10:43:07| Mover.py    |mover_get_da:2250| Mover get_data finished
+O29 Apr 10:43:07| Mover.py    |mover_get_da:2253| Will return exit code = 0, pilotErrorDiag = 
+O29 Apr 10:43:07| Mover.py    |get_data    : 138| Get function finished with exit code 0
+O29 Apr 10:43:07| Mover.py    |get_data    : 186| Input file(s):
+O29 Apr 10:43:07| Mover.py    |get_data    : 194| File add_env3.txt was not transferred
+O29 Apr 10:43:07| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-input-92.pickle
+O29 Apr 10:43:07| FileState.py|dumpFileStat: 225| File name  /  File state  /  Transfer mode
+O29 Apr 10:43:07| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:07| FileState.py|dumpFileStat: 235| 1. add_env3.txt	not_transferred	copy_to_scratch
+O29 Apr 10:43:07| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-input-92.pickle
+O29 Apr 10:43:07| FileState.py|hasOnlyCopyT: 213| filename=add_env3.txt states=['not_transferred', 'copy_to_scratch']
+O29 Apr 10:43:07| RunJobUtilit|updateRunCom: 673| There are only copy_to_scratch transfer modes in file state dictionary
+O29 Apr 10:43:07| RunJobUtilit|updateRunCom: 692| Updated run command: {'environment': ['export PANDA_RESOURCE=\"ANALY_RRC-KI-HPC\";', 'export FRONTIER_ID=\"[92]\";', 'export CMSSW_VERSION=$FRONTIER_ID;', 'export ROOT_TTREECACHE_SIZE=1;', 'export RUCIO_APPID=\"NULL\";', 'export RUCIO_ACCOUNT=\"pilot\";'], 'interpreter': '/usr/bin/python', 'payload': '/s/ls2/users/poyda/bio/runbio_wr.py', 'parameters': ' '}
+O29 Apr 10:43:07| RunJobUtilit|updateRunCom: 731| Dumping final input file states
+O29 Apr 10:43:07| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-input-92.pickle
+O29 Apr 10:43:07| FileState.py|dumpFileStat: 225| File name  /  File state  /  Transfer mode
+O29 Apr 10:43:07| FileState.py|dumpFileStat: 226| ---------------------------------------------------------------------------------PandaJob_92_1430304163', 'jobMetrics': '', 'siteName': 'ANALY_RRC-KI-HPC', 'timestamp': '2015-04-29T13:42:45+-300', 'attemptNr': 1, 'jobId': '92', 'state': 'running', 'schedulerID': 'xtestJS001', 'pilotID': 'xtestP001|PR|PICARD 60c\n', 'jobSubStatus': '', 'cpuConsumptionUnit': 'QEMU Virtual CPU version 1.0 4096 KB'}
+O29 Apr 10:42:45| pUtil.py    |verifyJobSta:2099| Job state 'running' is an allowed job state value
+O29 Apr 10:42:45| pUtil.py    |post        :1994| Executing command: curl --silent --show-error --connect-timeout 100 --max-time 120 --insecure --compressed --capath /cvmfs/grid.cern.ch/etc/grid-security/certificates --cert /tmp/x509up_u500 --cacert /tmp/x509up_u500 --key /tmp/x509up_u500 --config /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/curl.config https://vcloud29.grid.kiae.ru:25443/server/panda/updateJob
+O29 Apr 10:42:45| pUtil.py    |toServer    :2141| Elapsed seconds: 0
+O29 Apr 10:42:45| pUtil.py    |parseDispatc:2415| Dispatcher response: [('command', 'NULL'), ('StatusCode', '0')]
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 822| ret = (0, {'command': 'NULL', 'StatusCode': '0'}, 'command=NULL&StatusCode=0')
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 824| data = {'command': 'NULL', 'StatusCode': '0'}
+O29 Apr 10:42:45| PandaServerC|updatePandaS: 835| jobDispatcher acknowledged with 0
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1142| Successfully updated panda server at 2015-04-29T13:42:45+-300
+O29 Apr 10:42:45| Monitor.py  |monitor_job :1185| --- Main pilot monitoring loop (job id 92, state:starting (running), iteration 1)
+O29 Apr 10:42:45| Monitor.py  |__createSoft: 289| (payload_stdout.txt has not been created yet)
+O29 Apr 10:42:46| UpdateHandle|handle      :  16| Connected from ('127.0.0.1', 33987)
+O29 Apr 10:42:46| UpdateHandle|handle      :  19| --- TCPServer: Message received from child is : ['jobState=setup', 'coreCount=NULL', 'pid=2861', 'timeStageIn=0', 'timeExe=0', 'cpuConversionFactor=0', 'vmPeakMax=0', 'cpuUnit=None', 'vmPeakMean=0', 'pilotErrorDiag=None', 'status=setup', 'timeStageOut=0', 'RSSMean=0', 'nEvents=0', 'timeSetup=0', 'JEM=NO', 'nEventsW=0', 'cmtconfig=', 'pilotecode=0', 'cpuTime=0', 'jobid=92', 'pgrp=2861', 'transecode=0', '']
+O29 Apr 10:42:46| UpdateHandle|handle      :  69| Process groups: 2557 (pilot), 2861 (sub process)
+O29 Apr 10:42:46| pUtil.py    |decode_strin:3587| Decoding: None
+O29 Apr 10:42:46| pUtil.py    |decode_strin:3617| Empty URL encoded string (Nothing to decode)
+O29 Apr 10:42:46| UpdateHandle|handle      :  16| Connected from ('127.0.0.1', 33988)
+O29 Apr 10:42:46| UpdateHandle|handle      :  19| --- TCPServer: Message received from child is : ['jobState=setup', 'coreCount=NULL', 'pid=2861', 'timeStageIn=0', 'timeExe=0', 'cpuConversionFactor=0', 'vmPeakMax=0', 'cpuUnit=None', 'vmPeakMean=0', 'pilotErrorDiag=^!^', 'status=stagein', 'timeStageOut=0', 'RSSMean=0', 'nEvents=0', 'timeSetup=0', 'JEM=NO', 'nEventsW=0', 'cmtconfig=', 'pilotecode=0', 'cpuTime=0', 'jobid=92', 'pgrp=2861', 'transecode=0', '']
+O29 Apr 10:42:46| UpdateHandle|handle      :  69| Process groups: 2557 (pilot), 2861 (sub process)
+O29 Apr 10:42:46| pUtil.py    |decode_strin:3587| Decoding: ^!^
+O29 Apr 10:42:46| pUtil.py    |decode_strin:3617| Empty URL encoded string (Nothing to decode)
+O29 Apr 10:43:07| UpdateHandle|handle      :  16| Connected from ('127.0.0.1', 33999)
+O29 Apr 10:43:07| UpdateHandle|handle      :  19| --- TCPServer: Message received from child is : ['jobState=stagein', 'coreCount=NULL', 'pid=2861', 'bytesWithoutFAX=26', 'timeStageIn=21', 'filesWithoutFAX=1', 'timeExe=0', 'cpuConversionFactor=0', 'vmPeakMax=0', 'cpuUnit=None', 'vmPeakMean=0', 'pilotErrorDiag=^!^', 'status=running', 'timeStageOut=0', 'RSSMean=0', 'nEvents=0', 'timeSetup=0', 'JEM=NO', 'nEventsW=0', 'cmtconfig=', 'pilotecode=0', 'cpuTime=0', 'jobid=92', 'pgrp=2861', 'transecode=0', '']
+O29 Apr 10:43:07| UpdateHandle|handle      :  69| Process groups: 2557 (pilot), 2861 (sub process)
+O29 Apr 10:43:07| pUtil.py    |decode_strin:3587| Decoding: ^!^
+O29 Apr 10:43:07| pUtil.py    |decode_strin:3617| Empty URL encoded string (Nothi-------------------
+O29 Apr 10:43:07| FileState.py|dumpFileStat: 235| 1. add_env3.txt	not_transferred	copy_to_scratch
+O29 Apr 10:43:07| RunJobKurcha|<module>    : 911| Changing to running state since all input files have been staged
+O29 Apr 10:43:07| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:43:07| RunJobUtilit|updateJobInf: 107| filesAltStageOut not set
+O29 Apr 10:43:07| RunJobUtilit|updateJobInf: 112| filesNormalStageOut not set
+O29 Apr 10:43:07| RunJobUtilit|updateJobInf: 158| About to send TCP message to main pilot thread of length = 328
+O29 Apr 10:43:07| RunJobUtilit|updateJobInf: 163| (Sent)
+O29 Apr 10:43:07| RunJobUtilit|updateJobInf: 165| (Received)
+O29 Apr 10:43:07| RunJobUtilit|updateJobInf: 172| Successfully sent and received TCP message
+O29 Apr 10:43:07| RunJobUtilit|updatePilotS: 208| Successfully updated local pilot TCP server at 2015-04-29T13:43:07+-300 (Trial 1/2)
+O29 Apr 10:43:07| RunJobUtilit|setEnvVars  : 643| Note: ATLAS_CONDDB was not set by the pilot wrapper script
+O29 Apr 10:43:07| RunJobUtilit|setEnvVars  : 644| The pilot has set ATLAS_CONDDB to: 
+O29 Apr 10:43:07| RunJobUtilit|setEnvVars  : 650| Set PANDA_SITE_NAME = ANALY_RRC-KI-HPC
+O29 Apr 10:43:07| RunJobUtilit|setEnvVars  : 657| Set COPY_TOOL = sshmv
+O29 Apr 10:43:07| RunJobKurcha|executePaylo: 555| Launch parameters 
+OWalltime limit         : 60 (min)
+ORequested nodes (cores): 1 (1)
+O29 Apr 10:43:07| Experiment.p|addToJobSetu: 882| Updated /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/job_setup.sh: export PANDA_RESOURCE=\"ANALY_RRC-KI-HPC\";
+Oexport FRONTIER_ID=\"[92]\";
+Oexport CMSSW_VERSION=$FRONTIER_ID;
+Oexport ROOT_TTREECACHE_SIZE=1;
+Oexport RUCIO_APPID=\"NULL\";
+Oexport RUCIO_ACCOUNT=\"pilot\";
+Osource /adm/scripts/grid/emi-wn-cvmfs-environment.sh
+Opython /s/ls2/users/poyda/bio/runbio_wr.py  
+O29 Apr 10:43:07| RunJobKurcha|executePaylo: 576| ******* SAGA call to execute payload *********
+O/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:43:34| RunJobKurcha|executePaylo: 598| Local Job ID: [slurm+ssh://ui2.computing.kiae.ru]-[518301]
+O29 Apr 10:43:35| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:43:35| RunJobUtilit|updateJobInf: 107| filesAltStageOut not set
+O29 Apr 10:43:35| RunJobUtilit|updateJobInf: 112| filesNormalStageOut not set
+O29 Apr 10:43:35| RunJobUtilit|updateJobInf: 158| About to send TCP message to main pilot thread of length = 334
+O29 Apr 10:43:35| RunJobUtilit|updateJobInf: 163| (Sent)
+O29 Apr 10:43:35| RunJobUtilit|updateJobInf: 165| (Received)
+O29 Apr 10:43:35| RunJobUtilit|updateJobInf: 172| Successfully sent and received TCP message
+O29 Apr 10:43:35| RunJobUtilit|updatePilotS: 208| Successfully updated local pilot TCP server at 2015-04-29T13:43:35+-300 (Trial 1/2)
+O29 Apr 10:43:35| RunJobKurcha|executePaylo: 618| before fork_job.wait
+O29 Apr 10:43:37| RunJobKurcha|executePaylo: 620| after fork_job.wait
+O29 Apr 10:43:41| RunJobKurcha|executePaylo: 634| Job State              : Done
+O29 Apr 10:43:41| RunJobKurcha|executePaylo: 635| Exitcode               : 0
+O29 Apr 10:43:41| RunJobKurcha|executePaylo: 636| Create time            : 2015-04-29T13:43:34
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 637| Start time             : 2015-04-29T13:43:34
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 638| End time               : 2015-04-29T13:43:36
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 639| Walltime limit         : 60 (min)
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 640| Allocated nodes (cores): 1 (1)
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 645| Execution time         : 0:00:02 (sec. 2)
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 658| **********************************************
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 659| ******* SAGA call finished *******************
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 660| **********************************************
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 674| Job command 1/1 finished
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 682| Job CPU usage: 0 s
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 683| Job CPU conversion factor: 1.0000000000
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 686| Original exit code: 0
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 688| Exit code: 0 (returned from OS)
+O29 Apr 10:43:42| RunJob.py   |getTrfExitIn: 646| Job report not found: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:43:42| RunJobKurcha|executePaylo: 706| NOTE: For payload output, see files payload_stdout.txt, payload_stderr.txt
+O29 Apr 10:43:43| ErrorDiagnos|getJobReport:  85| !!WARNING!!1111!! File /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json does not exist
+O29 Apr 10:43:43| ATLASExperim|getNumberOfE: 744| Looking for number of processed events (pass 0: metadata.xml)
+O29 Apr 10:43:43| ATLASExperim|processMetad: 821| /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/metadata.xml does not exist
+O29 Apr 10:43:43| ATLASExperim|getNumberOfE: 753| Looking for number of processed events (pass 1: Athena summary file(s))
+O29 Apr 10:43:43| ATLASExperim|processAthen: 842| Did not find any athena summary files
+O29 Apr 10:43:43| ATLASExperim|getNumberOfE: 758| Looking for number of processed events (pass 2: Resorting to brute force grepping of payload stdout)
+O29 Apr 10:43:43| ATLASExperim|getNumberOfE: 767| Processing stdout file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/payload_stdout.txt
+O29 Apr 10:43:43| ATLASExperim|isOutOfMemor: 921| Checking for memory errors in stderr
+O29 Apr 10:43:43| ATLASExperim|isOutOfMemor: 928| Processing stderr file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/payload_stderr.txt
+O29 Apr 10:43:43| ATLASExperim|isOutOfMemor: 930| WARNING: payload produced stderr, will dump to log
+O29 Apr 10:43:43| RunJobUtilit|dumpOutput  : 262| Filename : /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/payload_stderr.txt
+O29 Apr 10:43:43| RunJobUtilit|dumpOutput  : 263| File size: 23
+O29 Apr 10:43:43| RunJobUtilit|dumpOutput  : 286| Begin output (all)..........................................................
+O29 Apr 10:43:43| RunJobUtilit|dumpOutput  : 293| Building a SMALL index
+O29 Apr 10:43:43| RunJobUtilit|dumpOutput  : 296| End output..................................................................
+O29 Apr 10:43:43| ATLASExperim|isOutOfMemor: 939| Checking for memory errors in stdout..
+O29 Apr 10:43:43| ATLASExperim|isOutOfMemor: 946| Processing stdout file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/payload_stdout.txt
+O29 Apr 10:43:43| pUtil.py    |timedCommand:1504| Executing command:  python VmPeak.py >Pilot_VmPeak.txt (protected by timed_command, timeout: 500 s)
+O29 Apr 10:43:43| pUtil.py    |timedCommand:1519| Elapsed time: 0
+O29 Apr 10:43:43| RunJobUtilit|findVmPeaks : 791| Note: File /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/VmPeak_values.txt does not exist
+O29 Apr 10:43:43| RunJobUtilit|findVmPeaks : 795| [VmPeak] vmPeakMax=0
+O29 Apr 10:43:43| RunJobUtilit|findVmPeaks : 796| [VmPeak] vmPeakMean=0
+O29 Apr 10:43:43| RunJobUtilit|findVmPeaks : 797| [VmPeak] RSSMean=0
+O29 Apr 10:43:43| RunJobKurcha|<module>    : 947| /s/ls2/users/poyda/testpilot
+O29 Apr 10:43:43| RunJobUtilit|prepareOutFi: 356| outf = user.ruslan.results3.txt.1
+O29 Apr 10:43:43| SiteMover.py|getModTime  :2512| Mod time for file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/user.ruslan.results3.txt.1: 2015-04-29 01:43:41
+O29 Apr 10:43:43| RunJobUtilit|prepareOutFi: 367| Output file(s):
+O29 Apr 10:43:43| RunJobUtilit|prepareOutFi: 373| -rw-rw-r--. 1 apf apf 0 Apr 29 13:43 /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/user.ruslan.results3.txt.1
+O29 Apr 10:43:43| RunJobKurcha|<module>    : 957| outsDict: {'user.ruslan.results3.txt.1': '2015-04-29 01:43:41', 'user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1': ''}
+O29 Apr 10:43:43| RunJobKurcha|<module>    : 959| asdfTEST1234_0
+O29 Apr 10:43:43| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:43:43| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:43:43| FileState.py|dumpFileStat: 223| File name  /  File state  /  Registration state
+O29 Apr 10:43:43| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:43| FileState.py|dumpFileStat: 235| 1. user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1	not_created	not_registered
+O29 Apr 10:43:43| FileState.py|dumpFileStat: 235| 2. user.ruslan.results3.txt.1	created	not_registered
+O29 Apr 10:43:43| RunJobKurcha|<module>    : 970| asdfTEST1234_1
+O29 Apr 10:43:43| RunJob.py   |getDatasets : 874| Dataset dictionary has been verified
+O29 Apr 10:43:43| RunJob.py   |moveTrfMetad: 768| Warning: Could not open the original /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/metadata.xml file, but harmless, pass it
+O29 Apr 10:43:44| SiteMoverFar|getSiteMover:  64| Looking for site mover sshmv, setup:, ar:(), kw:{}
+O29 Apr 10:43:44| SiteMoverFar|getSiteMover:  80| Returning site mover <class 'sshmvSM.sshmvSiteMover'> (setup: )
+O29 Apr 10:43:44| pUtil.py    |getOutputFil: 944| setting ec=0 (-1)
+O29 Apr 10:43:44| SiteMover.py|getLocalFile:1300| Executing getsize() for file: user.ruslan.results3.txt.1
+O29 Apr 10:43:44| SiteMover.py|getLocalFile:1309| !!WARNING!!2999!! Encountered zero file size for file user.ruslan.results3.txt.1
+O29 Apr 10:43:44| pUtil.py    |getOutputFil: 928| Adding 0,0 for file user.ruslan.results3.txt.1 using adler32
+O29 Apr 10:43:44| pUtil.py    |getOutputFil: 940| !!WARNING!!4000!! getFileInfo received an error from getLocalFileInfo for file: user.ruslan.results3.txt.1
+O29 Apr 10:43:44| pUtil.py    |getOutputFil: 942| !!WARNING!!4000!! ec = 1191, pilotErrorDiag = Encountered zero file size for file user.ruslan.results3.txt.1, fsize = 0, checksum = 0
+O29 Apr 10:43:44| RunJob.py   |createFileMe: 801| !!FAILED!!2999!! Encountered zero file size for file user.ruslan.results3.txt.1
+O29 Apr 10:43:44| RunJob.py   |failJob     : 462| Will now update local pilot TCP server
+O29 Apr 10:43:44| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 107| filesAltStageOut not set
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 112| filesNormalStageOut not set
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 138| Final payload state set to: failed
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 158| About to send TCP message to main pilot thread of length = 429
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 163| (Sent)
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 165| (Received)
+O29 Apr 10:43:44| RunJobUtilit|updateJobInf: 172| Successfully sent and received TCP message
+O29 Apr 10:43:44| RunJobUtilit|updatePilotS: 208| Successfully updated local pilot TCP server at 2015-04-29T13:43:44+-300 (Trial 1/10)
+O29 Apr 10:43:44| RunJob.py   |cleanup     : 336| ********************************************************
+O29 Apr 10:43:44| RunJob.py   |cleanup     : 337|  This job ended with (trf,pilot) exit code of (0,1191)
+O29 Apr 10:43:44| RunJob.py   |cleanup     : 338| ********************************************************
+O29 Apr 10:43:44| pUtil.py    |getFileList :  44| Copying: ['RunJob.py', 'PilotUtils.py', 'Mover.py', 'WatchDog.py', 'TimerCommand.py', 'EventServiceFactory.py', 'testsage2.py', 'EventService.py', 'VmPeak.py', 'RunJobFactory.py', 'dCacheSiteMover.py', 'rfcpLFCSiteMover.py', 'xrootdSiteMover.py', 'newJobDef.py', 'NordugridATLASSiteInformation.py', 'FileStateClient.py', 'globusPilot.py', 'SiteMoverFarm.py', 'processes.py', 'RunJobUtilities.py', 'NordugridATLASExperiment.py', 'adler32cmd.py', 'ATLASEventService.py', 'FileHandling.py', 'JobLog.py', 'dataPilot.py', 'xrdcpSiteMover.png to decode)
+O29 Apr 10:43:35| UpdateHandle|handle      :  16| Connected from ('127.0.0.1', 34029)
+O29 Apr 10:43:35| UpdateHandle|handle      :  19| --- TCPServer: Message received from child is : ['jobState=running', 'coreCount=1', 'pid=2861', 'bytesWithoutFAX=26', 'timeStageIn=21', 'filesWithoutFAX=1', 'timeExe=0', 'cpuConversionFactor=0', 'vmPeakMax=0', 'cpuUnit=None', 'vmPeakMean=0', 'pilotErrorDiag=^!^%5E%21%5E', 'status=running', 'timeStageOut=0', 'RSSMean=0', 'nEvents=0', 'timeSetup=0', 'JEM=NO', 'nEventsW=0', 'cmtconfig=', 'pilotecode=0', 'cpuTime=0', 'jobid=92', 'pgrp=2861', 'transecode=0', '']
+O29 Apr 10:43:35| UpdateHandle|handle      :  69| Process groups: 2557 (pilot), 2861 (sub process)
+O29 Apr 10:43:35| pUtil.py    |decode_strin:3587| Decoding: ^!^%5E%21%5E
+O29 Apr 10:43:35| pUtil.py    |decode_strin:3621| Resetting decoded string (TCP ping signal)
+O29 Apr 10:43:44| UpdateHandle|handle      :  16| Connected from ('127.0.0.1', 34035)
+O29 Apr 10:43:44| UpdateHandle|handle      :  19| --- TCPServer: Message received from child is : ['jobState=stageout', 'coreCount=1', 'pid=2861', 'bytesWithoutFAX=26', 'timeStageIn=21', 'output_latereg=False', 'filesWithoutFAX=1', 'timeExe=35', 'cpuConversionFactor=1.0', 'vmPeakMax=0', 'cpuUnit=s', 'finalstate=failed', 'vmPeakMean=0', 'pilotErrorDiag=^!^Encountered+zero+file+size+for+file+user.ruslan.results3.txt.1', 'status=failed', 'timeStageOut=0', 'RSSMean=0', 'nEvents=0', 'timeSetup=0', 'JEM=NO', 'nEventsW=0', 'cmtconfig=', 'pilotecode=1191', 'cpuTime=0', 'jobid=92', 'pgrp=2861', 'transecode=0', '']
+O29 Apr 10:43:44| UpdateHandle|handle      :  69| Process groups: 2557 (pilot), 2861 (sub process)
+O29 Apr 10:43:44| pUtil.py    |decode_strin:3587| Decoding: ^!^Encountered+zero+file+size+for+file+user.ruslan.results3.txt.1
+O29 Apr 10:43:44| UpdateHandle|handle      : 124| Got output_latereg=False
+O29 Apr 10:43:46| Monitor.py  |monitor_job :1185| --- Main pilot monitoring loop (job id 92, state:failed (failed), iteration 2)
+O29 Apr 10:43:46| Monitor.py  |__createSoft: 282| Created soft link to payload_stdout.txt in sitedir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/payload_stdout.txt
+O29 Apr 10:43:46| Monitor.py  |__cleanUpEnd: 827| Clean up the ended job: [2861, <Job.Job instance at 0x1724f38>, 2557]
+O29 Apr 10:43:46| Monitor.py  |__cleanUpEnd: 833| Refreshing tail stdout dictinary prior to finishing the job(s)
+O29 Apr 10:43:46| pUtil.py    |getStdoutDic:3806| Returning tail stdout dictionary with 1 entries
+O29 Apr 10:43:46| JobLog.py   |getXMLAndWor: 457| Post job task (normal mode) using dir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:43:46| pUtil.py    |getMetadata :3031| Trying to read metadata from file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/metadata-92.xml
+O29 Apr 10:43:46| pUtil.py    |getMetadata :3047| getMetadata: metadata does not seem to have been created (file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/metadata-92.xml does not exist)
+O29 Apr 10:43:46| JobLog.py   |buildLogExtr: 354| Building log extracts..
+O29 Apr 10:43:46| JobLog.py   |buildLogExtr: 376| Panda tracer log does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/pandatracerlog.txt (ignoring)
+O29 Apr 10:43:46| ATLASExperim|removeRedund: 565| Removing redundant files prior to log creation
+O29 Apr 10:43:46| ATLASExperim|removeRedund: 642| To be removed: ['/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/trivialPilot.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/Node.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/OtherSiteInformation.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/FileState.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/OtherSiteMover.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/S3SiteMover.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/StoppableThread.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/OtherExperiment.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/testsaga.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/CMSExperiment.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/environment.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/ThreadPool.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/curlSiteMover.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/Cleaner.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/Job.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/ChirpSiteMover.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/CastorSiteMover.py', '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/ExperimentFactory.py']
+O29 Apr 10:43:47| ATLASExperim|removeRedund: 642| To be removed: ['/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/ExperimentFactory.pyc']
+O29 Apr 10:43:47| ATLASExperim|removeRedund: 642| To be removed: ['/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/HPC']
+O29 Apr 10:43:47| ATLASExperim|removeRedund: 642| To be removed: ['/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/radical']
+O29 Apr 10:43:47| JobLog.py   |removeSoftLi: 510| Removed soft link: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/payload_stdout.txt
+O29 Apr 10:43:47| pUtil.py    |chdir       :2876| chdir to: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:43:47| pUtil.py    |chdir       :2878| current dir: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:43:47| JobLog.py   |postJobTask : 755| ls -altrR /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163:
+Ototal 60
+O-rw-rw-r--. 1 apf apf  1431 Apr 29 13:42 pandaJobData.out
+O-rw-rw-r--. 1 apf apf    28 Apr 29 13:42 PILOT_INITDIR
+O-rw-rw-r--. 1 apf apf   312 Apr 29 13:42 pilotlog.out
+O-rw-rw-r--. 1 apf apf   485 Apr 29 13:43 job_setup.sh
+O-rw-r--r--. 1 apf apf    23 Apr 29 13:43 payload_stderr.txt
+O-rw-r--r--. 1 apf apf 11614 Apr 29 13:43 payload_stdout.txt
+O-rw-rw-r--. 1 apf apf   291 Apr 29 13:43 PoolFileCatalog.xml
+O-rw-rw-r--. 1 apf apf    97 Apr 29 13:43 Pilot_VmPeak.txt
+Odrwxrwx---. 2 apf apf 12288 Apr 29 13:43 .
+Odrwxrwx---. 6 apf apf  4096 Apr 29 13:43 ..
+O-rw-rw-r--. 1 apf apf   129 Apr 29 13:43 runjob.stderr
+O29 Apr 10:43:47| pUtil.py    |getExeErrors: 838| Could not find trf error file jobInfo.xml in search path /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3065| ..Job report..................................................................................................
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3066| . Pilot version             : PICARD 60c
+O
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3067| . Job id                    : 92
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3068| . Current job status        : failed
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3073| . Trf job type              : Single trf job
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3078| . Final job state           : failed
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3088| . All out files transferred : No
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3091| . Pilot error code          : 1191, Illegal zero file size
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3095| . Job is recoverable        : No
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3106| . Length pilot error diag   : 62
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3111| . Pilot error diag          : Encountere/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/payload_stdout.txt
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/pandaJobData.out
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/Pilot_VmPeak.txt
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/PILOT_INITDIR
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/pilotlog.out
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/PoolFileCatalog.xml
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/runjob.stderr
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/payload_stderr.txt
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/job_setup.sh
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/pilotlog.txt
+Otarball_PandaJob_92_ANALY_RRC-KI-HPC/pilot.stderr
+Od zero file size for file user.ruslan.results3.txt.1
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3123| . Pilot produced stderr     : No
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3129| . RunJob produced stderr    : Yes (size: 129) see dump below
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3133| . Trf error code            : 0
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3138| . Trf error diagnosis       : 
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3148| . Length log extracts       : 50 (preliminary)
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3169| . Payload produced stderr   : Yes (check payload_stderr.txt)
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3178| . Found core dump in workdir: No
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3183| . Job was executed in dir   : /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3184| . Error report produced at  : 2015-04-29T13:43:47+-300
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3185| ..Time report.................................................................................................
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3186| . CPU consumption time      : 0 s
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3187| . Payload execution time    : 35 s
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3188| . GetJob consumption time   : 0 s
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3189| . Stage-in consumption time : 21 s
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3190| . Stage-out consumption time: 0 s
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3191| ..............................................................................................................
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3205| 
+O//begin runjob.stderr ///////////////////////////////////////////////////////////////////////////
+O29 Apr 10:43:47| pUtil.py    |dumpFile    :1201| Dumping file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/runjob.stderr (size: 129)
+O29 Apr 10:43:47| pUtil.py    |dumpFile    :1212| 29 Apr 10:43:44| RunJob.py   |createFileMe: 801| !!FAILED!!2999!! Encountered zero file size for file user.ruslan.results3.txt.1
+O29 Apr 10:43:47| pUtil.py    |dumpFile    :1216| Dumped 1 lines from file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/runjob.stderr
+O29 Apr 10:43:47| pUtil.py    |makeJobRepor:3207| 
+O//end runjob.stderr /////////////////////////////////////////////////////////////////////////////
+O29 Apr 10:43:47| JobLog.py   |removeUnwant: 515| Removing unwanted files prior to job log creation
+O29 Apr 10:43:47| JobLog.py   |addWantedFil: 550| No skipped input files (non DBRelease)
+O29 Apr 10:43:47| JobLog.py   |postJobTask : 798| Preparing to create log file
+O29 Apr 10:43:47| JobLog.py   |createLogFil:1114| Executing command: mv /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163 tarball_PandaJob_92_ANALY_RRC-KI-HPC
+O29 Apr 10:43:47| JobLog.py   |createLogFil:1121| Executing command: pwd;tar cvf tarball_PandaJob_92_ANALY_RRC-KI-HPC.tar tarball_PandaJob_92_ANALY_RRC-KI-HPC --dereference
+O29 Apr 10:43:47| JobLog.py   |createLogFil:1126| Tarball created: tarball_PandaJob_92_ANALY_RRC-KI-HPC.tar
+O29 Apr 10:43:47| JobLog.py   |createLogFil:1129| Executing command: gzip -f tarball_PandaJob_92_ANALY_RRC-KI-HPC.tar
+O29 Apr 10:43:48| JobLog.py   |createLogFil:1139| Tarball renamed to user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:48| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:43:48| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 223| File name  /  File state  /  Registration state
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 235| 1. user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1	created	not_registered
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 235| 2. user.ruslan.results3.txt.1	created	not_registered
+O29 Apr 10:43:48| JobLog.py   |postJobTask : 816| metadata will be created for the log only in updatePandaServer
+O29 Apr 10:43:48| JobLog.py   |transferLogF: 122| Special log file transfer not required
+O29 Apr 10:43:48| JobLog.py   |transferLogF: 125| Attempting log file transfer to primary SE
+O29 Apr 10:43:48| pUtil.py    |getFileGuid :2653| !!WARNING!!2999!! Could not locate /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/metadata-92.xml, log file guid can not be verified
+O29 Apr 10:43:48| JobLog.py   |getLogFileGu:  40| !!WARNING!!1500!! Log file guid could not be found in /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/metadata-92.xml
+O29 Apr 10:43:48| JobLog.py   |getLogFileGu:  51| Using log file guid: 46df2a3a-8c38-4e23-a163-c034ca450cd7
+O29 Apr 10:43:48| pUtil.py    |getCmtconfig:3304| Will try to use cmtconfig:  (from schedconfig DB)
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1201| Dumping file: tarball_PandaJob_92_ANALY_RRC-KI-HPC.xml (size: 357)
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212| <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212| <!-- Edited By POOL -->
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212| <!DOCTYPE POOLFILECATALOG SYSTEM \"InMemory\">
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212| <POOLFILECATALOG>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212|   <File ID=\"46df2a3a-8c38-4e23-a163-c034ca450cd7\">
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212|     <physical>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212|       <pfn filetype=\"ROOT_All\" name=\"user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1\"/>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212|     </physical>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212|   </File>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1212| </POOLFILECATALOG>
+O29 Apr 10:43:48| pUtil.py    |dumpFile    :1216| Dumped 10 lines from file tarball_PandaJob_92_ANALY_RRC-KI-HPC.xml
+O29 Apr 10:43:48| Mover.py    |getInitialTr: 525| Trying to add additional info to tracing report
+O29 Apr 10:43:48| Mover.py    |getInitialTr: 533| Tracing report initialised with: {'protocol': None, 'duid': None, 'eventType': 'put_sm', 'suspicious': '0', 'timeEnd': None, 'dataset': 'panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2', 'catStart': None, 'guid': None, 'transferStart': None, 'hostname': 'vcloud23', 'remoteSite': 'ANALY_RRC-KI-HPC', 'filename': None, 'version': None, 'filesize': None, 'ip': '192.168.23.43', 'usrdn': '/C=RU/O=RDIG/OU=users/OU=lebedev.ru/CN=Ruslan Mashinistov/CN=proxy', 'usr': 'd41d8cd98f00b204e9800998ecf8427e', 'eventVersion': 'pilot3', 'localSite': 'ANALY_RRC-KI-HPC', 'validateStart': None, 'uuid': ('9def29eaee5c11e4ab30fa163e1eac40',), 'timeStart': 1430304228.179976, 'relativeStart': None, 'appid': '92', 'clientState': 'INIT_REPORT'}
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2619| SE list: ['']
+O29 Apr 10:43:48| Mover.py    |copytool    :4060| Got copytool sshmv from queuedata file
+O29 Apr 10:43:48| Mover.py    |copytool    :4091| copysetup is: /cvmfs/atlas.cern.ch/repo/sw/local/setup.sh (file access verified)
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2634| Copy command: sshmv
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2635| Setup: /cvmfs/atlas.cern.ch/repo/sw/local/setup.sh
+O29 Apr 10:43:48| SiteMoverFar|getSiteMover:  64| Looking for site mover sshmv, setup:/cvmfs/atlas.cern.ch/repo/sw/local/setup.sh, ar:(), kw:{}
+O29 Apr 10:43:48| SiteMoverFar|getSiteMover:  80| Returning site mover <class 'sshmvSM.sshmvSiteMover'> (setup: /cvmfs/atlas.cern.ch/repo/sw/local/setup.sh)
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2639| Got site mover: <sshmvSM.sshmvSiteMover object at 0x183b990>
+O29 Apr 10:43:48| pUtil.py    |getSiteInfor:3511| getSiteInformation: got experiment=ATLAS
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2669| filename=user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2670| lfn=user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2671| guid=46df2a3a-8c38-4e23-a163-c034ca450cd7
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2674| Preparing copy for /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1 to  using sshmv
+O29 Apr 10:43:48| Mover.py    |getScope    :2548| Using scope 'panda:panda' for log file
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2678| scope=panda:panda
+O29 Apr 10:43:48| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:43:48| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 223| File name  /  File state  /  Registration state
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 235| 1. user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1	not_transferred	not_registered
+O29 Apr 10:43:48| FileState.py|dumpFileStat: 235| 2. user.ruslan.results3.txt.1	created	not_registered
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2685| datasetDict=None
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2686| pdsname=panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+O29 Apr 10:43:48| SiteMover.py|removeSubFro:3264| Found no _subNNN string in the dataset name
+O29 Apr 10:43:48| Mover.py    |getDatasetNa:2453| File user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1 will go to dataset panda:panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+O29 Apr 10:43:48| Mover.py    |getSpaceToke:2471| Mover is preparing to copy log file (space token not set)
+O29 Apr 10:43:48| Mover.py    |getFileSizeA:2296| outputFileInfo=None
+O29 Apr 10:43:48| Mover.py    |getFileSizeA:2306| No output file info available for file user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2706| Number of stage-out tries: 2
+O29 Apr 10:43:48| Mover.py    |mover_put_da:2718| Put attempt 1/2
+O29 Apr 10:43:48| ATLASSiteInf|forceAlterna: 297| ATLAS
+O29 Apr 10:43:48| epic.py     |init_saga   : 103| *********SAGA INIT*********
+O29 Apr 10:43:48| epic.py     |push_file   : 366| Pushing file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:48| epic.py     |push_file   : 367| Remote file path: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:48| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:43:49| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:43:51| epic.py     |push_file   : 376| Closing file
+Omylog_fields123: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1, 
+O29 Apr 10:43:51| epic.py     |ssh         : 131| *********SAGA*********
+O29 Apr 10:43:51| epic.py     |ssh         : 132| Executing external command: python /s/ls2/groups/g0037/bin/fileinfos.py /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:51| epic.py     |write       : 397| Using temporary name: /tmp/tmp8vRGoN
+O29 Apr 10:43:51| epic.py     |push_file   : 366| Pushing file: /tmp/tmp8vRGoN
+O29 Apr 10:43:51| epic.py     |push_file   : 367| Remote file path: /s/ls2/groups/g0037/tmp/cmd_2751_42311801.sh
+O29 Apr 10:43:51| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:43:51| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:43:51| epic.py     |push_file   : 376| Closing file
+O29 Apr 10:43:51| epic.py     |write       : 406| Removing tmp file
+O29 Apr 10:43:51| epic.py     |ssh         : 147| SAGA service init
+O29 Apr 10:43:54| epic.py     |ssh         : 150| SAGA job init
+O29 Apr 10:43:54| epic.py     |ssh         : 152| SAGA Job run
+O29 Apr 10:43:54| epic.py     |ssh         : 164| SAGA Job ended with state OK
+O29 Apr 10:43:54| epic.py     |ssh         : 169| Exit code: 0
+O29 Apr 10:43:54| epic.py     |read        : 387| Using temporary name: /tmp/tmpPk0oAK
+O29 Apr 10:43:54| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2751_42311801.out
+O29 Apr 10:43:54| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpPk0oAK
+O29 Apr 10:43:54| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:43:54| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:43:55| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:43:55| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:43:55| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:43:55| epic.py     |read        : 387| Using temporary name: /tmp/tmpLux0XO
+O29 Apr 10:43:55| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2751_42311801.err
+O29 Apr 10:43:55| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpLux0XO
+O29 Apr 10:43:55| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:43:55| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:43:56| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:43:56| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:43:56| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:43:56| epic.py     |ssh         : 176| Output file:
+O-----------------------------------------------------------------------------------------------------
+Omodtime:2015-04-29 01:43:51
+Ofsize:17672
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:56| epic.py     |ssh         : 180| Error file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:43:56| epic.py     |delete      : 331| Deleting remote file: /s/ls2/groups/g0037/tmp/cmd_2751_42311801.sh
+O29 Apr 10:43:56| epic.py     |delete      : 334| Opening remote directory
+O29 Apr 10:43:56| epic.py     |delete      : 350| Removing recursively
+O29 Apr 10:43:56| epic.py     |ssh         : 190| *********END**********
+O['modtime:2015-04-29 01:43:51', 'fsize:17672', '']
+O['fsize', '17672']
+O29 Apr 10:43:56| sshmvSM.py  |getLocalFile:  65| Executing adler32() for file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:56| epic.py     |ssh         : 131| *********SAGA*********
+O29 Apr 10:43:56| epic.py     |ssh         : 132| Executing external command: python /s/ls2/groups/g0037/bin/adler32cmd.py /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:43:56| epic.py     |write       : 397| Using temporary name: /tmp/tmpNFMpmM
+O29 Apr 10:43:56| epic.py     |push_file   : 366| Pushing file: /tmp/tmpNFMpmM
+O29 Apr 10:43:56| epic.py     |push_file   : 367| Remote file path: /s/ls2/groups/g0037/tmp/cmd_2751_42369662.sh
+O29 Apr 10:43:57| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:43:57| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:43:57| epic.py     |push_file   : 376| Closing file
+O29 Apr 10:43:57| epic.py     |write       : 406| Removing tmp file
+O29 Apr 10:43:57| epic.py     |ssh         : 147| SAGA service init
+O29 Apr 10:43:59| epic.py     |ssh         : 150| SAGA job init
+O29 Apr 10:44:00| epic.py     |ssh         : 152| SAGA Job run
+O29 Apr 10:44:00| epic.py     |ssh         : 164| SAGA Job ended with state OK
+O29 Apr 10:44:00| epic.py     |ssh         : 169| Exit code: 0
+O29 Apr 10:44:00| epic.py     |read        : 387| Using temporary name: /tmp/tmpJxxMCh
+O29 Apr 10:44:00| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2751_42369662.out
+O29 Apr 10:44:00| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpJxxMCh
+O29 Apr 10:44:00| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:44:00| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:44:01| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:44:01| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:44:01| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:44:01| epic.py     |read        : 387| Using temporary name: /tmp/tmpeAkjWo
+O29 Apr 10:44:01| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2751_42369662.err
+O29 Apr 10:44:01| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpeAkjWo
+O29 Apr 10:44:01| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:44:01| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:44:01| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:44:01| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:44:01| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:44:01| epic.py     |ssh         : 176| Output file:
+O-----------------------------------------------------------------------------------------------------
+Obbf6eb04
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:44:01| epic.py     |ssh         : 180| Error file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:44:01| epic.py     |delete      : 331| Deleting remote file: /s/ls2/groups/g0037/tmp/cmd_2751_42369662.sh
+O29 Apr 10:44:01| epic.py     |delete      : 334| Opening remote directory
+O29 Apr 10:44:02| epic.py     |delete      : 350| Removing recursively
+O29 Apr 10:44:02| epic.py     |ssh         : 190| *********END**********
+O29 Apr 10:44:02| sshmvSM.py  |getLocalFile:  72| Got adler32 checksum: bbf6eb04
+O
+O29 Apr 10:44:02| epic.py     |ssh         : 131| *********SAGA*********
+O29 Apr 10:44:02| epic.py     |ssh         : 132| Executing external command: mkdir -p /s/ls2/users/poyda/data/panda/panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2
+Omv /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1 /s/ls2/users/poyda/data/panda/panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:44:02| epic.py     |write       : 397| Using temporary name: /tmp/tmpRAx1DQ
+O29 Apr 10:44:02| epic.py     |push_file   : 366| Pushing file: /tmp/tmpRAx1DQ
+O29 Apr 10:44:02| epic.py     |push_file   : 367| Remote file path: /s/ls2/groups/g0037/tmp/cmd_2751_42427053.sh
+O29 Apr 10:44:02| epic.py     |push_file   : 371| Opening local file
+O29 Apr 10:44:02| epic.py     |push_file   : 373| Copying file
+O29 Apr 10:44:03| epic.py     |push_file   : 376| Closing file
+O29 Apr 10:44:03| epic.py     |write       : 406| Removing tmp file
+O29 Apr 10:44:03| epic.py     |ssh         : 147| SAGA service init
+O29 Apr 10:44:05| epic.py     |ssh         : 150| SAGA job init
+O29 Apr 10:44:05| epic.py     |ssh         : 152| SAGA Job run
+O29 Apr 10:44:06| epic.py     |ssh         : 164| SAGA Job ended with state OK
+O29 Apr 10:44:06| epic.py     |ssh         : 169| Exit code: 0
+O29 Apr 10:44:06| epic.py     |read        : 387| Using temporary name: /tmp/tmpJAHvK7
+O29 Apr 10:44:06| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2751_42427053.out
+O29 Apr 10:44:06| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpJAHvK7
+O29 Apr 10:44:06| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:44:06| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:44:06| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:44:06| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:44:06| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:44:06| epic.py     |read        : 387| Using temporary name: /tmp/tmpUJ7FCK
+O29 Apr 10:44:06| epic.py     |fetch_file  : 285| Getting remote file: /s/ls2/groups/g0037/tmp/out_2751_42427053.err
+O29 Apr 10:44:06| epic.py     |fetch_file  : 286| Local file path: /tmp/tmpUJ7FCK
+O29 Apr 10:44:06| epic.py     |fetch_file  : 290| Opening remote file
+O29 Apr 10:44:06| epic.py     |fetch_file  : 293| Moving remote file
+O29 Apr 10:44:07| epic.py     |fetch_file  : 298| Closing file
+O29 Apr 10:44:07| epic.py     |read        : 389| Reading tmp file
+O29 Apr 10:44:07| epic.py     |read        : 391| Removing tmp file
+O29 Apr 10:44:07| epic.py     |ssh         : 176| Output file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:44:07| epic.py     |ssh         : 180| Error file:
+O-----------------------------------------------------------------------------------------------------
+O
+O-----------------------------------------------------------------------------------------------------
+O29 Apr 10:44:07| epic.py     |delete      : 331| Deleting remote file: /s/ls2/groups/g0037/tmp/cmd_2751_42427053.sh
+O29 Apr 10:44:07| epic.py     |delete      : 334| Opening remote directory
+O29 Apr 10:44:08| epic.py     |delete      : 350| Removing recursively
+O29 Apr 10:44:08| epic.py     |ssh         : 190| *********END**********
+O29 Apr 10:44:08| Mover.py    |sitemover_pu:2516| Stage-out returned: s=0, r_gpfn=/s/ls2/users/poyda/data/panda/panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1, r_fsize=17672, r_fchecksum=bbf6eb04
+O, r_farch=, pilotErrorDiag=
+O29 Apr 10:44:08| SiteMover.py|updateSURLDi:1055| Adding GUID (46df2a3a-8c38-4e23-a163-c034ca450cd7) and SURL (/s/ls2/users/poyda/data/panda/panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1) to dictionary
+O29 Apr 10:44:08| SiteMover.py|getSURLDicti: 988| SURL dictionary does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/surlDictionary-92.json (will be created)
+O29 Apr 10:44:08| SiteMover.py|updateSURLDi:1065| Successfully updated SURL dictionary (which currectly has 1 key(s))
+O29 Apr 10:44:08| Mover.py    |mover_put_da:2842| Skipped chirp transfer
+O29 Apr 10:44:08| Mover.py    |mover_put_da:2848| Return code: 0
+O29 Apr 10:44:08| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:44:08| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:44:08| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:44:08| FileState.py|dumpFileStat: 223| File name  /  File state  /  Registration state
+O29 Apr 10:44:08| FileState.py|dumpFileStat: 226| ----------------------------------------------------------------------------------------------------
+O29 Apr 10:44:08| FileState.py|dumpFileStat: 235| 1. user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1	transferred	registered
+O29 Apr 10:44:08| FileState.py|dumpFileStat: 235| 2. user.ruslan.results3.txt.1	created	not_registered
+O29 Apr 10:44:08| Mover.py    |mover_put_da:2894| No file catalog registration by the pilot
+O29 Apr 10:44:08| Mover.py    |mover_put_da:2907| Put successful
+O29 Apr 10:44:08| JobLog.py   |transferActu: 250| mover_put_data finished with EC = 0
+O29 Apr 10:44:08| pUtil.py    |touch       :1594| Lock file created: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/LOGFILECOPIED
+O29 Apr 10:44:08| JobLog.py   |removeTree  :  87| Removed directory: tarball_PandaJob_92_ANALY_RRC-KI-HPC
+O29 Apr 10:44:08| JobLog.py   |transferActu: 325| tarball_PandaJob_92_ANALY_RRC-KI-HPC.xml removed
+O29 Apr 10:44:08| JobRecovery.|updateJobSta: 648| Successfully updated job state file with state: failed
+O29 Apr 10:44:08| PandaServerC|updatePandaS: 590| Updating job status in updatePandaServer(): PandaId=92, result=['failed', 0, 1191], time=2015-04-29T13:44:08+-300
+O29 Apr 10:44:08| PandaServerC|getNodeStruc: 207| Batch system type was not identified (will not be reported)
+O29 Apr 10:44:08| PandaServerC|getNodeStruc: 209| Will send pilotID: xtestP001|PR|PICARD 60c
+O
+O29 Apr 10:44:08| PandaServerC|getNodeStruc: 210| pilotId: xtestP001
+O29 Apr 10:44:08| PandaServerC|getJobMetric: 166| Job metrics=\"coreCount=1\"
+O29 Apr 10:44:08| PandaServerC|getNodeStruc: 255| Payload/TRF did not report the number of read events
+O29 Apr 10:44:08| PandaServerC|getNodeStruc: 289| (No need to negate error code)
+O29 Apr 10:44:08| PandaServerC|getNodeStruc: 292| Pilot error code: 1191
+O29 Apr 10:44:08| PandaServerC|updatePandaS: 609| xmlstr = None
+O29 Apr 10:44:08| PandaServerC|getXML      : 323| getXML called
+O29 Apr 10:44:08| SiteMoverFar|getSiteMover:  64| Looking for site mover sshmv, setup:, ar:(), kw:{}
+O29 Apr 10:44:08| SiteMoverFar|getSiteMover:  80| Returning site mover <class 'sshmvSM.sshmvSiteMover'> (setup: )
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1201| Dumping file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/XML4PandaJob_92/logfile.xml (size: 544)
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212| <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212| <!-- ATLAS file meta-data catalog -->
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212| <!DOCTYPE POOLFILECATALOG SYSTEM \"InMemory\">
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212| <POOLFILECATALOG>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|   <File ID=\"46df2a3a-8c38-4e23-a163-c034ca450cd7\">
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|     <logical>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|       <lfn name=\"user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1\"/>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|     </logical>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|     <metadata att_name=\"surl\" att_value=\"46df2a3a-8c38-4e23-a163-c034ca450cd7-surltobeset\"/>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|     <metadata att_name=\"fsize\" att_value=\"\"/>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|     <metadata att_name=\"csumtypetobeset\" att_value=\"\"/>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212|   </File>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1212| </POOLFILECATALOG>
+O29 Apr 10:44:08| pUtil.py    |dumpFile    :1216| Dumped 13 lines from file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/XML4PandaJob_92/logfile.xml
+O29 Apr 10:44:08| SiteMover.py|getLocalFile:1300| Executing getsize() for file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:44:08| SiteMover.py|getLocalFile:1312| Got file size: 17672
+O29 Apr 10:44:08| SiteMover.py|getLocalFile:1316| Executing adler32() for file: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1
+O29 Apr 10:44:08| SiteMover.py|getLocalFile:1323| Got adler32 checksum: bbf6eb04
+O29 Apr 10:44:08| PandaServerC|getXML      : 370| Added (17672, bbf6eb04) to metadata file (/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/XML4PandaJob_92/logfile.xml)
+O29 Apr 10:44:08| PandaServerC|getXML      : 448| Removed log file
+O29 Apr 10:44:08| PandaServerC|updatePandaS: 650| Stdout tail will not be sent (debug=False)
+O29 Apr 10:44:08| pUtil.py    |updateJobSta:2866| Successfully updated job state file at: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/jobState-92.pickle
+O29 Apr 10:44:09| PandaServerC|getPayloadMe: 536| Trying alternative location: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:44:09| PandaServerC|getPayloadMe: 564| Did not find /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163/jobReport.json
+O29 Apr 10:44:09| PandaServerC|getPayloadMe: 571| WARNING: metadata file does not exist: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/metadata-92.xml.PAYLOAD
+O29 Apr 10:44:09| PandaServerC|getPayloadMe: 572| Looking for it in the pilot init dir..
+O29 Apr 10:44:09| PandaServerC|updatePandaS: 773| Updating node structure XML with SURLs
+O29 Apr 10:44:09| SiteMover.py|getSURLDicti:1016| Deserialized surl dictionary with 1 keys
+O29 Apr 10:44:09| SiteMover.py|getSURLDicti:1017| surlDictionary={u'46df2a3a-8c38-4e23-a163-c034ca450cd7': u'/s/ls2/users/poyda/data/panda/panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1'}
+O29 Apr 10:44:09| pUtil.py    |updateXMLWit:2936| node_xml = <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>
+O<!-- ATLAS file meta-data catalog -->
+O<!DOCTYPE POOLFILECATALOG SYSTEM \"InMemory\">
+O<POOLFILECATALOG>
+O  <File ID=\"46df2a3a-8c38-4e23-a163-c034ca450cd7\">
+O    <logical>
+O      <lfn name=\"user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1\"/>
+O    </logical>
+O    <metadata att_name=\"surl\" att_value=\"46df2a3a-8c38-4e23-a163-c034ca450cd7-surltobeset\"/>
+O    <metadata att_name=\"fsize\" att_value=\"17672\"/>
+O    <metadata att_name=\"adler32\" att_value=\"bbf6eb04\"/>
+O  </File>
+O</POOLFILECATALOG>
+O
+O29 Apr 10:44:09| PandaServerC|updatePandaS: 791| Adding additionalMetadata to node
+O29 Apr 10:44:09| pUtil.py    |makeHTTPUpda: 143| Preparing for final Panda server update
+O29 Apr 10:44:09| pUtil.py    |makeHTTPUpda: 147| Max number of trials: 10, separated by delays of 120 seconds
+O29 Apr 10:44:09| pUtil.py    |makeHTTPUpda: 158| HTTP connect using server: https://vcloud29.grid.kiae.ru:25443/server/panda
+O29 Apr 10:44:09| pUtil.py    |httpConnect : 209| Sending attemptNr=1 for cmd=updateJob
+O29 Apr 10:44:09| pUtil.py    |toServer    :2118| toServer: cmd = updateJob
+O29 Apr 10:44:09| pUtil.py    |toServer    :2119| toServer: len(data) = 21
+O29 Apr 10:44:09| pUtil.py    |toServer    :2120| data = {'node': 'vcloud23.grid.kiae.ru', 'pilotErrorCode': 1191, 'workdir': '/s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PandaJob_92_1430304163', 'jobMetrics': 'coreCount=1', 'xml': u'<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n<!-- ATLAS file meta-data catalog -->\n<!DOCTYPE POOLFILECATALOG SYSTEM \"InMemory\">\n<POOLFILECATALOG>\n  <File ID=\"46df2a3a-8c38-4e23-a163-c034ca450cd7\">\n    <logical>\n      <lfn name=\"user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1\"/>\n    </logical>\n    <metadata att_name=\"surl\" att_value=\"/s/ls2/users/poyda/data/panda/panda.destDB.34c67df4-aa6e-4bbb-9919-e4181bc868d2/user.ruslan.4a15e18b-e4b1-4e03-a609-824cc2ef5147.job.log.tgz.1\"/>\n    <metadata att_name=\"fsize\" att_value=\"17672\"/>\n    <metadata att_name=\"adler32\" att_value=\"bbf6eb04\"/>\n  </File>\n</POOLFILECATALOG>\n\n', 'siteName': 'ANALY_RRC-KI-HPC', 'timestamp': '2015-04-29T13:44:08+-300', 'pilotTiming': '0|21|35|0|0', 'cpuConversionFactor': '1.0', 'attemptNr': 1, 'jobId': '92', 'cpuConsumptionUnit': 's+QEMU Virtual CPU version 1.0 4096 KB', 'state': 'failed', 'schedulerID': 'xtestJS001', 'pilotLog': '\n- Errors from payload_stdout.txt (no jobReport) -\n\n- Walltime -\nJobRetrival=0, StageIn=21, Execution=35, StageOut=0, CleanUp=22\n', 'cpuConsumptionTime': '0', 'pilotID': 'xtestP001|PR|PICARD 60c\n', 'jobSubStatus': '', 'transExitCode': 0, 'pilotErrorDiag': 'Encountered zero file size for file user.ruslan.results3.txt.1', 'metaData': ''}
+O29 Apr 10:44:09| pUtil.py    |verifyJobSta:2099| Job state 'failed' is an allowed job state value
+O29 Apr 10:44:09| pUtil.py    |post        :1994| Executing command: curl --silent --show-error --connect-timeout 100 --max-time 120 --insecure --compressed --capath /cvmfs/grid.cern.ch/etc/grid-security/certificates --cert /tmp/x509up_u500 --cacert /tmp/x509up_u500 --key /tmp/x509up_u500 --config /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/curl.config https://vcloud29.grid.kiae.ru:25443/server/panda/updateJob
+O29 Apr 10:44:14| pUtil.py    |toServer    :2141| Elapsed seconds: 5
+O29 Apr 10:44:14| pUtil.py    |parseDispatc:2415| Dispatcher response: [('command', 'NULL'), ('StatusCode', '0')]
+O29 Apr 10:44:14| PandaServerC|updatePandaS: 822| ret = (0, {'command': 'NULL', 'StatusCode': '0'}, 'command=NULL&StatusCode=0')
+O29 Apr 10:44:14| PandaServerC|updatePandaS: 824| data = {'command': 'NULL', 'StatusCode': '0'}
+O29 Apr 10:44:14| PandaServerC|updatePandaS: 835| jobDispatcher acknowledged with 0
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 892| Successfully updated panda server at 2015-04-29T13:44:14+-300
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 902| Removed job state file
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 907| Stored XML in retNode structure
+O29 Apr 10:44:14| pUtil.py    |updateJobSta:2866| Successfully updated job state file at: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/jobState-92.pickle
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 910| Backed up XML in job state file
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 941| Begin log extracts.......................................................................................
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 942| 
+O- Errors from payload_stdout.txt (no jobReport) -
+O
+O- Walltime -
+OJobRetrival=0, StageIn=21, Execution=35, StageOut=0, CleanUp=22
+O
+O29 Apr 10:44:14| JobLog.py   |postJobTask : 943| .........................................................................................end log extracts
+O29 Apr 10:44:14| Monitor.py  |__cleanUpEnd: 866| Killing remaining subprocesses (if any)
+O29 Apr 10:44:14| processes.py|killProcesse:  92| killProcesses() called
+O29 Apr 10:44:14| processes.py|killProcesse: 100| Killing group process 2861
+O29 Apr 10:44:14| processes.py|killProcesse: 104| WARNING: Exception thrown when killing the child group process under SIGTERM, wait for kill -9 later: [Errno 22] Invalid argument
+O29 Apr 10:44:14| processes.py|killProcesse: 117| WARNING: Exception thrown when killing the child group process under SIGTERM, wait for kill -9 later: [Errno 22] Invalid argument
+O29 Apr 10:44:14| processes.py|killProcesse: 128| Process IDs to be killed: [2861] (in reverse order)
+O29 Apr 10:44:14| processes.py|killProcesse: 139| Found commands still running:
+O29 Apr 10:44:14| processes.py|killProcesse: 141| USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+O29 Apr 10:44:15| processes.py|killProcesse: 141| apf       2861  9.0  0.0      0     0 pts/0    Z    13:42   0:08 [python] <defunct>
+O29 Apr 10:44:15| processes.py|dumpStackTra:  87| Skipping pstack dump for zombie process
+O29 Apr 10:44:15| processes.py|killProcesse: 156| Killed pid: 2861 (SIGTERM)
+O29 Apr 10:44:15| processes.py|killProcesse: 163| Sleeping 60 s to allow process to exit
+O29 Apr 10:45:15| processes.py|killProcesse: 173| Killed pid: 2861 (SIGKILL)
+O29 Apr 10:45:15| processes.py|killProcesse: 175| Killing any remaining orphan processes
+O29 Apr 10:45:15| processes.py|killOrphans : 195| Searching for orphan processes
+O29 Apr 10:45:15| processes.py|killOrphans : 214| Found orphan process: pid=3346, ppid=1, args='/usr/bin/python'
+O29 Apr 10:45:15| processes.py|killOrphans : 220| Killed orphaned process 3346 (/usr/bin/python)
+O29 Apr 10:45:15| processes.py|killOrphans : 225| Found 1 orphan process(es)
+O29 Apr 10:45:15| Monitor.py  |__cleanUpEnd: 881| Process id file removed
+O29 Apr 10:45:16| WatchDog.py |collectZombi:  58| --- collectZombieJob: --- 10, [2861]
+O29 Apr 10:45:16| WatchDog.py |collectZombi:  62| Zombie collector trying to kill pid 2861
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1205| The job has finished
+O29 Apr 10:45:17| FileState.py|__init__    :  65| Using file state dictionary: /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/fileState-output-92.pickle
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1216| Current log file state: ['transferred', 'registered']
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1221| Will not remove log file at this point (possibly already removed)
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1225| --------------------------------------------------------------------------------
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1226| Number of processed jobs              : 1
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1227| Maximum number of monitored processes : 0
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1228| Pilot executed last job in directory  : /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1229| Current time                          : 2015-04-29T13:45:17+-300
+O29 Apr 10:45:17| Monitor.py  |monitor_job :1230| --------------------------------------------------------------------------------
+O29 Apr 10:45:18| Monitor.py  |monitor_job :1247| No time floor set, no time to run another job
+Obreak
+O29 Apr 10:45:18| pilot.py    |runMain     :2624| No more jobs to execute
+O29 Apr 10:45:28| pilot.py    |runMain     :2628| End of the pilot
+O29 Apr 10:45:28| PilotTCPServ|join        :  42| join called on thread PilotTCPServer
+O29 Apr 10:45:28| pUtil.py    |cleanup     :4100| Overall cleanup function is called
+O29 Apr 10:45:29| pUtil.py    |cleanup     :4103| Collected zombie processes
+O29 Apr 10:45:29| pUtil.py    |readStringFr:1729| Found string /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155 in file /s/ls2/users/poyda/testpilot/CURRENT_SITEWORKDIR
+O29 Apr 10:45:29| pUtil.py    |readCodeFrom:1715| No code to report (file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/EXITCODE does not exist)
+O29 Apr 10:45:29| pUtil.py    |readCodeFrom:1715| No code to report (file /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155/PROCESSID does not exist)
+O29 Apr 10:45:29| pUtil.py    |cleanup     :4138| Attempting to remove the pilot workdir /s/ls2/users/poyda/testpilot/Panda_Pilot_2751_1430304155 now!
+O29 Apr 10:45:29| pUtil.py    |chdir       :2876| chdir to: /s/ls2/users/poyda/testpilot
+O29 Apr 10:45:29| pUtil.py    |chdir       :2878| current dir: /s/ls2/users/poyda/testpilot
+O29 Apr 10:45:29| pUtil.py    |cleanup     :4195| Pilot cleanup has finished
+O29 Apr 10:45:39| pUtil.py    |cleanup     :4208| Done, using system exit to quit

@@ -10,7 +10,6 @@ from pUtil import tolog, writeToFileWithStatus   # Logging method that sends tex
 
 # Standard python modules
 import os
-import re
 import sys
 import time
 import stat
@@ -992,7 +991,7 @@ class RunJobEvent(RunJob):
 
         # convert the preliminary metadata-<jobId>.xml file to OutputFiles-<jobId>.xml for NG and for CERNVM
         # note: for CERNVM this is only really needed when CoPilot is used
-        if os.environ.has_key('Nordugrid_pilot') or sitename == 'CERNVM':
+        if region == 'Nordugrid' or sitename == 'CERNVM':
             if RunJobUtilities.convertMetadata4NG(os.path.join(self.__job.workdir, self.__job.outputFilesXML), _fname, outsDict, dsname, datasetDict):
                 tolog("Metadata has been converted to NG/CERNVM format")
             else:
@@ -1293,8 +1292,13 @@ class RunJobEvent(RunJob):
                                     # Note: the rec pilot must update the server appropriately
 
                                 # Time to update the server
-                                msg = updateEventRange(event_range_id, self.__eventRange_dictionary[event_range_id], status=status)
-
+                                tolog("Transfer %s" % (status))
+                                try:
+                                    msg = updateEventRange(event_range_id, self.__eventRange_dictionary[event_range_id], status=status)
+                                except Exception, e:
+                                    tolog("!!WARNING!!2233!! updateEventRange threw an exception: %s" % (e))
+                                else:
+                                    tolog("updateEventRange has returned")
                         else:
                             tolog("!!WARNING!!1112!! Failed to create file metadata: %d, %s" % (ec, pilotErrorDiag))
             time.sleep(1)
@@ -1318,18 +1322,6 @@ class RunJobEvent(RunJob):
                     size, buf = self.__message_server.receive()
                 tolog("Received new message: %s" % (buf))
 
-#                if not "Ready for" in buf:
-#                    if self.__eventRangeID_dictionary.keys():
-#                        try:
-#                            keys = self.__eventRangeID_dictionary.keys()
-#                            key = keys[0]
-#                            tolog("Faking error for range = %s" % (key))
-#                            buf = "ERR_TE_RANGE %s: Range contains wrong positional number 5001" % (key)
-#                        except Exception,e:
-#                            tolog("No event ranges yet:%s" % (e))
-#                    #buf = "ERR_TE_FATAL Range-2: CURL curl_easy_perform() failed! Couldn't resolve host name"
-#                    #buf = "ERR_TE_FATAL 5211313-2452346274-2058479689-3-8: URL No tokens for GUID 00224B03-8005-E849-BCD5-D8F8F764B630"
-
                 # Interpret the message and take the appropriate action
                 if "Ready for events" in buf:
                     buf = ""
@@ -1352,47 +1344,10 @@ class RunJobEvent(RunJob):
                         self.__stageout_queue.append(path)
                         tolog("File %s has been added to the stage-out queue (length = %d)" % (path, len(self.__stageout_queue)))
 
-                elif buf.startswith('ERR'):
-                    tolog("Received an error message: %s" % (buf))
-
-                    # Extract the error acronym and the error diagnostics
-                    error_acronym, event_range_id, error_diagnostics = self.extractErrorMessage(buf)
-                    if event_range_id != "":
-                        tolog("!!WARNING!!2144!! Extracted error acronym %s and error diagnostics \'%s\' for event range %s" % (error_acronym, error_diagnostics, event_range_id))
-
-                        # Time to update the server
-                        msg = updateEventRange(event_range_id, [], status='Failed')
-                        if msg != "":
-                            tolog("!!WARNING!!2145!! Problem with updating event range: %s" % (msg))
-                        else:
-                            tolog("Updated server for failed event range")
-
-                        # Was the error fatal? If so, the pilot should abort
-                        if "FATAL" in error_acronym:
-                            tolog("!!WARNING!!2146!! A FATAL error was encountered, prepare to finish")
-
-                            # Fail the job
-                            if error_acronym == "ERR_TE_FATAL" and "URL Error" in error_diagnostics:
-                                error_code = self.__error.ERR_TEBADURL
-                            elif error_acronym == "ERR_TE_FATAL" and "resolve host name" in error_diagnostics:
-                                error_code = self.__error.ERR_TEHOSTNAME
-                            elif error_acronym == "ERR_TE_FATAL" and "Invalid GUID length" in error_diagnostics:
-                                error_code = self.__error.ERR_TEINVALIDGUID
-                            elif error_acronym == "ERR_TE_FATAL" and "No tokens for GUID" in error_diagnostics:
-                                error_code = self.__error.ERR_TEWRONGGUID
-                            elif error_acronym == "ERR_TE_FATAL":
-                                error_code = self.__error.ERR_TEFATAL
-                            else:
-                                error_code = self.__error.ERR_ESFATAL
-                            result = ["failed", 0, error_code]
-                            tolog("Setting error code: %d" % (error_code))
-                            self.setJobResult(result)
-
-                            # ..
-
-                    else:
-                        tolog("!!WARNING!!2245!! Extracted error acronym %s and error diagnostics \'%s\' (event range could not be extracted - cannot update server)" % (error_acronym, error_diagnostics))
-
+                        #cmd = "ls -lF %s" % (path)
+                        #tolog("zxzxzx Executing command: %s" % (cmd))
+                        #out = commands.getoutput(cmd)
+                        #tolog("\n%s" % (out))
                 else:
                     tolog("Pilot received message:%s" % buf)
             except Exception, e:
@@ -1400,72 +1355,6 @@ class RunJobEvent(RunJob):
             time.sleep(1)
 
         tolog("listener has finished")
-
-    def extractErrorMessage(self, msg):
-        """ Extract the error message from the AthenaMP message """
-
-        # msg = 'ERR_ATHENAMP_PROCESS 130-2068634812-21368-1-4: Failed to process event range'
-        # -> error_acronym = 'ERR_ATHENAMP_PROCESS'
-        #    event_range_id = '130-2068634812-21368-1-4'
-        #    error_diagnostics = 'Failed to process event range')
-        #
-        # msg = ERR_ATHENAMP_PARSE "u'LFN': u'mu_E50_eta0-25.evgen.pool.root',u'eventRangeID': u'130-2068634812-21368-1-4', u'startEvent': 5, u'GUID': u'74DFB3ED-DAA7-E011-8954-001E4F3D9CB1'": Wrong format
-        # -> error_acronym = 'ERR_ATHENAMP_PARSE'
-        #    event_range = "u'LFN': u'mu_E50_eta0-25.evgen.pool.root',u'eventRangeID': u'130-2068634812-21368-1-4', ..
-        #    error_diagnostics = 'Wrong format'
-        #    -> event_range_id = '130-2068634812-21368-1-4' (if possible to extract)
-
-        error_acronym = ""
-        event_range_id = ""
-        error_diagnostics = ""
-
-        # Special error acronym
-        if "ERR_ATHENAMP_PARSE" in msg:
-            # Note: the event range will be in the msg and not the event range id only 
-            pattern = re.compile(r"(ERR\_[A-Z\_]+)\ (.+)\:\ ?(.+)")
-            found = re.findall(pattern, msg)
-            if len(found) > 0:
-                try:
-                    error_acronym = found[0][0]
-                    event_range = found[0][1] # Note: not the event range id only, but the full event range
-                    error_diagnostics = found[0][2]
-                except Exception, e:
-                    tolog("!!WARNING!!2211!! Failed to extract AthenaMP message: %s" % (e))
-                    error_acronym = "EXTRACTION_FAILURE"
-                    error_diagnostics = e
-                else:
-                    # Can the event range id be extracted?
-                    if "eventRangeID" in event_range:
-                        pattern = re.compile(r"eventRangeID\'\:\ ?.?\'([0-9\-]+)")
-                        found = re.findall(pattern, event_range)
-                        if len(found) > 0:
-                            try:
-                                event_range_id = found[0]
-                            except Exception, e:
-                                tolog("!!WARNING!!2212!! Failed to extract event_range_id: %s" % (e))
-                            else:
-                                tolog("Extracted event_range_id: %s" % (event_range_id))
-                    else:
-                        tolog("!!WARNING!!2213!1 event_range_id not found in event_range: %s" % (event_range))
-        else:
-            # General error acronym
-            pattern = re.compile(r"(ERR\_[A-Z\_]+)\ ([0-9\-]+)\:\ ?(.+)")
-            found = re.findall(pattern, msg)
-            if len(found) > 0:
-                try:
-                    error_acronym = found[0][0]
-                    event_range_id = found[0][1]
-                    error_diagnostics = found[0][2]
-                except Exception, e:
-                    tolog("!!WARNING!!2211!! Failed to extract AthenaMP message: %s" % (e))
-                    error_acronym = "EXTRACTION_FAILURE"
-                    error_diagnostics = e
-            else:
-                tolog("!!WARNING!!2212!! Failed to extract AthenaMP message")
-                error_acronym = "EXTRACTION_FAILURE"
-                error_diagnostics = msg
-
-        return error_acronym, event_range_id, error_diagnostics
 
     def correctFileName(self, path, event_range_id):
         """ Correct the output file name if necessary """
@@ -1566,7 +1455,14 @@ class RunJobEvent(RunJob):
         cmd = "%s TokenExtractor %s" % (setup, options)
 
         # Execute and return the TokenExtractor subprocess object
-        return self.getSubprocess(thisExperiment, cmd, stdout=stdout, stderr=stderr)
+        return thisExperiment.getSubprocess(cmd, stdout=stdout, stderr=stderr)
+
+    def getAthenaMPProcess(self, thisExperiment, runCommand, stdout=None, stderr=None):
+        """ Execute AthenaMP """
+
+        # Execute and return the AthenaMP subprocess object
+        #return thisExperiment.getSubprocess(thisExperiment.getJobExecutionCommand4EventService(pilot_initdir)) # move method to EventService class
+        return thisExperiment.getSubprocess(runCommand, stdout=stdout, stderr=stderr)
 
     def createMessageServer(self):
         """ Create the message server socket object """
@@ -1820,6 +1716,27 @@ class RunJobEvent(RunJob):
 
         return message
 
+    def getStdoutStderrFileObjects(self, stdoutName="stdout.txt", stderrName="stderr.txt"):
+        """ Create stdout/err file objects """
+
+        try:
+            stdout = open(os.path.join(os.getcwd(), stdoutName), "w")
+            stderr = open(os.path.join(os.getcwd(), stderrName), "w")
+        except Exception, e:
+            tolog("!!WARNING!!3330!! Failed to open stdout/err files: %s" % (e))
+            stdout = None
+            stderr = None
+
+        return stdout, stderr
+
+    def testES(self):
+
+        tolog("Note: queuedata.json must be available")
+        os.environ['PilotHomeDir'] = os.getcwd()
+        thisExperiment = getExperiment("ATLAS")
+        message = self.downloadEventRanges()
+        #createPoolFileCatalogFromMessage(message, thisExperiment)
+
     def extractEventRanges(self, message):
         """ Extract all event ranges from the server message """
 
@@ -1970,6 +1887,7 @@ if __name__ == "__main__":
         # get the event service object using the experiment name (since it can be experiment specific)
         thisEventService = getEventService(runJob.getExperiment())
 
+        region = readpar('region')
         JR = JobRecovery()
         try:
             job = Job.Job()
@@ -2213,7 +2131,7 @@ if __name__ == "__main__":
         #tolog("Replaced '%s' with '%s' in the run command" % (inputFile, turl))
 
         # Create and start the AthenaMP process
-        athenaMPProcess = runJob.getSubprocess(thisExperiment, runCommandList[0], stdout=athenamp_stdout, stderr=athenamp_stderr)
+        athenaMPProcess = runJob.getAthenaMPProcess(thisExperiment, runCommandList[0], stdout=athenamp_stdout, stderr=athenamp_stderr)
 
         # Main loop ........................................................................................
 

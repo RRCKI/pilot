@@ -27,10 +27,6 @@ from WatchDog import WatchDog
 from Monitor import Monitor
 import subprocess
 
-try:
-    from rucio.client import Client
-except Exception, e:
-    print "!!WARNING!!0000!! Exception caught:", e
 
 # Initialize the configuration singleton
 import environment
@@ -300,11 +296,6 @@ def argParser(argv):
 
         elif o == "-F": 
             env['experiment'] = a
-
-            # Special case for Nordugrid: define env variable already here
-            if "Nordugrid" in a:
-                os.environ['Nordugrid_pilot'] = ""
-                print "Created environment variable \'Nordugrid_pilot\'"
 
         elif o == "-G": 
             try:
