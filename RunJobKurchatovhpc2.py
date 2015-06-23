@@ -302,6 +302,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
     
         # special setup command. should be placed in queue defenition (or job defenition) ?
         setup_commands = ['source /adm/scripts/grid/emi-wn-cvmfs-environment.sh']
+        setup_commands = []
         
         #setup_commands = ['source $MODULESHOME/init/bash',
         #                  'export LD_LIBRARY_PATH=$PROJWORK/csc108/panitkin/AtlasReleases/18.9.0/ldpatch:$LD_LIBRARY_PATH',

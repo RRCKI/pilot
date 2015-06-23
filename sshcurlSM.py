@@ -77,8 +77,8 @@ class sshcurlSiteMover(SiteMover.SiteMover):
 
             obj=json.loads(o)
             if csumtype=='adler32':
-                return 0, '', obj.fsize, obj.adler32
-            return 0, '', obj.fsize, obj.md5sum
+                return 0, '', obj['fsize'], obj['adler32']
+            return 0, '',obj['fsize'], obj['md5sum']
         epic.ssh('python ~/bin/fileinfos.py %s' %(fname))
         pilotErrorDiag=''
         arr=epic.output.split("\n")
@@ -139,7 +139,7 @@ class sshcurlSiteMover(SiteMover.SiteMover):
         if path == '': path = './'
         fullname = os.path.join(path, lfn)
 
-        epic.ssh('mkdir -p %s;%s %s -o %s %s/%s/fetch' %(path,curl,curl_args,getfile,server,fullname))
+        epic.ssh('mkdir -p %s;%s %s -o %s %s/%s/fetch' %(path,curl,curl_args,fullname,server,getfile))
         o=epic.output
         s=epic.exit_code
         tolog("Command finished: %s" % ( o))

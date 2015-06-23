@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sshcurlSM.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SiteMoverFarm.py" afterPath="$PROJECT_DIR$/SiteMoverFarm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queuedata.json" afterPath="$PROJECT_DIR$/queuedata.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runScript" afterPath="$PROJECT_DIR$/runScript" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sshmvSM.py" afterPath="$PROJECT_DIR$/sshmvSM.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sshcurlSM.py" afterPath="$PROJECT_DIR$/sshcurlSM.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pilot_HPC_KI.iws" />
@@ -158,14 +154,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7950" max-vertical-offset="14484">
-              <caret line="474" column="0" selection-start-line="474" selection-start-column="0" selection-end-line="474" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.15154749" vertical-offset="5208" max-vertical-offset="14501">
+              <caret line="304" column="27" selection-start-line="304" selection-start-column="27" selection-end-line="304" selection-end-column="27" />
               <folding>
-                <marker date="1433856784337" expanded="true" signature="10214:10255" placeholder="UPDATE pilot..." />
-                <marker date="1433856784337" expanded="true" signature="18499:18573" placeholder="INSERT INTO ..." />
+                <marker date="1435055372508" expanded="true" signature="10214:10255" placeholder="UPDATE pilot..." />
+                <marker date="1435055372508" expanded="true" signature="18527:18601" placeholder="INSERT INTO ..." />
               </folding>
             </state>
           </provider>
@@ -227,11 +223,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sshcurlSM.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sshcurlSM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sshcurlSM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27214515" vertical-offset="0" max-vertical-offset="3111">
-              <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="3111">
+              <caret line="136" column="27" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -276,11 +272,11 @@
         <option value="$PROJECT_DIR$/pUtil.py" />
         <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
         <option value="$PROJECT_DIR$/epic.py" />
-        <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
         <option value="$PROJECT_DIR$/sshmvSM.py" />
         <option value="$PROJECT_DIR$/SiteMoverFarm.py" />
-        <option value="$PROJECT_DIR$/sshcurlSM.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/sshcurlSM.py" />
+        <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
       </list>
     </option>
   </component>
@@ -562,6 +558,13 @@
       <option name="number" value="Default" />
       <updated>1423562386906</updated>
     </task>
+    <task id="LOCAL-00001" summary="Cloud storage">
+      <created>1435053395104</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1435053395104</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -571,6 +574,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23484014" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -605,6 +609,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Cloud storage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cloud storage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -615,7 +621,7 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -915,17 +921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7950" max-vertical-offset="14484">
-          <caret line="474" column="0" selection-start-line="474" selection-start-column="0" selection-end-line="474" selection-end-column="0" />
-          <folding>
-            <marker date="1433856784337" expanded="true" signature="10214:10255" placeholder="UPDATE pilot..." />
-            <marker date="1433856784337" expanded="true" signature="18499:18573" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/epic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="623" max-vertical-offset="5423">
@@ -952,6 +947,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6830308" vertical-offset="2514" max-vertical-offset="3451">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -959,14 +955,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31056562" vertical-offset="1307" max-vertical-offset="2703">
           <caret line="94" column="45" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RunJobUtilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4907" max-vertical-offset="13770">
-          <caret line="313" column="4" selection-start-line="313" selection-start-column="4" selection-end-line="313" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="e#0#13#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1113,9 +1104,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sshcurlSM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27214515" vertical-offset="0" max-vertical-offset="3111">
-          <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="3111">
+          <caret line="136" column="27" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4907" max-vertical-offset="13770">
+          <caret line="313" column="4" selection-start-line="313" selection-start-column="4" selection-end-line="313" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.15154749" vertical-offset="5208" max-vertical-offset="14501">
+          <caret line="304" column="27" selection-start-line="304" selection-start-column="27" selection-end-line="304" selection-end-column="27" />
+          <folding>
+            <marker date="1435055372508" expanded="true" signature="10214:10255" placeholder="UPDATE pilot..." />
+            <marker date="1435055372508" expanded="true" signature="18527:18601" placeholder="INSERT INTO ..." />
+          </folding>
         </state>
       </provider>
     </entry>
