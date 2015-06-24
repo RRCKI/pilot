@@ -254,7 +254,7 @@ class RemoteMonitorStarter(object):
 
 
 if __name__ == "__main__":
-    jid=epic.slurm('ls -la;sleep 30;hostname>&2;exit 23',nonblocking=True)
+    jid=epic.slurm('ls -la;sleep 30;hostname>&2',nonblocking=True,walltime=100)
     print("SLURM JID=%d"%jid)
     epic.slurm_wait_queued(jid)
     print("started")

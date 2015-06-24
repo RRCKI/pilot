@@ -164,19 +164,29 @@ def ssh(cmd):
 class JobInfo(object):
     def __init__(self,scontrol):
         self.__str=scontrol
-        self.state=self.__state()
+        if self.wrongId():
+            self.state='WRONG_ID'
+        else:
+            self.state=self.__state()
+
+    def wrongId(self):
+        if 'Invalid job id' in self.__str:
+            return True
+        return False
 
     def se(self,needle):
         return re.search('(?<=\s%s=)\S*'%needle,self.__str).group(0)
 
     def ec(self):
+        if self.wrongId():
+            return -1
         return long(self.se('ExitCode').split(':')[0])
 
     def __state(self):
         return self.se('JobState')
 
     def state_is_final(state):
-        if state in ['CANCELLED','COMPLETED','FAILED','NODE_FAIL','PREEMPTED','TIMEOUT']:
+        if state in ['CANCELLED','COMPLETED','FAILED','NODE_FAIL','PREEMPTED','TIMEOUT','WRONG_ID']:
             return True
         return False
     state_is_final = staticmethod(state_is_final)
@@ -220,6 +230,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False): # 10000 min ~= 1 wee
     __jobs[job.jid]=job
 
     slurm_status(job.jid)
+    if job.info.is_final():
+        slurm_finalize(job.jid)
 
     if not nonblocking:
         return slurm_wait(job.jid)
@@ -260,7 +272,8 @@ def slurm_wait_queued(jid,wait_time=False):
     sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
 
-    if not job.info.is_final():
+    if not job.info.is_final() and not job.waiting:
+        pUtil.tolog("Waiting in queue")
         while True:
             e,o=commands.getstatusoutput(sshcmd)
             jd=JobInfo(o)
@@ -301,16 +314,23 @@ def slurm_finalize(jid):
     pUtil.tolog("Job ended with state %s"%job.info.state)
     pUtil.tolog("Exit code: %s"%job.info.ec())
 
-    job.output=read(job.out_fn,True)
-    job.error=read(job.err_fn,True)
-    pUtil.tolog("Output file:\n"+\
-                "-----------------------------------------------------------------------------------------------------\n"+\
-                job.output+\
-                "\n-----------------------------------------------------------------------------------------------------")
-    pUtil.tolog("Error file:\n"+\
-                "-----------------------------------------------------------------------------------------------------\n"+\
-                job.error+\
-                "\n-----------------------------------------------------------------------------------------------------")
+    if job.info.state=='WRONG_ID':
+        job.output=''
+        job.error='Wrong SLURM job ID returned'
+        delete(job.out_fn)
+        delete(job.err_fn)
+    else:
+
+        job.output=read(job.out_fn,True)
+        job.error=read(job.err_fn,True)
+        pUtil.tolog("Output file:\n"+\
+                    "-----------------------------------------------------------------------------------------------------\n"+\
+                    job.output+\
+                    "\n-----------------------------------------------------------------------------------------------------")
+        pUtil.tolog("Error file:\n"+\
+                    "-----------------------------------------------------------------------------------------------------\n"+\
+                    job.error+\
+                    "\n-----------------------------------------------------------------------------------------------------")
 
     delete(job.cmd_file)
 
@@ -330,6 +350,7 @@ def slurm_wait(jid):
     sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
     if not job.info.is_final():
+        pUtil.tolog("Waiting for job to end")
         while True:
             e,o=commands.getstatusoutput(sshcmd)
             jd=JobInfo(o)
