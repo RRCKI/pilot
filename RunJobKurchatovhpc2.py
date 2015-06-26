@@ -208,12 +208,13 @@ class RunJobKurchatovhpc2(RunJobHPC):
         #
         
         #cmd = 'showbf --blocking -p %s' % partition
-        cmd = ('ssh -i %s -l %s %s sinfo -p %s -t idle -o %%D -h' % (self.ssh_keypath,self.ssh_user,self.ssh_server,partition)) #where partition = 'bamboo-1w' for KI
+        cmd = ('sinfo -p %s -t idle -o %%D -h' % (epic.queue)) #where partition = 'bamboo-1w' for KI
 
-        res_tuple = commands.getstatusoutput(cmd) #??
+        epic.ssh(cmd)
+
         showbf_str = ""
-        if res_tuple[0] == 0:
-            showbf_str = res_tuple[1]
+        if epic.exit_code == 0:
+            showbf_str = epic.output
     
         res = {}
         
@@ -301,7 +302,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
         res_tuple = (0, 'Undefined')
     
         # special setup command. should be placed in queue defenition (or job defenition) ?
-        setup_commands = ['source /adm/scripts/grid/emi-wn-cvmfs-environment.sh']
+        # setup_commands = ['source /adm/scripts/grid/emi-wn-cvmfs-environment.sh']
         setup_commands = []
         
         #setup_commands = ['source $MODULESHOME/init/bash',

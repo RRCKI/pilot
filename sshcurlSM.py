@@ -142,7 +142,7 @@ class sshcurlSiteMover(SiteMover.SiteMover):
         epic.ssh('mkdir -p %s;%s %s -o %s %s/%s/fetch' %(path,curl,curl_args,fullname,server,getfile))
         o=epic.output
         s=epic.exit_code
-        tolog("Command finished: %s" % ( o))
+        tolog('Returned status: Status=%d Output=%s' % (s, str(o)))
 
         if s != 0:
             pilotErrorDiag = "Error copying the file: %d, %s" % (s, o)
@@ -165,7 +165,7 @@ class sshcurlSiteMover(SiteMover.SiteMover):
         error = PilotErrors()
         pilotErrorDiag = ""
 
-        cmd='%s %s -d %s %s/%s/save' %(curl,curl_args,source,server,putfile)
+        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" --data-binary @%s %s/%s/save' %(curl,curl_args,source,server,putfile)
 
         if '.log.' in source:
             ec,ped,fsize,fchecksum=SiteMover.SiteMover.getLocalFileInfo(source,'adler32')
@@ -177,6 +177,9 @@ class sshcurlSiteMover(SiteMover.SiteMover):
             o=epic.output
             ec=epic.exit_code
 
+
+        tolog("Curl command sent: %s" % (cmd))
+        tolog('Returned status: Status=%d Output=%s' % (ec, str(o)))
         if ec != 0:
             tolog("!!WARNING!!2990!! Command failed: %s" % (cmd))
             tolog('!!WARNING!!2990!! put_data failed: Status=%d Output=%s' % (ec, str(o)))
