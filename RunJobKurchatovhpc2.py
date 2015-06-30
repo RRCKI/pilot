@@ -457,9 +457,9 @@ class RunJobKurchatovhpc2(RunJobHPC):
 	
     
     #poyda
-    def create_record(self, pid, status, cpu=0, mem=0, hd=0):
+    def create_record(self, pid, status, cpu=0, mem=0, hdd=0):
         try:
-            sql = "INSERT INTO pilots (id, status, cpu, mem, hdd) VALUES (%d, %s, %d, %d, %d)"%(pid, status, cpu, mem, hdd)
+            sql = "INSERT INTO pilots (id, status, cpu, mem, hdd, server) VALUES (%d, '%s', %d, %d, %d, '%s')"%(pid, status, cpu, mem, hdd, epic.ssh_server)
             conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
             cur = conn.cursor()
             cur.execute(sql, {})

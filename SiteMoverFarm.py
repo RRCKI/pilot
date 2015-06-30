@@ -28,6 +28,7 @@ from sshlcgcpSiteMover import sshlcgcpSiteMover             # HPC KI
 from sshlcgcp2SM import sshlcgcp2SiteMover                  # HPC KI
 from sshmvSM import sshmvSiteMover                  # HPC KI Localv
 from sshcurlSM import sshcurlSiteMover                  # HPC KI Localc
+from slurmcurlSM import slurmcurlSiteMover                  # HPC KI Localc
 
 mover_selector = {
     SiteMover.copyCommand : SiteMover,
@@ -56,7 +57,8 @@ mover_selector = {
     sshlcgcpSiteMover.copyCommand : sshlcgcpSiteMover,
     sshlcgcp2SiteMover.copyCommand : sshlcgcp2SiteMover,
     sshmvSiteMover.copyCommand : sshmvSiteMover,
-    sshcurlSiteMover.copyCommand : sshcurlSiteMover
+    sshcurlSiteMover.copyCommand : sshcurlSiteMover,
+    slurmcurlSiteMover.copyCommand : slurmcurlSiteMover
     }
 
 def getSiteMover(sitemover, setup_file='', *args, **kwrds):
