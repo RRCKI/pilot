@@ -142,6 +142,7 @@ class slurmcurlSiteMover(SiteMover.SiteMover):
         epic.slurm('mkdir -p %s;%s %s -o %s %s/%s/fetch' %(path,curl,curl_args,fullname,server,getfile),walltime=10)
         o=epic.output
         s=epic.exit_code
+
         tolog('Returned status: Status=%d Output=%s' % (s, str(o)))
 
         if s != 0:

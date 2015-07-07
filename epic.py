@@ -208,9 +208,9 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False): # 10000 min ~= 1 wee
     cmd = '#!/bin/sh\n#SBATCH -o '+pipes.quote(job.out_fn)+'\n'+\
           '#SBATCH -e '+pipes.quote(job.err_fn)+'\n'+\
           '#SBATCH -D '+pipes.quote(ssh_remote_path)+'\n'+\
-          ('#SBATCH -n %d\n'%cpucount)+\
+          ('#SBATCH -n %d\n'%long(cpucount))+\
           '#SBATCH -p '+pipes.quote(queue)+'\n'+\
-          ('#SBATCH -t %02d:%02d:00\n'%(hours,minutes))+\
+          ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes)))+\
           cmd
     write(job.cmd_file,cmd)
 

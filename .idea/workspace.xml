@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/slurmcurlSM.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SiteMoverFarm.py" afterPath="$PROJECT_DIR$/SiteMoverFarm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/epic.py" afterPath="$PROJECT_DIR$/epic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/slurmcurlSM.py" afterPath="$PROJECT_DIR$/slurmcurlSM.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pilot_HPC_KI.iws" />
@@ -167,13 +167,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3673" max-vertical-offset="14518">
-              <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.42369264" vertical-offset="3785" max-vertical-offset="14620">
+              <caret line="252" column="50" selection-start-line="252" selection-start-column="50" selection-end-line="252" selection-end-column="50" />
               <folding>
-                <marker date="1435653138000" expanded="true" signature="10119:10160" placeholder="UPDATE pilot..." />
+                <marker date="1436274512000" expanded="true" signature="10140:10181" placeholder="UPDATE pilot..." />
+                <marker date="1436274512000" expanded="true" signature="18794:18884" placeholder="INSERT INTO ..." />
               </folding>
             </state>
           </provider>
@@ -182,8 +183,8 @@
       <file leaf-file-name="epic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/epic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1225" max-vertical-offset="6273">
-              <caret line="326" column="127" selection-start-line="326" selection-start-column="127" selection-end-line="326" selection-end-column="127" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="6273">
+              <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
               <folding>
                 <element signature="e#254#265#0" expanded="true" />
                 <element signature="e#1285#1511#0" expanded="false" />
@@ -192,11 +193,11 @@
                 <element signature="e#2560#2805#0" expanded="false" />
                 <element signature="e#2846#3250#0" expanded="false" />
                 <element signature="e#3274#3432#0" expanded="false" />
-                <element signature="e#11725#12250#0" expanded="false" />
-                <element signature="e#13277#13549#0" expanded="false" />
-                <element signature="e#13592#14056#0" expanded="false" />
-                <element signature="e#14095#14352#0" expanded="false" />
-                <element signature="e#14396#14726#0" expanded="false" />
+                <element signature="e#11743#12268#0" expanded="false" />
+                <element signature="e#13295#13567#0" expanded="false" />
+                <element signature="e#13610#14074#0" expanded="false" />
+                <element signature="e#14113#14370#0" expanded="false" />
+                <element signature="e#14414#14744#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -244,11 +245,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="slurmcurlSM.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="slurmcurlSM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/slurmcurlSM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2700107" vertical-offset="0" max-vertical-offset="2312">
-              <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="2329">
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding>
                 <element signature="e#1880#3982#0" expanded="false" />
               </folding>
@@ -256,12 +257,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pUtil.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pUtil.py">
+      <file leaf-file-name="PandaServerClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PandaServerClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="33816" max-vertical-offset="75497">
-              <caret line="2031" column="44" selection-start-line="2031" selection-start-column="12" selection-end-line="2031" selection-end-column="47" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="14535">
+              <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -286,11 +289,11 @@
         <option value="$PROJECT_DIR$/sshmvSM.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
-        <option value="$PROJECT_DIR$/epic.py" />
         <option value="$PROJECT_DIR$/sshcurlSM.py" />
-        <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
         <option value="$PROJECT_DIR$/SiteMoverFarm.py" />
         <option value="$PROJECT_DIR$/slurmcurlSM.py" />
+        <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
+        <option value="$PROJECT_DIR$/epic.py" />
       </list>
     </option>
   </component>
@@ -596,7 +599,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435324267355</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Slurm shim created">
+      <created>1435663562269</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1435663562269</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -604,7 +613,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24862184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25137818" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -645,7 +654,8 @@
     <MESSAGE value="Cloud storage fixes, cloud setup fix" />
     <MESSAGE value="Epic fail obtaining wrong ID fixed" />
     <MESSAGE value="backfill fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="backfill fixed" />
+    <MESSAGE value="Slurm shim created" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slurm shim created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -661,13 +671,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RunJobEvent.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="437" max-vertical-offset="40817">
-          <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RunJobEvent.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="437" max-vertical-offset="40817">
@@ -941,7 +944,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
           <caret line="4" column="64" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -983,37 +985,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="11016" max-vertical-offset="20213">
           <caret line="677" column="33" selection-start-line="677" selection-start-column="33" selection-end-line="677" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/epic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4053" max-vertical-offset="5780">
-          <caret line="326" column="127" selection-start-line="326" selection-start-column="127" selection-end-line="326" selection-end-column="127" />
-          <folding>
-            <element signature="e#254#265#0" expanded="true" />
-            <element signature="e#1285#1511#0" expanded="false" />
-            <element signature="e#1542#1760#0" expanded="false" />
-            <element signature="e#1857#2537#0" expanded="false" />
-            <element signature="e#2560#2805#0" expanded="false" />
-            <element signature="e#2846#3250#0" expanded="false" />
-            <element signature="e#3274#3432#0" expanded="false" />
-            <element signature="e#11725#12250#0" expanded="false" />
-            <element signature="e#13277#13549#0" expanded="false" />
-            <element signature="e#13592#14056#0" expanded="false" />
-            <element signature="e#14095#14352#0" expanded="false" />
-            <element signature="e#14396#14726#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3673" max-vertical-offset="14518">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-          <folding>
-            <marker date="1435653138000" expanded="true" signature="10119:10160" placeholder="UPDATE pilot..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1152,12 +1123,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PandaServerClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="14535">
+          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/slurmcurlSM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2700107" vertical-offset="0" max-vertical-offset="2312">
-          <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="2329">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding>
             <element signature="e#1880#3982#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/epic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="6273">
+          <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+          <folding>
+            <element signature="e#254#265#0" expanded="true" />
+            <element signature="e#1285#1511#0" expanded="false" />
+            <element signature="e#1542#1760#0" expanded="false" />
+            <element signature="e#1857#2537#0" expanded="false" />
+            <element signature="e#2560#2805#0" expanded="false" />
+            <element signature="e#2846#3250#0" expanded="false" />
+            <element signature="e#3274#3432#0" expanded="false" />
+            <element signature="e#11743#12268#0" expanded="false" />
+            <element signature="e#13295#13567#0" expanded="false" />
+            <element signature="e#13610#14074#0" expanded="false" />
+            <element signature="e#14113#14370#0" expanded="false" />
+            <element signature="e#14414#14744#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42369264" vertical-offset="3785" max-vertical-offset="14620">
+          <caret line="252" column="50" selection-start-line="252" selection-start-column="50" selection-end-line="252" selection-end-column="50" />
+          <folding>
+            <marker date="1436274512000" expanded="true" signature="10140:10181" placeholder="UPDATE pilot..." />
+            <marker date="1436274512000" expanded="true" signature="18794:18884" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>

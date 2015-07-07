@@ -263,7 +263,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
             if f in job.outFiles:
                 touch(os.path.join(job.workdir,f))
             #if (name in job.stdout) or (name in job.stderr) or (name.endswith(".xml")):
-            if (f in job.stderr) or (f.endswith(".xml")):
+            if (f in job.stderr) or (f in job.stdout) or (f.endswith(".xml")):
                 epic.fetch_file(f,os.path.join(job.workdir,f))
         return
 
@@ -299,7 +299,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
         """ execute the payload """
         
         t0 = os.times() 
-        res_tuple = (0, 'Undefined')
+        res_tuple = (-1, 'Undefined')
     
         # special setup command. should be placed in queue defenition (or job defenition) ?
         # setup_commands = ['source /adm/scripts/grid/emi-wn-cvmfs-environment.sh']
@@ -322,11 +322,16 @@ class RunJobKurchatovhpc2(RunJobHPC):
         getstatusoutput_was_interrupted = False
         number_of_jobs = len(runCommandList)
         for cmd in runCommandList:
-            nodes, walltime, d = self.get_hpc_resources(self.partition_comp, self.max_nodes, self.nodes, self.min_walltime)
-            #cpu_number = self.cpu_number_per_node * nodes
-	    cpu_number = 1 #temporary
-            
-            tolog("Launch parameters \nWalltime limit         : %s (min)\nRequested nodes (cores): %s (%s)" % (walltime,nodes,cpu_number))
+            nodes, walltime, d = self.get_hpc_resources(self.partition_comp, self.max_nodes,job.coreCount, self.min_walltime)
+            # #cpu_number = self.cpu_number_per_node * nodes
+            # if nodes>=job.coreCount:
+            #     cpu_number = job.coreCount
+            # else:
+            #     tolog("Job failed: no resources availible: availible %d of %d cores" % (nodes, job.coreCount))
+            #     break
+            #
+            # tolog("Launch parameters \nWalltime limit         : %s (min)\nRequested nodes (cores): %s (%s)" % (walltime,nodes,cpu_number))
+            cpu_number = job.coreCount
             
             current_job_number += 1
             # add the full job command to the job_setup.sh file
@@ -345,6 +350,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
             thisExperiment.updateJobSetupScript(job.workdir, to_script=to_script)
             epic.cd(job.workdir)
             self.putFilesRemote_SLURM()
+            tolog("cpu_number: %s|walltime: %s"%(str(cpu_number),str(walltime)))
             jid=epic.slurm(to_script,cpu_number,walltime,True)
             tolog("Local Job ID: %s" % jid)
             rt = RunJobUtilities.updatePilotServer(job, self.getPilotServer(), self.getPilotPort())
