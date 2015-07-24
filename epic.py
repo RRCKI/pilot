@@ -21,18 +21,19 @@ import glob
 import time
 import csv
 import re
+import hpcconf
 
 saga_context = None
 saga_session = None
 
-queue="pledged"
+queue=hpcconf.queue
 
-ssh_user="apfc"
-ssh_pass=""
-ssh_keypath="/home/apf/.ssh/apfc_rsa"
-ssh_server="192.168.23.71"
-ssh_remote_home="/home/apfc"
-ssh_remote_temp="/tmp"
+ssh_user=hpcconf.ssh.user
+ssh_pass=hpcconf.ssh.passwd
+ssh_keypath=hpcconf.ssh.keypath
+ssh_server=hpcconf.ssh.server
+ssh_remote_home=hpcconf.ssh.remote_home
+ssh_remote_temp=hpcconf.ssh.remote_temp
 ssh_remote_path=None
 
 __jobs={}

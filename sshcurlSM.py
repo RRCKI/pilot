@@ -17,12 +17,8 @@ import pipes
 import Configuration
 from config import config_sm
 import json
+import hpcconf
 
-prefixpath='/data/pilots'
-cloudprefix='/httpcloud'
-curl='curl'
-curl_args='--silent --show-error --connect-timeout 100 --max-time 120 --insecure --compressed'
-server='https://vcloud23.grid.kiae.ru:8060/api/file'
 ARCH_DEFAULT = config_sm.ARCH_DEFAULT
 CMD_CHECKSUM = config_sm.COMMAND_MD5
 
@@ -49,8 +45,7 @@ class sshcurlSiteMover(SiteMover.SiteMover):
     isNewLCGVersion = staticmethod(isNewLCGVersion)
 
     def isCloud(file):
-        global cloudprefix
-        return os.path.commonprefix([file,cloudprefix])==cloudprefix
+        return os.path.commonprefix([file,hpcconf.cloudprefix])==hpcconf.cloudprefix
     isCloud = staticmethod(isCloud)
 
     def adler32(filename):
@@ -65,9 +60,8 @@ class sshcurlSiteMover(SiteMover.SiteMover):
     def getLocalFileInfo(fname, csumtype="default", date=None):
         fname=os.path.abspath(fname)
         if sshcurlSiteMover.isCloud(fname):
-            global curl,curl_args,server
-            fname=fname[len(cloudprefix):]
-            cmd=curl+' '+curl_args+' '+server+fname+'/info'
+            fname=fname[len(hpcconf.cloudprefix):]
+            cmd=hpcconf.curl.cmd+' '+hpcconf.curl.args+' '+hpcconf.curl.server+'/file'+fname+'/info'
             tolog('Executing:'+cmd)
             s,o = commands.getstatusoutput(cmd)
             if s!=0:
@@ -117,16 +111,14 @@ class sshcurlSiteMover(SiteMover.SiteMover):
     getLocalFileInfo = staticmethod(getLocalFileInfo)
 
     def getTier3Path(dsname, DN):
-        global prefixpath,cloudprefix
         # return '/s/ls2/users/poyda/data/se'
         dsname = dsname[dsname.find(':')+1:]
-        return os.path.join(cloudprefix,dsname)
+        return os.path.join(hpcconf.cloudprefix,dsname)
     getTier3Path = staticmethod(getTier3Path)
 
 
     def get_data(self, gpfn, lfn, path, fsize=0, fchecksum=0, guid=0, **pdict):
         """ copy input file from SE to local dir """
-        global cloudprefix,curl,curl_args,server
         dsname = pdict.get('dsname', '')
         dsname=dsname[dsname.find(':')+1:]
         print("mylog_fields123: %s, %s, %s"%(gpfn, lfn, path))
@@ -139,7 +131,7 @@ class sshcurlSiteMover(SiteMover.SiteMover):
         if path == '': path = './'
         fullname = os.path.join(path, lfn)
 
-        epic.ssh('mkdir -p %s;%s %s -o %s %s/%s/fetch' %(path,curl,curl_args,fullname,server,getfile))
+        epic.ssh('mkdir -p %s;%s %s -o %s %s/file/%s/fetch' %(path,hpcconf.curl.cmd,hpcconf.curl.args,fullname,hpcconf.curl.server,getfile))
         o=epic.output
         s=epic.exit_code
         tolog('Returned status: Status=%d Output=%s' % (s, str(o)))
@@ -153,7 +145,6 @@ class sshcurlSiteMover(SiteMover.SiteMover):
 
     def put_data(self, source, destination, fsize=0, fchecksum=0, **pdict):
         """ copy output file from disk to local SE """
-        global prefixpath,curl_args,curl,server,cloudprefix
         dsname = pdict.get('dsname', '')
         dsname=dsname[dsname.find(':')+1:]
         print("mylog_fields123: %s, %s"%(source, destination))
@@ -165,7 +156,7 @@ class sshcurlSiteMover(SiteMover.SiteMover):
         error = PilotErrors()
         pilotErrorDiag = ""
 
-        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" --data-binary @%s %s/%s/save' %(curl,curl_args,source,server,putfile)
+        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/save' %(hpcconf.curl.cmd,hpcconf.curl.args,source,hpcconf.curl.server,putfile)
 
         if '.log.' in source:
             ec,ped,fsize,fchecksum=SiteMover.SiteMover.getLocalFileInfo(source,'adler32')

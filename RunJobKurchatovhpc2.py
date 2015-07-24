@@ -366,8 +366,15 @@ class RunJobKurchatovhpc2(RunJobHPC):
             tolog("after fork_job.wait")
             self.getFilesRemote_SLURM()
 
+            f=open(job.stdout,"w+")
+            f.write(epic.output)
+            f.close()
+            f=open(job.stderr,"w+")
+            f.write(epic.error)
+            f.close()
 
-            res_tuple = (epic.exit_code, "Look into: %s" % epic.output)
+
+            res_tuple = (epic.exit_code, "Look into: %s and %s" % (job.stdout ,job.stderr))
  
             if res_tuple[0] == 0:
                 tolog("Job command %d/%d finished" % (current_job_number, number_of_jobs))

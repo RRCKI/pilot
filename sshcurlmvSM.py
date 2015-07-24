@@ -16,15 +16,16 @@ import shlex
 import pipes
 import Configuration
 from config import config_sm
+import json
 import hpcconf
 
 ARCH_DEFAULT = config_sm.ARCH_DEFAULT
 CMD_CHECKSUM = config_sm.COMMAND_MD5
 
-class sshmvSiteMover(SiteMover.SiteMover):
+class sshcurlmvSiteMover(SiteMover.SiteMover):
     """ SiteMover that uses lcg-cp for both get and put """
     # no registration is done
-    copyCommand = "sshmv"
+    copyCommand = "sshcurlmv"
     checksum_command = "adler32"
     has_mkdir = False
     has_df = False
@@ -39,17 +40,39 @@ class sshmvSiteMover(SiteMover.SiteMover):
     def get_timeout(self):
         return self.timeout
 
+    def isCloud(file):
+        return os.path.commonprefix([file,hpcconf.cloudprefix])==hpcconf.cloudprefix
+    isCloud = staticmethod(isCloud)
+
     def isNewLCGVersion(cmd):
         return True
     isNewLCGVersion = staticmethod(isNewLCGVersion)
 
     def adler32(filename):
+        if sshcurlmvSiteMover.isCloud(filename):
+            s,e,fs,sum=sshcurlmvSiteMover.getLocalFileInfo(filename,'adler32')
+            if s!=0: return '00000001'
+            return sum
         epic.ssh('python ~/bin/adler32cmd.py %s' %(filename))
         return epic.output.strip()
     adler32 = staticmethod(adler32)
 
     def getLocalFileInfo(fname, csumtype="default", date=None):
         fname=os.path.abspath(fname)
+        if sshcurlmvSiteMover.isCloud(fname):
+            fname=fname[len(hpcconf.cloudprefix):]
+            cmd=hpcconf.curl.cmd+' '+hpcconf.curl.args+' '+hpcconf.curl.server+'/file'+fname+'/info'
+            tolog('Executing:'+cmd)
+            s,o = commands.getstatusoutput(cmd)
+            if s!=0:
+                pilotErrorDiag = "CURL failed: "+o
+                tolog("!!WARNING!!2999!! %s" % (pilotErrorDiag))
+                return s, pilotErrorDiag, 0, 0
+
+            obj=json.loads(o)
+            if csumtype=='adler32':
+                return 0, '', obj['fsize'], obj['adler32']
+            return 0, '',obj['fsize'], obj['md5sum']
         epic.ssh('python ~/bin/fileinfos.py %s' %(fname))
         pilotErrorDiag=''
         arr=epic.output.split("\n")
@@ -62,7 +85,7 @@ class sshmvSiteMover(SiteMover.SiteMover):
         # get the checksum
         if csumtype == "adler32":
             tolog("Executing adler32() for file: %s" % (fname))
-            fchecksum = sshmvSiteMover.adler32(fname)
+            fchecksum = sshcurlmvSiteMover.adler32(fname)
             if fchecksum == '00000001': # "%08x" % 1L
                 pilotErrorDiag = "Adler32 failed (returned 1)"
                 tolog("!!WARNING!!2999!! %s" % (pilotErrorDiag))
@@ -89,17 +112,38 @@ class sshmvSiteMover(SiteMover.SiteMover):
 
     def getTier3Path(dsname, DN):
         # return '/s/ls2/users/poyda/data/se'
-        dsname = dsname.replace(':','/').replace('//','/')
-        return os.path.join(hpcconf.SEpath,dsname)
+        # dsname = dsname.replace(':','/').replace('//','/')
+        # return os.path.join(hpcconf.SEpath,dsname)
+        dsname = dsname[dsname.find(':')+1:]
+        return os.path.join(hpcconf.cloudprefix,dsname)
     getTier3Path = staticmethod(getTier3Path)
 
 
     def get_data(self, gpfn, lfn, path, fsize=0, fchecksum=0, guid=0, **pdict):
         """ copy input file from SE to local dir """
-        dsname = pdict.get('dsname', '').replace(':','/').replace('//','/')
+        dsname_local_prefix = pdict.get('dsname', '').replace(':','/').replace('//','/')
         print("mylog_fields123: %s, %s, %s"%(gpfn, lfn, path))
 
-        getfile = os.path.join(hpcconf.SEpath,dsname, lfn)
+        dsname_remote_prefix = pdict.get('dsname', '')
+        dsname_remote_prefix=dsname_remote_prefix[dsname_remote_prefix.find(':')+1:]
+        getfile = os.path.join(dsname_remote_prefix, lfn)
+
+        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/makereplica/RRC-KI-HPC' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,getfile)
+
+
+        tolog('Executing:'+cmd)
+        ec,o=commands.getstatusoutput(cmd)
+        obj=json.loads(o)
+        task_id=obj['task_id']
+        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/task/%s/info' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,task_id)
+
+        while True:
+            ec,o=commands.getstatusoutput(cmd)
+            obj=json.loads(o)
+            if obj['data']['status']=="SUCCESS":
+                break
+
+        getfile = os.path.join(hpcconf.SEpath,dsname_local_prefix, lfn)
 
         error = PilotErrors()
         pilotErrorDiag = ""
@@ -146,5 +190,14 @@ class sshmvSiteMover(SiteMover.SiteMover):
             tolog("!!WARNING!!2990!! Command failed: %s" % (cmd))
             tolog('!!WARNING!!2990!! put_data failed: Status=%d Output=%s' % (ec, str(o)))
             return self.put_data_retfail(error.ERR_STAGEOUTFAILED, pilotErrorDiag)
+
+
+        dsname_remote_prefix = pdict.get('dsname', '')
+        dsname_remote_prefix=dsname_remote_prefix[dsname_remote_prefix.find(':')+1:]
+        putfile = os.path.join(dsname_remote_prefix, filename)
+
+        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/makereplica/RRC-KI-CLOUD' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,putfile)
+        ec,o=commands.getstatusoutput(cmd)
+
 
         return 0, pilotErrorDiag, putfile, fsize, fchecksum, ARCH_DEFAULT
