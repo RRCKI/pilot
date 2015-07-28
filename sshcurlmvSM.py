@@ -18,6 +18,7 @@ import Configuration
 from config import config_sm
 import json
 import hpcconf
+import time
 
 ARCH_DEFAULT = config_sm.ARCH_DEFAULT
 CMD_CHECKSUM = config_sm.COMMAND_MD5
@@ -53,7 +54,7 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
             s,e,fs,sum=sshcurlmvSiteMover.getLocalFileInfo(filename,'adler32')
             if s!=0: return '00000001'
             return sum
-        epic.ssh('python ~/bin/adler32cmd.py %s' %(filename))
+        epic.ssh('python %s/adler32cmd.py %s' %(hpcconf.ssh.remote_bin,filename))
         return epic.output.strip()
     adler32 = staticmethod(adler32)
 
@@ -73,7 +74,7 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
             if csumtype=='adler32':
                 return 0, '', obj['fsize'], obj['adler32']
             return 0, '',obj['fsize'], obj['md5sum']
-        epic.ssh('python ~/bin/fileinfos.py %s' %(fname))
+        epic.ssh('python %s/fileinfos.py %s' %(hpcconf.ssh.remote_bin,fname))
         pilotErrorDiag=''
         arr=epic.output.split("\n")
         fsize=arr[1].split(':',1)
@@ -128,20 +129,25 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
         dsname_remote_prefix=dsname_remote_prefix[dsname_remote_prefix.find(':')+1:]
         getfile = os.path.join(dsname_remote_prefix, lfn)
 
-        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/makereplica/RRC-KI-HPC' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,getfile)
+        cmd='%s -X POST %s %s/file/%s/makereplica/RRC-KI-HPC' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,getfile)
 
 
         tolog('Executing:'+cmd)
         ec,o=commands.getstatusoutput(cmd)
+        tolog("got file\n---------\n%s\n---------"% o)
         obj=json.loads(o)
-        task_id=obj['task_id']
-        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/task/%s/info' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,task_id)
+        if 'task_id' in obj:
+            task_id=obj['task_id']
+            cmd='%s %s %s/task/%s/info' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,task_id)
 
-        while True:
-            ec,o=commands.getstatusoutput(cmd)
-            obj=json.loads(o)
-            if obj['data']['status']=="SUCCESS":
-                break
+            while True:
+                tolog('Executing:'+cmd)
+                ec,o=commands.getstatusoutput(cmd)
+                tolog("got file\n---------\n%s\n---------"% o)
+                obj=json.loads(o)
+                if obj['data']['status']=="SUCCESS":
+                    break
+                time.sleep(1)
 
         getfile = os.path.join(hpcconf.SEpath,dsname_local_prefix, lfn)
 
@@ -198,6 +204,11 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
 
         cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/makereplica/RRC-KI-CLOUD' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,putfile)
         ec,o=commands.getstatusoutput(cmd)
+        tolog("got file\n---------\n%s\n---------"% o)
+        if ec != 0:
+            tolog("!!WARNING!!2990!! Command failed: %s" % (cmd))
+            tolog('!!WARNING!!2990!! put_data failed: Status=%d Output=%s' % (ec, str(o)))
+            return self.put_data_retfail(error.ERR_STAGEOUTFAILED, pilotErrorDiag)
 
 
         return 0, pilotErrorDiag, putfile, fsize, fchecksum, ARCH_DEFAULT

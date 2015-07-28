@@ -23,6 +23,7 @@ from ErrorDiagnosis import ErrorDiagnosis # import here to avoid issues seen at 
 from PilotErrors import PilotErrors
 from datetime import datetime
 import Mover as mover
+import hpcconf
 
 def touch(fname, times=None):
     with open(fname, 'a'):
@@ -472,7 +473,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
     #poyda
     def create_record(self, pid, status, cpu=0, mem=0, hdd=0):
         try:
-            sql = "INSERT INTO pilots (id, status, cpu, mem, hdd, server) VALUES (%d, '%s', %d, %d, %d, '%s')"%(pid, status, cpu, mem, hdd, epic.ssh_server)
+            sql = "INSERT INTO pilots (id, status, cpu, mem, hdd, server) VALUES (%d, '%s', %d, %d, %d, '%s')"%(pid, status, cpu, mem, hdd, hpcconf.ssh.server)
             conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
             cur = conn.cursor()
             cur.execute(sql, {})
