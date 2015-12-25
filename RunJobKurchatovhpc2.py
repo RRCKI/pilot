@@ -25,6 +25,11 @@ from datetime import datetime
 import Mover as mover
 import hpcconf
 
+from Configuration import Configuration
+import environment
+environment.set_environment()
+env = Configuration()
+
 def touch(fname, times=None):
     with open(fname, 'a'):
         os.utime(fname, times)
@@ -293,7 +298,6 @@ class RunJobKurchatovhpc2(RunJobHPC):
         except Exception, e:
             pilotErrorDiag = "Coudn't update record in DB: %s" % str(e)
             tolog("!!WARNING!! %s" % (pilotErrorDiag))
-
 	    
 
     def executePayload(self, thisExperiment, runCommandList, job, repeat_num = 0):
@@ -352,20 +356,32 @@ class RunJobKurchatovhpc2(RunJobHPC):
             epic.cd(job.workdir)
             self.putFilesRemote_SLURM()
             tolog("cpu_number: %s|walltime: %s"%(str(cpu_number),str(walltime)))
-            jid=epic.slurm(to_script,cpu_number,walltime,True)
-            tolog("Local Job ID: %s" % jid)
-            rt = RunJobUtilities.updatePilotServer(job, self.getPilotServer(), self.getPilotPort())
+            trial=2
+            while trial>0:
+                tolog("Starting attempts left: %d" % trial)
+                #trial
 
-            tolog("before fork_job.wait")
-            #test_file_name = os.path.join(job.workdir, '/../_st_')
-            test_file_name = job.workdir+ '/../_st_'
-            print 'test file is %s'%test_file_name
-            test_file = open(test_file_name, 'w+')
-            test_file.close()
 
-            epic.slurm_wait(jid)
-            tolog("after fork_job.wait")
-            self.getFilesRemote_SLURM()
+                jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
+                tolog("Local Job ID: %s" % jid)
+                epic.slurm_wait_queued(jid)
+                if not epic.slurm_job_queue_walltime_exceded(jid):
+                    break
+
+                tolog("Trying once again")
+            if not epic.slurm_job_queue_walltime_exceded(jid):
+                rt = RunJobUtilities.updatePilotServer(job, self.getPilotServer(), self.getPilotPort())
+
+                tolog("before fork_job.wait")
+                #test_file_name = os.path.join(job.workdir, '/../_st_')
+                test_file_name = job.workdir+ '/../_st_'
+                print 'test file is %s'%test_file_name
+                test_file = open(test_file_name, 'w+')
+                test_file.close()
+
+                epic.slurm_wait(jid)
+                tolog("after fork_job.wait")
+                self.getFilesRemote_SLURM()
 
             f=open(job.stdout,"w+")
             f.write(epic.output)
@@ -782,6 +798,9 @@ if __name__ == "__main__":
                     updateFileStates(outs, runJob.getParentWorkDir(), job.jobId, mode="file_state", state="not_transferred")
                     dumpFileStates(runJob.getParentWorkDir(), job.jobId)
                 tolog('asdfTEST1234_4')
+
+                epic.cd(os.path.dirname(env['pilot_initdir']))
+                epic.delete(env['pilot_initdir'])
 
                 finalUpdateDone = True
                 if ec != 0:

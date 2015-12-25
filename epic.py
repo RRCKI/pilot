@@ -163,12 +163,21 @@ def ssh(cmd):
     pUtil.tolog("*********END**********")
 
 class JobInfo(object):
+    failcounter=0
+    failcounter_raised=0
+
     def __init__(self,scontrol):
-        self.__str=scontrol
-        if self.wrongId():
-            self.state='WRONG_ID'
+        if isinstance(scontrol, basestring):
+            self.failcounter_raised = 0
+            self.__str=scontrol
+            if self.wrongId():
+                self.state='WRONG_ID'
+            else:
+                self.state=self.__state()
         else:
-            self.state=self.__state()
+            pUtil.tolog("Wrong JobInfo value %s"% scontrol)
+            self.failcounter += 1
+            self.failcounter_raised = 1
 
     def wrongId(self):
         if 'Invalid job id' in self.__str:
@@ -176,7 +185,18 @@ class JobInfo(object):
         return False
 
     def se(self,needle):
-        return re.search('(?<=\s%s=)\S*'%needle,self.__str).group(0)
+        try:
+            ret=re.search('(?<=\s%s=)\S*'%needle,self.__str).group(0)
+            self.failcounter_raised = 0
+            self.failcounter = 0
+        except:
+            pUtil.tolog("Can not parse job state: %s"% self.__str)
+            ret=""
+            self.failcounter += 1
+            self.failcounter_raised = 1
+            if self.failcounter >10:
+                raise
+        return ret
 
     def ec(self):
         if self.wrongId():
@@ -192,10 +212,19 @@ class JobInfo(object):
         return False
     state_is_final = staticmethod(state_is_final)
 
+    def state_no_output(state):
+        if state in ['CANCELLED','TIMEOUT','WRONG_ID','PENDING']:
+            return True
+        return False
+    state_no_output=staticmethod(state_no_output)
+
     def is_final(self):
         return JobInfo.state_is_final(self.state)
 
-def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False): # 10000 min ~= 1 week
+    def has_output(self):
+        return not JobInfo.state_no_output(self.state)
+
+def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 10000 min ~= 1 week
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
     pUtil.tolog("*********EPIC*********")
     pUtil.tolog("Executing external command: %s"%cmd)
@@ -218,15 +247,23 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False): # 10000 min ~= 1 wee
     sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)
 
     e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote(sshcmd))
+    o1=o
     o=o.split(' ')
     job.jid=-1
     if o[0]=='Submitted' and o[2]=='job':
         job.jid=long(o[3])
+
+    if job.jid < 0:
+        pUtil.tolog("Error of submiting job to slurm: %s"%o1)
+        return job.jid
+
     pUtil.tolog("Job id: %d"  %  job.jid)
 
-    job.time_waisted=0
+    job.time_waisted=0.
+    job.cancelling=False
     job.old_state=-4
     job.waiting=False
+    job.wait_time=wait_queued
 
     __jobs[job.jid]=job
 
@@ -254,7 +291,12 @@ def slurm_status(jid):
     job.info=JobInfo(o)
     return job.info
 
-def slurm_wait_queued(jid,wait_time=False):
+def slurm_job_queue_walltime_exceded(jid):
+    job=__jobs[jid]
+    assert job.jid==jid
+    return job.cancelling
+
+def slurm_wait_queued(jid):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
     test_forgiveness=jid
     test_forgiveness+=1 #test forgiveness for integers should break here
@@ -263,10 +305,10 @@ def slurm_wait_queued(jid,wait_time=False):
     assert job.jid==jid
 
     try:
-        wait_time+=1
-        wait_time-=1
+        job.wait_time+=1
+        job.wait_time-=1
     except TypeError:
-        wait_time=job_wait_pending
+        job.wait_time=job_wait_pending
 
 
     scontrolcmd='scontrol -od show job %d'%job.jid
@@ -275,9 +317,13 @@ def slurm_wait_queued(jid,wait_time=False):
 
     if not job.info.is_final() and not job.waiting:
         pUtil.tolog("Waiting in queue")
+        pUtil.tolog("Wait time: %d"%job.wait_time)
         while True:
             e,o=commands.getstatusoutput(sshcmd)
-            jd=JobInfo(o)
+            try:
+                jd=JobInfo(o)
+            except:
+                pUtil.tolog("SLURM returned:(%s) %s"  %  (e,o))
 
             st=jd.state
 
@@ -289,9 +335,10 @@ def slurm_wait_queued(jid,wait_time=False):
                 job.waiting=True
                 break
 
-            if job.time_waisted>wait_time>0 and not job.waiting:
+            if job.time_waisted>(job.wait_time*60)>0 and not job.waiting:
                 pUtil.tolog("Job is pending for too long, aborting")
                 e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
+                job.cancelling=True
                 job.waiting=True
                 break
 
@@ -300,7 +347,7 @@ def slurm_wait_queued(jid,wait_time=False):
                 break
 
             time.sleep(job_wait_time)
-            job.time_waisted+=job_wait_time/60
+            job.time_waisted+=job_wait_time
 
 def slurm_finalize(jid):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
@@ -322,8 +369,16 @@ def slurm_finalize(jid):
         delete(job.err_fn)
     else:
 
-        job.output=read(job.out_fn,True)
-        job.error=read(job.err_fn,True)
+        if job.info.has_output():
+            job.output=read(job.out_fn,True)
+            job.error=read(job.err_fn,True)
+        else:
+            job.output=""
+            job.error=job.info.state
+            delete(job.out_fn)
+            delete(job.err_fn)
+
+
         pUtil.tolog("Output file:\n"+\
                     "-----------------------------------------------------------------------------------------------------\n"+\
                     job.output+\
@@ -335,6 +390,9 @@ def slurm_finalize(jid):
 
     delete(job.cmd_file)
 
+    if job.cancelling:
+        exit_code=-100
+
     pUtil.tolog("*********END**********")
 
 def slurm_wait(jid):
@@ -345,7 +403,7 @@ def slurm_wait(jid):
     job=__jobs[jid]
     assert job.jid==jid
 
-    slurm_wait_queued(jid,0)
+    slurm_wait_queued(jid)
 
     scontrolcmd='scontrol -od show job %d'%job.jid
     sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)

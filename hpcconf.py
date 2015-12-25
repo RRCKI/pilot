@@ -13,8 +13,10 @@ ssh.remote_home="/s/ls2/groups/g0037/panda"
 ssh.remote_temp="/s/ls2/groups/g0037/tmp"
 ssh.remote_bin="/s/ls2/groups/g0037/bin"
 
-SEpath='/s/ls2/users/poyda/data'
+# SEpath='/s/ls2/users/poyda/data'
 cloudprefix='/__httpcloud__'
+stageout_path='/s/ls2/users/poyda/data/{scope}/.sys/{guid}/{file}'
+stagein_path='/s/ls2/users/poyda/data/system/{scope}/.sys/{guid}/{file}'
 
 curl=NakedObject()
 curl.cmd='curl'

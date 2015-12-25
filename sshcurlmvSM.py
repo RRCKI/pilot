@@ -65,6 +65,7 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
             cmd=hpcconf.curl.cmd+' '+hpcconf.curl.args+' '+hpcconf.curl.server+'/file'+fname+'/info'
             tolog('Executing:'+cmd)
             s,o = commands.getstatusoutput(cmd)
+            tolog('CURL returned code %d, data:\n%s'%(s,o))
             if s!=0:
                 pilotErrorDiag = "CURL failed: "+o
                 tolog("!!WARNING!!2999!! %s" % (pilotErrorDiag))
@@ -122,8 +123,11 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
 
     def get_data(self, gpfn, lfn, path, fsize=0, fchecksum=0, guid=0, **pdict):
         """ copy input file from SE to local dir """
-        dsname_local_prefix = pdict.get('dsname', '').replace(':','/').replace('//','/')
-        print("mylog_fields123: %s, %s, %s"%(gpfn, lfn, path))
+        # dsname_local_prefix = pdict.get('dsname', '').replace(':','/').replace('//','/')
+
+        scope = pdict.get('dsname', '').split(":")[0]
+        # dsname_local_prefix=os.path.join(dsname_local_prefix,guid)
+        print("mylog_fields123: %s, %s, %s, guid %s"%(gpfn, lfn, path, guid))
 
         dsname_remote_prefix = pdict.get('dsname', '')
         dsname_remote_prefix=dsname_remote_prefix[dsname_remote_prefix.find(':')+1:]
@@ -149,7 +153,7 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
                     break
                 time.sleep(1)
 
-        getfile = os.path.join(hpcconf.SEpath,dsname_local_prefix, lfn)
+        getfile = hpcconf.stagein_path.format(scope=scope,guid=guid,file=lfn)
 
         error = PilotErrors()
         pilotErrorDiag = ""
@@ -172,14 +176,15 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
     def put_data(self, source, destination, fsize=0, fchecksum=0, **pdict):
         """ copy output file from disk to local SE """
         dsname = pdict.get('dsname', '').replace(':','/').replace('//','/')
+        scope, guid = dsname.split("/")
         if '.log.' in source:
             fp=os.path.abspath(source)
             epic.push_file(fp,fp)
         print("mylog_fields123: %s, %s"%(source, destination))
         filename = os.path.basename(source)
 
-        putfile_path = os.path.join(hpcconf.SEpath,dsname)
-        putfile=os.path.join(putfile_path,filename)
+        putfile = hpcconf.stageout_path.format(scope=scope, guid=guid, file=filename)
+        putfile_path = os.path.dirname(putfile)
 
         ec,ped,fsize,fchecksum=self.getLocalFileInfo(source,'adler32')
 
