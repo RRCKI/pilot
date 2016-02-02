@@ -35,16 +35,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sshmvSM.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sshmvSM.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="2516">
-              <caret line="119" column="32" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="xrdcpSiteMover.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/xrdcpSiteMover.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -99,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epic.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="epic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/epic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.16" vertical-offset="2911" max-vertical-offset="8024">
-              <caret line="245" column="59" selection-start-line="245" selection-start-column="59" selection-end-line="245" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.7200878" vertical-offset="7572" max-vertical-offset="8483">
+              <caret line="549" column="24" selection-start-line="549" selection-start-column="24" selection-end-line="549" selection-end-column="24" />
               <folding>
                 <element signature="e#254#265#0" expanded="true" />
                 <element signature="e#953#1352#0" expanded="false" />
@@ -112,19 +102,17 @@
                 <element signature="e#2646#2891#0" expanded="false" />
                 <element signature="e#2932#3336#0" expanded="false" />
                 <element signature="e#3360#3518#0" expanded="false" />
-                <element signature="e#14399#14924#0" expanded="false" />
-                <element signature="e#16266#16730#0" expanded="false" />
-                <element signature="e#16769#17026#0" expanded="false" />
+                <element signature="e#16288#16752#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="remoteMonitorStarter.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="remoteMonitorStarter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35634744" vertical-offset="3692" max-vertical-offset="4590">
-              <caret line="236" column="53" selection-start-line="236" selection-start-column="53" selection-end-line="236" selection-end-column="53" />
+            <state vertical-scroll-proportion="-28.44" vertical-offset="3641" max-vertical-offset="4590">
+              <caret line="256" column="20" selection-start-line="256" selection-start-column="20" selection-end-line="256" selection-end-column="20" />
               <folding>
                 <element signature="e#232#241#0" expanded="true" />
               </folding>
@@ -177,8 +165,8 @@
         <option value="$PROJECT_DIR$/hpcconf.py" />
         <option value="$PROJECT_DIR$/sshcurlmvSM.py" />
         <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
-        <option value="$PROJECT_DIR$/epic.py" />
         <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
+        <option value="$PROJECT_DIR$/epic.py" />
       </list>
     </option>
   </component>
@@ -448,7 +436,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438095938234</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added time limit tests">
+      <created>1454420442532</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1454420442532</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -458,6 +452,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1949891" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -466,7 +461,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -501,7 +495,8 @@
     <MESSAGE value="fixed bug and added corecount" />
     <MESSAGE value="Added a new type of mover" />
     <MESSAGE value="Fixed some errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some errors" />
+    <MESSAGE value="Added time limit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added time limit tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -522,13 +517,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sshlcgcpSiteMover.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9299">
-          <caret line="19" column="69" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RunJobHPC.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
@@ -880,10 +868,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.PyCharm40/system/python_stubs/-1445694159/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="84014">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-28.44" vertical-offset="3641" max-vertical-offset="4590">
+          <caret line="256" column="20" selection-start-line="256" selection-start-column="20" selection-end-line="256" selection-end-column="20" />
+          <folding>
+            <element signature="e#232#241#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/epic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.16" vertical-offset="2911" max-vertical-offset="8024">
-          <caret line="245" column="59" selection-start-line="245" selection-start-column="59" selection-end-line="245" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.7200878" vertical-offset="7572" max-vertical-offset="8483">
+          <caret line="549" column="24" selection-start-line="549" selection-start-column="24" selection-end-line="549" selection-end-column="24" />
           <folding>
             <element signature="e#254#265#0" expanded="true" />
             <element signature="e#953#1352#0" expanded="false" />
@@ -892,19 +898,7 @@
             <element signature="e#2646#2891#0" expanded="false" />
             <element signature="e#2932#3336#0" expanded="false" />
             <element signature="e#3360#3518#0" expanded="false" />
-            <element signature="e#14399#14924#0" expanded="false" />
-            <element signature="e#16266#16730#0" expanded="false" />
-            <element signature="e#16769#17026#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35634744" vertical-offset="3692" max-vertical-offset="4590">
-          <caret line="236" column="53" selection-start-line="236" selection-start-column="53" selection-end-line="236" selection-end-column="53" />
-          <folding>
-            <element signature="e#232#241#0" expanded="true" />
+            <element signature="e#16288#16752#0" expanded="false" />
           </folding>
         </state>
       </provider>

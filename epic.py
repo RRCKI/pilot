@@ -146,6 +146,7 @@ def ssh(cmd):
           '\nsh -c ' + pipes.quote(cmd) + ' >'+pipes.quote(out_fn) + ' 2>'+pipes.quote(err_fn)+\
           '\nexit $?'
 
+    #pUtil.tolog(cmd)
     exit_code,o=commands.getstatusoutput(sshcmd+' '+pipes.quote(cmd))
     exit_code,exit_code_ssh=divmod(exit_code,256)
     pUtil.tolog("Exit code: %s"%exit_code)
@@ -532,7 +533,7 @@ def push_file(original,remote='./'):
     return remote
 
 def read(original,delete=False):
-    tmpname=tempfile.mktemp()
+    tmpname=tempfile.mktemp()+unique_str()
     pUtil.tolog("Using temporary name: %s"%tmpname)
     fetch_file(original,tmpname,delete)
     pUtil.tolog("Reading tmp file")
@@ -542,7 +543,7 @@ def read(original,delete=False):
     return ret
 
 def write(filename,str,append=False):
-    tmpname=tempfile.mktemp()
+    tmpname=tempfile.mktemp()+unique_str()
     pUtil.tolog("Using temporary name: %s"%tmpname)
     if append:
         prepend=read(filename)
