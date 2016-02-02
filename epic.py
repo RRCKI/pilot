@@ -22,6 +22,7 @@ import time
 import csv
 import re
 import hpcconf
+import datetime
 
 saga_context = None
 saga_session = None
@@ -212,6 +213,11 @@ class JobInfo(object):
         return False
     state_is_final = staticmethod(state_is_final)
 
+    def state_test_runtime(state):
+        if state in ['COMPLETING']:
+            return True
+        return False
+
     def state_no_output(state):
         if state in ['CANCELLED','TIMEOUT','WRONG_ID','PENDING']:
             return True
@@ -259,6 +265,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
 
     pUtil.tolog("Job id: %d"  %  job.jid)
 
+    job.walltime=walltime
+    job.endtime=False
     job.time_waisted=0.
     job.cancelling=False
     job.old_state=-4
@@ -310,28 +318,14 @@ def slurm_wait_queued(jid):
     except TypeError:
         job.wait_time=job_wait_pending
 
-
-    scontrolcmd='scontrol -od show job %d'%job.jid
-    sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
-
-
     if not job.info.is_final() and not job.waiting:
         pUtil.tolog("Waiting in queue")
         pUtil.tolog("Wait time: %d"%job.wait_time)
         while True:
-            e,o=commands.getstatusoutput(sshcmd)
-            try:
-                jd=JobInfo(o)
-            except:
-                pUtil.tolog("SLURM returned:(%s) %s"  %  (e,o))
-
-            st=jd.state
-
-            if st!=job.info.state:
-                pUtil.tolog("Job state changed to %s"  %  st)
-            job.info=jd
+            st=slurm_get_state(jid)
 
             if st=='RUNNING' and not job.waiting:
+                job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%Y-%m-%dT%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
                 job.waiting=True
                 break
 
@@ -340,10 +334,6 @@ def slurm_wait_queued(jid):
                 e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
                 job.cancelling=True
                 job.waiting=True
-                break
-
-            if job.info.is_final():
-                slurm_finalize(jid)
                 break
 
             time.sleep(job_wait_time)
@@ -395,6 +385,46 @@ def slurm_finalize(jid):
 
     pUtil.tolog("*********END**********")
 
+def slurm_get_state(jid):
+    global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
+    test_forgiveness=jid
+    test_forgiveness+=1 #test forgiveness for integers should break here
+
+    job=__jobs[jid]
+    assert job.jid==jid
+
+    scontrolcmd='scontrol -od show job %d'%job.jid
+    sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
+
+    if not job.info.is_final():
+        e,o=commands.getstatusoutput(sshcmd)
+        st=''
+        try:
+            jd=JobInfo(o)
+            st=jd.state
+            if st!=job.info.state:
+                pUtil.tolog("Job state changed to %s"  %  st)
+
+            job.info=jd
+
+            if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
+                pUtil.tolog("Job exceeded walltime, cancelling")
+                e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
+                job.cancelling=True
+                job.info.state='CANCELLED'
+                job.info.state='CANCELLED'
+
+            if job.info.is_final():
+                slurm_finalize(jid)
+
+
+            return job.info.state
+        except:
+            pUtil.tolog("SLURM returned:(%s) %s"  %  (e,o))
+            return 'FAIL_TO_DETERMINE_STATE'
+
+
+
 def slurm_wait(jid):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
     test_forgiveness=jid
@@ -411,21 +441,13 @@ def slurm_wait(jid):
     if not job.info.is_final():
         pUtil.tolog("Waiting for job to end")
         while True:
-            e,o=commands.getstatusoutput(sshcmd)
-            jd=JobInfo(o)
-
-            st=jd.state
-
-            if st!=job.info.state:
-                pUtil.tolog("Job state changed to %s"  %  st)
-            job.info=jd
+            slurm_get_state(jid)
 
             if job.info.is_final():
                 break
 
             time.sleep(job_wait_time)
 
-        slurm_finalize(jid)
     state=job.info.state
     exit_code=job.info.ec()
     output=job.output
