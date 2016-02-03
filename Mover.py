@@ -4226,11 +4226,11 @@ def verifyAvailableSpace(sitemover, totalFileSize, path, error):
     doVerification = sitemover.doFileVerifications()
     
     # are we wihin the limit?
-    if (_neededSpace > _availableSpace) and doVerification:
-        pilotErrorDiag = "Not enough local space for staging input files and run the job (need %d B, but only have %d B)" %\
-                         (_neededSpace, _availableSpace)
-        tolog("!!FAILED!!2999!! %s" % (pilotErrorDiag))
-        ec = error.ERR_NOLOCALSPACE
+    #if (_neededSpace > _availableSpace) and doVerification:
+    #    pilotErrorDiag = "Not enough local space for staging input files and run the job (need %d B, but only have %d B)" %\
+    #                     (_neededSpace, _availableSpace)
+    #    tolog("!!FAILED!!2999!! %s" % (pilotErrorDiag))
+    #    ec = error.ERR_NOLOCALSPACE
 
     return ec, pilotErrorDiag
 

@@ -338,7 +338,6 @@ class RunJobKurchatovhpc2(RunJobHPC):
             #
             # tolog("Launch parameters \nWalltime limit         : %s (min)\nRequested nodes (cores): %s (%s)" % (walltime,nodes,cpu_number))
             cpu_number = job.coreCount
-            cpu_number = 8
             
             current_job_number += 1
             # add the full job command to the job_setup.sh file
@@ -364,8 +363,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
                 #trial
 
 
-                #jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
-                jid=epic.slurm(to_script,cpu_number,24*60,True,wait_queued=5)
+                jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
                 tolog("Local Job ID: %s" % jid)
                 epic.slurm_wait_queued(jid)
                 if not epic.slurm_job_queue_walltime_exceded(jid):
@@ -373,8 +371,6 @@ class RunJobKurchatovhpc2(RunJobHPC):
 
                 tolog("Trying once again")
             if not epic.slurm_job_queue_walltime_exceded(jid):
-        	#poyda
-        	self.update_record_status(os.getpid(), 'allocated')
                 rt = RunJobUtilities.updatePilotServer(job, self.getPilotServer(), self.getPilotPort())
 
                 tolog("before fork_job.wait")
@@ -530,8 +526,7 @@ if __name__ == "__main__":
     
     #poyda temp
     my_pid = os.getpid()
-    cpu_required = 8 #temporary. need get from metric
-    #runJob.coreCount = cpu_required #temporary
+    cpu_required = 1 #temporary. need get from metric
     mem_required = 0
     hdd_required = 0
     runJob.create_record(my_pid, 'runned', cpu_required, mem_required, hdd_required)

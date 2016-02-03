@@ -249,6 +249,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
           '#SBATCH -p '+pipes.quote(queue)+'\n'+\
           ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes)))+\
           cmd
+          
+    #pUtil.tolog('EPIC executing script: %s'%cmd)
     write(job.cmd_file,cmd)
 
     sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)

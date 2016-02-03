@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="">
+    <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="Uniquify tmps more">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2_poyda.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mover.py" afterPath="$PROJECT_DIR$/Mover.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/epic.py" afterPath="$PROJECT_DIR$/epic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/remoteMonitorStarter.py" afterPath="$PROJECT_DIR$/remoteMonitorStarter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hpcconf.py" afterPath="$PROJECT_DIR$/hpcconf.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processes.py" afterPath="$PROJECT_DIR$/processes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pilot_HPC_KI.iws" />
@@ -58,12 +62,10 @@
       <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="13378" max-vertical-offset="15181">
-              <caret line="807" column="98" selection-start-line="807" selection-start-column="98" selection-end-line="807" selection-end-column="98" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="13480" max-vertical-offset="15283">
+              <caret line="813" column="98" selection-start-line="813" selection-start-column="98" selection-end-line="813" selection-end-column="98" />
               <folding>
                 <element signature="e#297#367#0" expanded="true" />
-                <marker date="1451036593214" expanded="true" signature="10267:10308" placeholder="UPDATE pilot..." />
-                <marker date="1451036593214" expanded="true" signature="19560:19650" placeholder="INSERT INTO ..." />
               </folding>
             </state>
           </provider>
@@ -92,8 +94,8 @@
       <file leaf-file-name="epic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/epic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7200878" vertical-offset="7572" max-vertical-offset="8483">
-              <caret line="549" column="24" selection-start-line="549" selection-start-column="24" selection-end-line="549" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.33040616" vertical-offset="3133" max-vertical-offset="8772">
+              <caret line="252" column="49" selection-start-line="252" selection-start-column="49" selection-end-line="252" selection-end-column="49" />
               <folding>
                 <element signature="e#254#265#0" expanded="true" />
                 <element signature="e#953#1352#0" expanded="false" />
@@ -102,7 +104,6 @@
                 <element signature="e#2646#2891#0" expanded="false" />
                 <element signature="e#2932#3336#0" expanded="false" />
                 <element signature="e#3360#3518#0" expanded="false" />
-                <element signature="e#16288#16752#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -133,8 +134,8 @@
       <file leaf-file-name="hpcconf.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hpcconf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="561">
-              <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="595">
+              <caret line="20" column="67" selection-start-line="20" selection-start-column="67" selection-end-line="20" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -442,7 +443,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454420442532</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Uniquify tmps more">
+      <created>1454422525628</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1454422525628</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -496,7 +503,8 @@
     <MESSAGE value="Added a new type of mover" />
     <MESSAGE value="Fixed some errors" />
     <MESSAGE value="Added time limit tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added time limit tests" />
+    <MESSAGE value="Uniquify tmps more" />
+    <option name="LAST_COMMIT_MESSAGE" value="Uniquify tmps more" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -508,7 +516,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/RunJobKurchatovhpc2.py</url>
-          <line>491</line>
+          <line>497</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
@@ -826,8 +834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hpcconf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
-          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="595">
+          <caret line="20" column="67" selection-start-line="20" selection-start-column="67" selection-end-line="20" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -858,12 +866,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13378" max-vertical-offset="15181">
-          <caret line="807" column="98" selection-start-line="807" selection-start-column="98" selection-end-line="807" selection-end-column="98" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="13480" max-vertical-offset="15283">
+          <caret line="813" column="98" selection-start-line="813" selection-start-column="98" selection-end-line="813" selection-end-column="98" />
           <folding>
             <element signature="e#297#367#0" expanded="true" />
-            <marker date="1451036593214" expanded="true" signature="10267:10308" placeholder="UPDATE pilot..." />
-            <marker date="1451036593214" expanded="true" signature="19560:19650" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
@@ -888,8 +894,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/epic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7200878" vertical-offset="7572" max-vertical-offset="8483">
-          <caret line="549" column="24" selection-start-line="549" selection-start-column="24" selection-end-line="549" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.33040616" vertical-offset="3133" max-vertical-offset="8772">
+          <caret line="252" column="49" selection-start-line="252" selection-start-column="49" selection-end-line="252" selection-end-column="49" />
           <folding>
             <element signature="e#254#265#0" expanded="true" />
             <element signature="e#953#1352#0" expanded="false" />
@@ -898,7 +904,6 @@
             <element signature="e#2646#2891#0" expanded="false" />
             <element signature="e#2932#3336#0" expanded="false" />
             <element signature="e#3360#3518#0" expanded="false" />
-            <element signature="e#16288#16752#0" expanded="false" />
           </folding>
         </state>
       </provider>

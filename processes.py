@@ -207,7 +207,7 @@ def killOrphans():
             args = ids.group(3)
             if 'cvmfs2' in args:
                 pUtil.tolog("Ignoring possible orphan process running cvmfs2: pid=%s, ppid=%s, args='%s'" % (pid, ppid, args))
-            elif 'pilots_starter.py' in args:
+            elif 'pilots_starter.py' in line:
                 pUtil.tolog("Ignoring Pilot Launcher: pid=%s, ppid=%s, args='%s'" % (pid, ppid, args))
             elif ppid == '1':
                 count += 1
