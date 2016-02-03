@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="Uniquify tmps more">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2_poyda.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mover.py" afterPath="$PROJECT_DIR$/Mover.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
+    <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="Added concurrency over SSH">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleflock.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/epic.py" afterPath="$PROJECT_DIR$/epic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hpcconf.py" afterPath="$PROJECT_DIR$/hpcconf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processes.py" afterPath="$PROJECT_DIR$/processes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/remoteMonitorStarter.py" afterPath="$PROJECT_DIR$/remoteMonitorStarter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pilot_HPC_KI.iws" />
@@ -66,6 +63,8 @@
               <caret line="813" column="98" selection-start-line="813" selection-start-column="98" selection-end-line="813" selection-end-column="98" />
               <folding>
                 <element signature="e#297#367#0" expanded="true" />
+                <marker date="1454414957000" expanded="true" signature="1128:8921" placeholder="..." />
+                <marker date="1454414957000" expanded="true" signature="8299:8921" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -91,19 +90,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epic.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="epic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/epic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33040616" vertical-offset="3133" max-vertical-offset="8772">
-              <caret line="252" column="49" selection-start-line="252" selection-start-column="49" selection-end-line="252" selection-end-column="49" />
+            <state vertical-scroll-proportion="-11.56" vertical-offset="340" max-vertical-offset="8347">
+              <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
               <folding>
                 <element signature="e#254#265#0" expanded="true" />
-                <element signature="e#953#1352#0" expanded="false" />
-                <element signature="e#1371#1597#0" expanded="false" />
-                <element signature="e#1628#1846#0" expanded="false" />
-                <element signature="e#2646#2891#0" expanded="false" />
-                <element signature="e#2932#3336#0" expanded="false" />
-                <element signature="e#3360#3518#0" expanded="false" />
+                <element signature="e#1564#1790#0" expanded="false" />
+                <element signature="e#1821#2039#0" expanded="false" />
+                <element signature="e#3666#3824#0" expanded="false" />
+                <element signature="e#5412#7304#0" expanded="false" />
+                <element signature="e#14346#15116#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simpleflock.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/simpleflock.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.49615806" vertical-offset="41" max-vertical-offset="1037">
+              <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,8 +122,8 @@
       <file leaf-file-name="remoteMonitorStarter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-28.44" vertical-offset="3641" max-vertical-offset="4590">
-              <caret line="256" column="20" selection-start-line="256" selection-start-column="20" selection-end-line="256" selection-end-column="20" />
+            <state vertical-scroll-proportion="-18.92" vertical-offset="3692" max-vertical-offset="4590">
+              <caret line="245" column="29" selection-start-line="245" selection-start-column="29" selection-end-line="245" selection-end-column="29" />
               <folding>
                 <element signature="e#232#241#0" expanded="true" />
               </folding>
@@ -167,6 +177,7 @@
         <option value="$PROJECT_DIR$/sshcurlmvSM.py" />
         <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
         <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
+        <option value="$PROJECT_DIR$/simpleflock.py" />
         <option value="$PROJECT_DIR$/epic.py" />
       </list>
     </option>
@@ -452,16 +463,37 @@
     <option name="localTasksCounter" value="11" />
     <servers />
   </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1949891" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987553" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18549223" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25522387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -473,7 +505,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24972437" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18549223" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -504,7 +535,8 @@
     <MESSAGE value="Fixed some errors" />
     <MESSAGE value="Added time limit tests" />
     <MESSAGE value="Uniquify tmps more" />
-    <option name="LAST_COMMIT_MESSAGE" value="Uniquify tmps more" />
+    <MESSAGE value="Added concurrency over SSH" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added concurrency over SSH" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -525,13 +557,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RunJobHPC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adler32cmd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
@@ -870,6 +895,8 @@
           <caret line="813" column="98" selection-start-line="813" selection-start-column="98" selection-end-line="813" selection-end-column="98" />
           <folding>
             <element signature="e#297#367#0" expanded="true" />
+            <marker date="1454414957000" expanded="true" signature="1128:8921" placeholder="..." />
+            <marker date="1454414957000" expanded="true" signature="8299:8921" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -884,8 +911,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/remoteMonitorStarter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.44" vertical-offset="3641" max-vertical-offset="4590">
-          <caret line="256" column="20" selection-start-line="256" selection-start-column="20" selection-end-line="256" selection-end-column="20" />
+        <state vertical-scroll-proportion="-18.92" vertical-offset="3692" max-vertical-offset="4590">
+          <caret line="245" column="29" selection-start-line="245" selection-start-column="29" selection-end-line="245" selection-end-column="29" />
           <folding>
             <element signature="e#232#241#0" expanded="true" />
           </folding>
@@ -894,16 +921,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/epic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33040616" vertical-offset="3133" max-vertical-offset="8772">
-          <caret line="252" column="49" selection-start-line="252" selection-start-column="49" selection-end-line="252" selection-end-column="49" />
+        <state vertical-scroll-proportion="-11.56" vertical-offset="340" max-vertical-offset="8347">
+          <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
           <folding>
             <element signature="e#254#265#0" expanded="true" />
-            <element signature="e#953#1352#0" expanded="false" />
-            <element signature="e#1371#1597#0" expanded="false" />
-            <element signature="e#1628#1846#0" expanded="false" />
-            <element signature="e#2646#2891#0" expanded="false" />
-            <element signature="e#2932#3336#0" expanded="false" />
-            <element signature="e#3360#3518#0" expanded="false" />
+            <element signature="e#1564#1790#0" expanded="false" />
+            <element signature="e#1821#2039#0" expanded="false" />
+            <element signature="e#3666#3824#0" expanded="false" />
+            <element signature="e#5412#7304#0" expanded="false" />
+            <element signature="e#14346#15116#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleflock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49615806" vertical-offset="41" max-vertical-offset="1037">
+          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>

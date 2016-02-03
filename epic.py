@@ -20,9 +20,14 @@ import pUtil
 import glob
 import time
 import csv
+import errno
 import re
 import hpcconf
 import datetime
+import random
+from simpleflock import SimpleFlock
+
+lock_fn='~/.ssh/epic.lockfile'
 
 saga_context = None
 saga_session = None
@@ -47,7 +52,16 @@ state="Undefined"
 exit_code=-1
 
 job_wait_pending=5 #min
-job_wait_time=10 #sec
+job_wait_time=30 #sec
+
+
+random.seed()
+session=random.randint(0,7)
+# session=1
+
+lock_timeout=300
+lock_fn+=".%d"%session
+
 class NakedObject(object):
     pass
 
@@ -118,7 +132,7 @@ def ssh_command(with_ident=True):
     if type(ssh_pass) is str and ssh_pass!='':
         usr=usr+':'+ssh_pass
 
-    cmd="ssh"
+    cmd="ssh -o \"ControlMaster auto\" -S \"~/.ssh/controlmasters/"+ssh_ident()+("_%d"%session)+"\" -o \"ControlPersist 10m\""
     if with_ident:
         cmd+=" "+pipes.quote(ssh_ident())
 
@@ -143,13 +157,15 @@ def ssh(cmd):
     cmd_file,out_fn,err_fn=__COE()
     cmd = 'export HOME=' + pipes.quote(ssh_remote_home) +\
           '\ncd ' +pipes.quote(ssh_remote_path)+\
+          '\nhostname'\
           '\nsh -c ' + pipes.quote(cmd) + ' >'+pipes.quote(out_fn) + ' 2>'+pipes.quote(err_fn)+\
           '\nexit $?'
 
-    #pUtil.tolog(cmd)
-    exit_code,o=commands.getstatusoutput(sshcmd+' '+pipes.quote(cmd))
+    print(sshcmd+' '+pipes.quote(cmd))
+    with SimpleFlock(lock_fn,lock_timeout):
+        exit_code,o=commands.getstatusoutput(sshcmd+' '+pipes.quote(cmd))
     exit_code,exit_code_ssh=divmod(exit_code,256)
-    pUtil.tolog("Exit code: %s"%exit_code)
+    pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
 
     output=read(out_fn,True)
     error=read(err_fn,True)
@@ -255,7 +271,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
 
     sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)
 
-    e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote(sshcmd))
+    with SimpleFlock(lock_fn,lock_timeout):
+        e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote(sshcmd))
     o1=o
     o=o.split(' ')
     job.jid=-1
@@ -298,7 +315,8 @@ def slurm_status(jid):
     scontrolcmd='scontrol -od show job %d'%job.jid
     sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
-    e,o=commands.getstatusoutput(sshcmd)
+    with SimpleFlock(lock_fn,lock_timeout):
+        e,o=commands.getstatusoutput(sshcmd)
     job.info=JobInfo(o)
     return job.info
 
@@ -334,7 +352,9 @@ def slurm_wait_queued(jid):
 
             if job.time_waisted>(job.wait_time*60)>0 and not job.waiting:
                 pUtil.tolog("Job is pending for too long, aborting")
-                e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
+
+                with SimpleFlock(lock_fn,lock_timeout):
+                    e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
                 job.cancelling=True
                 job.waiting=True
                 break
@@ -400,7 +420,8 @@ def slurm_get_state(jid):
     sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
     if not job.info.is_final():
-        e,o=commands.getstatusoutput(sshcmd)
+        with SimpleFlock(lock_fn,lock_timeout):
+            e,o=commands.getstatusoutput(sshcmd)
         st=''
         try:
             jd=JobInfo(o)
@@ -412,7 +433,8 @@ def slurm_get_state(jid):
 
             if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
                 pUtil.tolog("Job exceeded walltime, cancelling")
-                e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
+                with SimpleFlock(lock_fn,lock_timeout):
+                    e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
                 job.cancelling=True
                 job.info.state='CANCELLED'
                 job.info.state='CANCELLED'
@@ -472,7 +494,10 @@ def fetch_file(original,local='./',remove=False):
     cmd+=pipes.quote(ssh_ident()+":"+original)+" "+pipes.quote(local)
 
     print(cmd)
-    s, o = commands.getstatusoutput(cmd)
+    with SimpleFlock(lock_fn,lock_timeout):
+        s, o = commands.getstatusoutput(cmd)
+
+    pUtil.tolog("rsync returned %d: %s"%(s,o))
 
     return local
 
@@ -494,7 +519,8 @@ def ls(dir=".",extended=False):
     # fp.close()
     cmd="rsync -e "+pipes.quote(ssh_command(False))+" --list-only "+pipes.quote(ssh_ident()+":"+dir+"/")
     print(cmd)
-    s, o = commands.getstatusoutput(cmd)
+    with SimpleFlock(lock_fn,lock_timeout):
+        s, o = commands.getstatusoutput(cmd)
     reader = csv.DictReader(o.decode('ascii').splitlines(),
                         delimiter=' ', skipinitialspace=True,
                         fieldnames=['permissions', 'size',
@@ -515,7 +541,8 @@ def delete(remote):
 
     pUtil.tolog("Deleting remote file: %s"%remote)
     cmd=ssh_command()+" rm -rf "+pipes.quote(remote)
-    s, o = commands.getstatusoutput(cmd)
+    with SimpleFlock(lock_fn,lock_timeout):
+        s, o = commands.getstatusoutput(cmd)
 
 def push_file(original,remote='./'):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path
@@ -530,12 +557,13 @@ def push_file(original,remote='./'):
     cmd+=pipes.quote(original)+" "+pipes.quote(ssh_ident()+":"+remote)
 
     print(cmd)
-    s, o = commands.getstatusoutput(cmd)
+    with SimpleFlock(lock_fn,lock_timeout):
+        s, o = commands.getstatusoutput(cmd)
 
     return remote
 
 def read(original,delete=False):
-    tmpname=tempfile.mktemp()+unique_str()
+    tmpname=mymktemp()
     pUtil.tolog("Using temporary name: %s"%tmpname)
     fetch_file(original,tmpname,delete)
     pUtil.tolog("Reading tmp file")
@@ -545,7 +573,7 @@ def read(original,delete=False):
     return ret
 
 def write(filename,str,append=False):
-    tmpname=tempfile.mktemp()+unique_str()
+    tmpname=mymktemp()
     pUtil.tolog("Using temporary name: %s"%tmpname)
     if append:
         prepend=read(filename)
@@ -558,3 +586,8 @@ def write(filename,str,append=False):
     pUtil.tolog("Removing tmp file")
     os.remove(tmpname)
     return ret
+
+def mymktemp():
+    tmpname="./tempfile"+unique_str()
+    return tmpname
+
