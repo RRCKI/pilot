@@ -132,7 +132,9 @@ def ssh_command(with_ident=True):
     if type(ssh_pass) is str and ssh_pass!='':
         usr=usr+':'+ssh_pass
 
-    cmd="ssh -o \"ControlMaster auto\" -S \"~/.ssh/controlmasters/"+ssh_ident()+("_%d"%session)+"\" -o \"ControlPersist 10m\""
+    cmd="ssh"
+
+    # cmd+=" -o \"ControlMaster auto\" -S \"~/.ssh/controlmasters/"+ssh_ident()+("_%d"%session)+"\" -o \"ControlPersist 10m\""
     if with_ident:
         cmd+=" "+pipes.quote(ssh_ident())
 
@@ -157,15 +159,15 @@ def ssh(cmd):
     cmd_file,out_fn,err_fn=__COE()
     cmd = 'export HOME=' + pipes.quote(ssh_remote_home) +\
           '\ncd ' +pipes.quote(ssh_remote_path)+\
-          '\nhostname'\
           '\nsh -c ' + pipes.quote(cmd) + ' >'+pipes.quote(out_fn) + ' 2>'+pipes.quote(err_fn)+\
           '\nexit $?'
 
-    print(sshcmd+' '+pipes.quote(cmd))
+    # print(sshcmd+' '+pipes.quote(cmd))
     with SimpleFlock(lock_fn,lock_timeout):
         exit_code,o=commands.getstatusoutput(sshcmd+' '+pipes.quote(cmd))
     exit_code,exit_code_ssh=divmod(exit_code,256)
-    pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
+    pUtil.tolog("Exit code: %s"%exit_code)
+    # pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
 
     output=read(out_fn,True)
     error=read(err_fn,True)
@@ -493,11 +495,11 @@ def fetch_file(original,local='./',remove=False):
 
     cmd+=pipes.quote(ssh_ident()+":"+original)+" "+pipes.quote(local)
 
-    print(cmd)
+    # print(cmd)
     with SimpleFlock(lock_fn,lock_timeout):
         s, o = commands.getstatusoutput(cmd)
 
-    pUtil.tolog("rsync returned %d: %s"%(s,o))
+    # pUtil.tolog("rsync returned %d: %s"%(s,o))
 
     return local
 
@@ -518,7 +520,7 @@ def ls(dir=".",extended=False):
     #     ret.append(str(f))
     # fp.close()
     cmd="rsync -e "+pipes.quote(ssh_command(False))+" --list-only "+pipes.quote(ssh_ident()+":"+dir+"/")
-    print(cmd)
+    # print(cmd)
     with SimpleFlock(lock_fn,lock_timeout):
         s, o = commands.getstatusoutput(cmd)
     reader = csv.DictReader(o.decode('ascii').splitlines(),
@@ -556,7 +558,7 @@ def push_file(original,remote='./'):
 
     cmd+=pipes.quote(original)+" "+pipes.quote(ssh_ident()+":"+remote)
 
-    print(cmd)
+    # print(cmd)
     with SimpleFlock(lock_fn,lock_timeout):
         s, o = commands.getstatusoutput(cmd)
 

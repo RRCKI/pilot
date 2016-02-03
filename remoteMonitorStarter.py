@@ -254,7 +254,7 @@ class RemoteMonitorStarter(object):
 
 
 if __name__ == "__main__":
-    epic.ssh('ls -la;sleep 10;hostname>&2')
+    epic.ssh('ls -la;hostname>&2')
     # print("SLURM JID=%d"%jid)
     # epic.slurm_wait_queued(jid)
     # print("started")
