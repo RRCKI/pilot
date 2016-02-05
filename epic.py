@@ -347,7 +347,7 @@ def slurm_wait_queued(jid):
         while True:
             st=slurm_get_state(jid)
 
-            if st=='RUNNING' and not job.waiting:
+            if st=='RUNNING' and not job.waiting or job.info.is_final():
                 job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%Y-%m-%dT%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
                 job.waiting=True
                 break
@@ -438,7 +438,6 @@ def slurm_get_state(jid):
                 with SimpleFlock(lock_fn,lock_timeout):
                     e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
                 job.cancelling=True
-                job.info.state='CANCELLED'
                 job.info.state='CANCELLED'
 
             if job.info.is_final():

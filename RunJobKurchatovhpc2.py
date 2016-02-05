@@ -363,17 +363,17 @@ class RunJobKurchatovhpc2(RunJobHPC):
                 tolog("Starting attempts left: %d" % trial)
                 #trial
 
-
                 #jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
                 jid=epic.slurm(to_script,cpu_number,24*60,True,wait_queued=5)
                 tolog("Local Job ID: %s" % jid)
                 epic.slurm_wait_queued(jid)
                 if not epic.slurm_job_queue_walltime_exceded(jid):
                     break
+                trial -= 1
 
                 tolog("Trying once again")
             if not epic.slurm_job_queue_walltime_exceded(jid):
-        	#poyda
+                #poyda
         	self.update_record_status(os.getpid(), 'allocated')
                 rt = RunJobUtilities.updatePilotServer(job, self.getPilotServer(), self.getPilotPort())
 
