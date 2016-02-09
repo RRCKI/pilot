@@ -3,6 +3,7 @@ import time
 import os
 import fcntl
 import errno
+from pUtil import tolog
 
 class SimpleFlock:
    """Provides the simplest possible interface to flock-based file locking. Intended for use with the `with` syntax. It will create/truncate/delete the lock file as necessary."""
@@ -22,10 +23,11 @@ class SimpleFlock:
             return
          except (OSError, IOError) as ex:
             if ex.errno != errno.EAGAIN: # Resource temporarily unavailable
-               raise
+                raise
             elif self._timeout is not None and time.time() > (start_lock_search + self._timeout):
-               # Exceeded the user-specified timeout.
-               raise
+                tolog("Lock wait timeout exceeded")
+                # Exceeded the user-specified timeout.
+                raise
          
          # TODO It would be nice to avoid an arbitrary sleep here, but spinning
          # without a delay is also undesirable.

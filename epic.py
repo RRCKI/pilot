@@ -59,7 +59,7 @@ random.seed()
 session=random.randint(0,7)
 # session=1
 
-lock_timeout=300
+lock_timeout=500
 lock_fn+=".%d"%session
 
 class NakedObject(object):
@@ -268,7 +268,7 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
           ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes)))+\
           cmd
           
-    #pUtil.tolog('EPIC executing script: %s'%cmd)
+    pUtil.tolog('EPIC executing script: %s'%cmd)
     write(job.cmd_file,cmd)
 
     sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)
@@ -495,10 +495,19 @@ def fetch_file(original,local='./',remove=False):
     cmd+=pipes.quote(ssh_ident()+":"+original)+" "+pipes.quote(local)
 
     # print(cmd)
-    with SimpleFlock(lock_fn,lock_timeout):
-        s, o = commands.getstatusoutput(cmd)
+    iteration = 0
+    while not os.path.isfile(local):
+        iteration += 1
+        if iteration>5:
+            pUtil.tolog("too much fetching trials")
+            e = OSError("fetching file failed")
+            e.errno=errno.ENOENT
+            raise e
+        pUtil.tolog("fetching iteration %d" % iteration)
+        with SimpleFlock(lock_fn,lock_timeout):
+            s, o = commands.getstatusoutput(cmd)
+            pUtil.tolog("rsync returned %d: %s"%(s,o))
 
-    # pUtil.tolog("rsync returned %d: %s"%(s,o))
 
     return local
 

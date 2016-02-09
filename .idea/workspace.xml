@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" afterPath="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/epic.py" afterPath="$PROJECT_DIR$/epic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleflock.py" afterPath="$PROJECT_DIR$/simpleflock.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pilot_HPC_KI.iws" />
@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RunJobKurchatovhpc2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.010976949" vertical-offset="6059" max-vertical-offset="15283">
-              <caret line="357" column="32" selection-start-line="357" selection-start-column="32" selection-end-line="357" selection-end-column="32" />
+            <state vertical-scroll-proportion="-248.2" vertical-offset="0" max-vertical-offset="15283">
+              <caret line="365" column="81" selection-start-line="365" selection-start-column="81" selection-end-line="365" selection-end-column="81" />
               <folding>
                 <element signature="e#297#367#0" expanded="true" />
               </folding>
@@ -87,18 +87,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epic.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="epic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/epic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.0" vertical-offset="4179" max-vertical-offset="8364">
-              <caret line="344" column="39" selection-start-line="344" selection-start-column="39" selection-end-line="344" selection-end-column="39" />
+            <state vertical-scroll-proportion="-0.9600887" vertical-offset="7615" max-vertical-offset="8517">
+              <caret line="505" column="56" selection-start-line="505" selection-start-column="56" selection-end-line="505" selection-end-column="56" />
               <folding>
                 <element signature="e#254#265#0" expanded="true" />
                 <element signature="e#1564#1790#0" expanded="false" />
                 <element signature="e#1821#2039#0" expanded="false" />
                 <element signature="e#3681#3839#0" expanded="false" />
                 <element signature="e#5450#7342#0" expanded="false" />
-                <element signature="e#14364#15134#0" expanded="false" />
+                <element signature="e#14363#15133#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -107,8 +107,8 @@
       <file leaf-file-name="simpleflock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleflock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.52" vertical-offset="126" max-vertical-offset="1037">
-              <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+            <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="1071">
+              <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -172,10 +172,10 @@
         <option value="$PROJECT_DIR$/slurmcurlSM.py" />
         <option value="$PROJECT_DIR$/hpcconf.py" />
         <option value="$PROJECT_DIR$/sshcurlmvSM.py" />
-        <option value="$PROJECT_DIR$/simpleflock.py" />
         <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
-        <option value="$PROJECT_DIR$/epic.py" />
         <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
+        <option value="$PROJECT_DIR$/simpleflock.py" />
+        <option value="$PROJECT_DIR$/epic.py" />
       </list>
     </option>
   </component>
@@ -183,10 +183,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1874" />
-    <option name="height" value="1096" />
+    <option name="x" value="88" />
+    <option name="width" value="1773" />
+    <option name="height" value="1087" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -469,7 +468,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454503315717</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed lost decrement">
+      <created>1454658203188</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1454658203188</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -493,11 +498,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
+    <frame x="88" y="0" width="1773" height="1087" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1949891" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20634006" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987553" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -546,7 +551,8 @@
     <MESSAGE value="Uniquify tmps more" />
     <MESSAGE value="Added concurrency over SSH" />
     <MESSAGE value="Removed dirty logs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed dirty logs" />
+    <MESSAGE value="Fixed lost decrement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed lost decrement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -893,16 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleflock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.52" vertical-offset="126" max-vertical-offset="1037">
-          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sshcurlmvSM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.56" vertical-offset="2753" max-vertical-offset="3689">
@@ -927,27 +923,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-248.2" vertical-offset="0" max-vertical-offset="15283">
+          <caret line="365" column="81" selection-start-line="365" selection-start-column="81" selection-end-line="365" selection-end-column="81" />
+          <folding>
+            <element signature="e#297#367#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleflock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="1071">
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/epic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.0" vertical-offset="4179" max-vertical-offset="8364">
-          <caret line="344" column="39" selection-start-line="344" selection-start-column="39" selection-end-line="344" selection-end-column="39" />
+        <state vertical-scroll-proportion="-0.9600887" vertical-offset="7615" max-vertical-offset="8517">
+          <caret line="505" column="56" selection-start-line="505" selection-start-column="56" selection-end-line="505" selection-end-column="56" />
           <folding>
             <element signature="e#254#265#0" expanded="true" />
             <element signature="e#1564#1790#0" expanded="false" />
             <element signature="e#1821#2039#0" expanded="false" />
             <element signature="e#3681#3839#0" expanded="false" />
             <element signature="e#5450#7342#0" expanded="false" />
-            <element signature="e#14364#15134#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.010976949" vertical-offset="6059" max-vertical-offset="15283">
-          <caret line="357" column="32" selection-start-line="357" selection-start-column="32" selection-end-line="357" selection-end-column="32" />
-          <folding>
-            <element signature="e#297#367#0" expanded="true" />
+            <element signature="e#14363#15133#0" expanded="false" />
           </folding>
         </state>
       </provider>
