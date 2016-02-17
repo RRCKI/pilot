@@ -24,7 +24,6 @@ import errno
 import re
 import hpcconf
 import datetime
-import random
 from simpleflock import SimpleFlock
 
 lock_fn='~/.ssh/epic.lockfile'
@@ -54,13 +53,10 @@ exit_code=-1
 job_wait_pending=5 #min
 job_wait_time=30 #sec
 
-
-random.seed()
-session=random.randint(0,7)
 # session=1
+number_locks=7
 
 lock_timeout=500
-lock_fn+=".%d"%session
 
 class NakedObject(object):
     pass
@@ -134,7 +130,7 @@ def ssh_command(with_ident=True):
 
     cmd="ssh"
 
-    # cmd+=" -o \"ControlMaster auto\" -S \"~/.ssh/controlmasters/"+ssh_ident()+("_%d"%session)+"\" -o \"ControlPersist 10m\""
+    # cmd+=" -o \"ControlMaster auto\" -S \"~/.ssh/controlmasters/"+ssh_ident()+("_%d"%session)+"\" -o \"ControlPersist 10s\""
     if with_ident:
         cmd+=" "+pipes.quote(ssh_ident())
 
@@ -148,26 +144,53 @@ def unique_str():
     t="%s"%int(round(time.time()*1000))
     return "%s_%s%s"%(os.getpid(),t[-7:],__unique_str_counter)
 
+def __call_ssh(cmd):
+    sshcmd=ssh_command()
+    iteration = 0
+    sshcmd += ' '+pipes.quote("echo 'ssh: OK'\n" + cmd)
+    print sshcmd
+    while iteration<10:
+        o = "\n"
+        exit_code = -1
+        ret = ''
+        iteration += 1
+        pUtil.tolog("Executing SSH call, trial %d" % iteration)
+        with SimpleFlock(lock_fn,lock_timeout,number_locks):
+            exit_code,o=commands.getstatusoutput(sshcmd)
+            exit_code,exit_code_ssh=divmod(exit_code,256)
+            # pUtil.tolog("Exit code: %s"%exit_code)
+            pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
+        lines = o.split("\n",1)
+        if len(lines)>1:
+            ret = lines[1]
+        if lines[0] == "ssh: OK":
+            return exit_code,ret
+        else:
+            pUtil.tolog("SSH failed with %s"%lines[0])
+
+        time.sleep(1)
+    e=OSError('Can not execute SSH command')
+    e.errno = errno.EFAULT
+    raise e
+    # return exit_code,lines[1]
+
 def ssh(cmd):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,error,output,state,exit_code,ssh_remote_home
     pUtil.tolog("*********EPIC*********")
     pUtil.tolog("Executing external command: %s"%cmd)
     init_epic()
 
-    sshcmd=ssh_command()
+    # sshcmd=ssh_command()
 
     cmd_file,out_fn,err_fn=__COE()
     cmd = 'export HOME=' + pipes.quote(ssh_remote_home) +\
           '\ncd ' +pipes.quote(ssh_remote_path)+\
-          '\nsh -c ' + pipes.quote(cmd) + ' >'+pipes.quote(out_fn) + ' 2>'+pipes.quote(err_fn)+\
-          '\nexit $?'
+          '\nsh -c ' + pipes.quote(cmd) + ' >'+pipes.quote(out_fn) + ' 2>'+pipes.quote(err_fn)
 
     # print(sshcmd+' '+pipes.quote(cmd))
-    with SimpleFlock(lock_fn,lock_timeout):
-        exit_code,o=commands.getstatusoutput(sshcmd+' '+pipes.quote(cmd))
-    exit_code,exit_code_ssh=divmod(exit_code,256)
-    pUtil.tolog("Exit code: %s"%exit_code)
-    # pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
+    e,o=__call_ssh(cmd)
+
+    exit_code=e
 
     output=read(out_fn,True)
     error=read(err_fn,True)
@@ -263,8 +286,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
     cmd = '#!/bin/sh\n#SBATCH -o '+pipes.quote(job.out_fn)+'\n'+\
           '#SBATCH -e '+pipes.quote(job.err_fn)+'\n'+\
           '#SBATCH -D '+pipes.quote(ssh_remote_path)+'\n'+\
-          ('#SBATCH -n %d\n'%long(cpucount))+\
           '#SBATCH -p '+pipes.quote(queue)+'\n'+\
+          ('#SBATCH --cpus-per-task %d\n'%long(cpucount))+\
           ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes)))+\
           cmd
           
@@ -273,8 +296,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
 
     sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)
 
-    with SimpleFlock(lock_fn,lock_timeout):
-        e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote(sshcmd))
+
+    e,o=__call_ssh(sshcmd)
     o1=o
     o=o.split(' ')
     job.jid=-1
@@ -315,10 +338,8 @@ def slurm_status(jid):
     assert job.jid==jid
 
     scontrolcmd='scontrol -od show job %d'%job.jid
-    sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
-    with SimpleFlock(lock_fn,lock_timeout):
-        e,o=commands.getstatusoutput(sshcmd)
+    e,o=__call_ssh(scontrolcmd)
     job.info=JobInfo(o)
     return job.info
 
@@ -355,8 +376,7 @@ def slurm_wait_queued(jid):
             if job.time_waisted>(job.wait_time*60)>0 and not job.waiting:
                 pUtil.tolog("Job is pending for too long, aborting")
 
-                with SimpleFlock(lock_fn,lock_timeout):
-                    e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
+                e,o=__call_ssh('scancel %d'%job.jid)
                 job.cancelling=True
                 job.waiting=True
                 break
@@ -419,11 +439,10 @@ def slurm_get_state(jid):
     assert job.jid==jid
 
     scontrolcmd='scontrol -od show job %d'%job.jid
-    sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
+    # sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
     if not job.info.is_final():
-        with SimpleFlock(lock_fn,lock_timeout):
-            e,o=commands.getstatusoutput(sshcmd)
+        e,o=__call_ssh(scontrolcmd)
         st=''
         try:
             jd=JobInfo(o)
@@ -435,8 +454,7 @@ def slurm_get_state(jid):
 
             if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
                 pUtil.tolog("Job exceeded walltime, cancelling")
-                with SimpleFlock(lock_fn,lock_timeout):
-                    e,o=commands.getstatusoutput(ssh_command()+' '+pipes.quote('scancel %d'%job.jid))
+                e,o=__call_ssh('scancel %d'%job.jid)
                 job.cancelling=True
                 job.info.state='CANCELLED'
 
@@ -479,6 +497,20 @@ def slurm_wait(jid):
     output=job.output
     error=job.error
 
+# def __call_rsync(cmd):
+#     iteration = 0
+#     while not os.path.isfile(local):
+#         iteration += 1
+#         if iteration>5:
+#             pUtil.tolog("too much fetching trials")
+#             e = OSError("fetching file failed")
+#             e.errno=errno.ENOENT
+#             raise e
+#         pUtil.tolog("fetching iteration %d" % iteration)
+#         with SimpleFlock(lock_fn,lock_timeout):
+#             s, o = commands.getstatusoutput(cmd)
+#             pUtil.tolog("rsync returned %d: %s"%(s,o))
+
 def fetch_file(original,local='./',remove=False):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,ssh_remote_home
     init_epic()
@@ -503,11 +535,11 @@ def fetch_file(original,local='./',remove=False):
             e = OSError("fetching file failed")
             e.errno=errno.ENOENT
             raise e
+        # time.sleep(random.random()+0.2)
         pUtil.tolog("fetching iteration %d" % iteration)
-        with SimpleFlock(lock_fn,lock_timeout):
+        with SimpleFlock(lock_fn,lock_timeout,number_locks):
             s, o = commands.getstatusoutput(cmd)
             pUtil.tolog("rsync returned %d: %s"%(s,o))
-
 
     return local
 
@@ -529,7 +561,7 @@ def ls(dir=".",extended=False):
     # fp.close()
     cmd="rsync -e "+pipes.quote(ssh_command(False))+" --list-only "+pipes.quote(ssh_ident()+":"+dir+"/")
     # print(cmd)
-    with SimpleFlock(lock_fn,lock_timeout):
+    with SimpleFlock(lock_fn,lock_timeout,number_locks):
         s, o = commands.getstatusoutput(cmd)
     reader = csv.DictReader(o.decode('ascii').splitlines(),
                         delimiter=' ', skipinitialspace=True,
@@ -550,9 +582,8 @@ def delete(remote):
     remote,rdn,rfn=__R(remote)
 
     pUtil.tolog("Deleting remote file: %s"%remote)
-    cmd=ssh_command()+" rm -rf "+pipes.quote(remote)
-    with SimpleFlock(lock_fn,lock_timeout):
-        s, o = commands.getstatusoutput(cmd)
+    # cmd=ssh_command()+"
+    s, o = __call_ssh("rm -rf "+pipes.quote(remote))
 
 def push_file(original,remote='./'):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path
@@ -567,7 +598,7 @@ def push_file(original,remote='./'):
     cmd+=pipes.quote(original)+" "+pipes.quote(ssh_ident()+":"+remote)
 
     # print(cmd)
-    with SimpleFlock(lock_fn,lock_timeout):
+    with SimpleFlock(lock_fn,lock_timeout,number_locks):
         s, o = commands.getstatusoutput(cmd)
 
     return remote

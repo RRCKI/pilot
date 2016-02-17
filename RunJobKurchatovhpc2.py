@@ -296,6 +296,8 @@ class RunJobKurchatovhpc2(RunJobHPC):
             cur = conn.cursor()
             cur.execute(sql, {})
             conn.commit()
+            cur.close()
+            conn.close()
         except Exception, e:
             pilotErrorDiag = "Coudn't update record in DB: %s" % str(e)
             tolog("!!WARNING!! %s" % (pilotErrorDiag))
@@ -349,7 +351,8 @@ class RunJobKurchatovhpc2(RunJobHPC):
             ''' Temporary, for multi-thread testing  '''
             #to_script = "%s\nsrun %s %s" % (to_script, cmd["payload"], cmd["parameters"]) #production
             #to_script = "%s\nbash %s %s" % (to_script, cmd["payload"], cmd["parameters"]) #test
-            to_script = "%s\npython %s %s" % (to_script, cmd["payload"], cmd["parameters"]) #test
+            #to_script = "%s\npython %s %s" % (to_script, cmd["payload"], cmd["parameters"]) #test
+            to_script = "%s\npython %s %s %s" % (to_script, cmd["payload"], job.attemptNr, cmd["parameters"]) #test
             #to_script = "%s\n %s %s" % (to_script, cmd["payload"], cmd["parameters"]) #test
             ''' Floating point'''
             #to_script = "%s\naprun -n%s -S4 -j1 %s %s" % (to_script, cpu_number/2 ,cmd["payload"], cmd["parameters"])
@@ -364,7 +367,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
                 #trial
 
                 #jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
-                jid=epic.slurm(to_script,cpu_number,24*60,True,wait_queued=5)
+                jid=epic.slurm(to_script,cpu_number,24*60,True,wait_queued=30)
                 tolog("Local Job ID: %s" % jid)
                 epic.slurm_wait_queued(jid)
                 if not epic.slurm_job_queue_walltime_exceded(jid):
@@ -499,6 +502,8 @@ class RunJobKurchatovhpc2(RunJobHPC):
             cur = conn.cursor()
             cur.execute(sql, {})
             conn.commit()
+            cur.close()
+            conn.close()
         except Exception, e:
             pilotErrorDiag = "Coudn't add record in DB: %s" % str(e)
             tolog("!!WARNING!! %s" % (pilotErrorDiag))

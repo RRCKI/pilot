@@ -161,7 +161,7 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
         if path == '': path = './'
         fullname = os.path.join(path, lfn)
 
-        epic.ssh('mkdir -p %s;ln -s %s %s' %(path,getfile,fullname))
+        epic.ssh('mkdir -p %s;ln -f -s %s %s' %(path,getfile,fullname))
         o=epic.output
         s=epic.exit_code
         tolog("Command finished: %s" % ( o))
