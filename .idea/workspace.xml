@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d76f585-09ba-4104-ad3f-6b41b2f9bf74" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/epic.py" afterPath="$PROJECT_DIR$/epic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/remoteMonitorStarter.py" afterPath="$PROJECT_DIR$/remoteMonitorStarter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleflock.py" afterPath="$PROJECT_DIR$/simpleflock.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sshcurlmvSM.py" afterPath="$PROJECT_DIR$/sshcurlmvSM.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pilot_HPC_KI.iws" />
@@ -61,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epic.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="epic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/epic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27352297" vertical-offset="5037" max-vertical-offset="11475">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5037" max-vertical-offset="11475">
               <caret line="311" column="0" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
               <folding>
                 <element signature="e#254#265#0" expanded="true" />
@@ -105,11 +103,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sshcurlmvSM.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sshcurlmvSM.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sshcurlmvSM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2711" max-vertical-offset="3689">
-              <caret line="197" column="25" selection-start-line="197" selection-start-column="25" selection-end-line="197" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.49781182" vertical-offset="208" max-vertical-offset="3723">
+              <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -139,11 +137,11 @@
         <option value="$PROJECT_DIR$/slurmcurlSM.py" />
         <option value="$PROJECT_DIR$/hpcconf.py" />
         <option value="$PROJECT_DIR$/maketable.py" />
-        <option value="$PROJECT_DIR$/sshcurlmvSM.py" />
         <option value="$PROJECT_DIR$/RunJobKurchatovhpc2.py" />
         <option value="$PROJECT_DIR$/remoteMonitorStarter.py" />
         <option value="$PROJECT_DIR$/epic.py" />
         <option value="$PROJECT_DIR$/simpleflock.py" />
+        <option value="$PROJECT_DIR$/sshcurlmvSM.py" />
       </list>
     </option>
   </component>
@@ -514,7 +512,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455711146339</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Few changes">
+      <created>1458047397294</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1458047397294</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -544,6 +548,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22812311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987553" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -553,7 +558,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -921,14 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sshcurlmvSM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2762" max-vertical-offset="3689">
-          <caret line="197" column="25" selection-start-line="197" selection-start-column="25" selection-end-line="197" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RunJobKurchatovhpc2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5583" max-vertical-offset="15368">
@@ -984,11 +980,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/epic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27352297" vertical-offset="5037" max-vertical-offset="11475">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5037" max-vertical-offset="11475">
           <caret line="311" column="0" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
           <folding>
             <element signature="e#254#265#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sshcurlmvSM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49781182" vertical-offset="208" max-vertical-offset="3723">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

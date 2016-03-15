@@ -125,7 +125,9 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
         """ copy input file from SE to local dir """
         # dsname_local_prefix = pdict.get('dsname', '').replace(':','/').replace('//','/')
 
-        scope = pdict.get('dsname', '').split(":")[0]
+        #scope = pdict.get('dsname', '').split(":")[0]
+        #tertychnyy
+        scope = guid.split("_")[0]
         # dsname_local_prefix=os.path.join(dsname_local_prefix,guid)
         print("mylog_fields123: %s, %s, %s, guid %s"%(gpfn, lfn, path, guid))
 
