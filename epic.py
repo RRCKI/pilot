@@ -58,6 +58,16 @@ number_locks=7
 
 lock_timeout=500
 
+# debug_pipe= subprocess.Popen(["sh"],stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
+debug_files=[]
+debug_names=[]
+
+for i in range(0,9):
+    fn="file_temp_test_lock_%d.txt"%i
+    fd =os.open(fn, os.O_CREAT)
+    debug_files.append(fd)
+    debug_names.append(fn)
+
 class NakedObject(object):
     pass
 
@@ -145,33 +155,51 @@ def unique_str():
     return "%s_%s%s"%(os.getpid(),t[-7:],__unique_str_counter)
 
 def __call_ssh(cmd):
-    sshcmd=ssh_command()
-    iteration = 0
-    sshcmd += ' '+pipes.quote("echo 'ssh: OK'\n" + cmd)
-    print sshcmd
-    while iteration<10:
-        o = "\n"
-        exit_code = -1
-        ret = ''
-        iteration += 1
-        pUtil.tolog("Executing SSH call, trial %d" % iteration)
-        with SimpleFlock(lock_fn,lock_timeout,number_locks):
-            exit_code,o=commands.getstatusoutput(sshcmd)
-            exit_code,exit_code_ssh=divmod(exit_code,256)
-            # pUtil.tolog("Exit code: %s"%exit_code)
-            pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
-        lines = o.split("\n",1)
-        if len(lines)>1:
-            ret = lines[1]
-        if lines[0] == "ssh: OK":
-            return exit_code,ret
-        else:
-            pUtil.tolog("SSH failed with %s"%lines[0])
+    try:
+        sshcmd=ssh_command()
+        iteration = 0
+        sshcmd += ' '+pipes.quote("echo 'ssh: OK'\n" + cmd)
+        print sshcmd
+        while iteration<10:
 
-        time.sleep(1)
-    e=OSError('Can not execute SSH command')
-    e.errno = errno.EFAULT
-    raise e
+            o = "\n"
+            exit_code = -1
+            ret = ''
+            iteration += 1
+            pUtil.tolog("Executing SSH call, trial %d" % iteration)
+            with SimpleFlock(lock_fn,lock_timeout,number_locks):
+                exit_code,o=commands.getstatusoutput(sshcmd)
+                exit_code,exit_code_ssh=divmod(exit_code,256)
+                # pUtil.tolog("Exit code: %s"%exit_code)
+                pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
+            lines = o.split("\n",1)
+            if len(lines)>1:
+                ret = lines[1]
+            if lines[0] == "ssh: OK":
+                return exit_code,ret
+            else:
+                pUtil.tolog("SSH failed with %s"%lines[0])
+
+            time.sleep(1)
+        e=OSError('Can not execute SSH command')
+        e.errno = errno.EFAULT
+        raise e
+    except OSError as err:
+        if err.errno == 24:
+            for i in range(0,9):
+                try:
+                    fn=debug_names[i]
+                    fd=debug_files[i]
+                    os.close(fd)
+                    os.unlink(fn)
+                except:
+                    pass
+
+            cmd="sudo /usr/sbin/lsof -p %s"%os.getpid()
+            pUtil.tolog("Too many pipes opened. Calling %s"%cmd)
+            exit_code,o=commands.getstatusoutput(cmd)
+            pUtil.tolog(o)
+        raise
     # return exit_code,lines[1]
 
 def ssh(cmd):
@@ -212,7 +240,7 @@ class JobInfo(object):
     def __init__(self,scontrol):
         if isinstance(scontrol, basestring):
             self.failcounter_raised = 0
-            self.__str=scontrol
+            self.__str=' '+scontrol
             if self.wrongId():
                 self.state='WRONG_ID'
             else:
@@ -261,7 +289,7 @@ class JobInfo(object):
         return False
 
     def state_no_output(state):
-        if state in ['CANCELLED','TIMEOUT','WRONG_ID','PENDING']:
+        if state in ['CANCELLED','TIMEOUT','WRONG_ID','PENDING','STATE_UNDEFINED']:
             return True
         return False
     state_no_output=staticmethod(state_no_output)
@@ -317,6 +345,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
     job.old_state=-4
     job.waiting=False
     job.wait_time=wait_queued
+    job.status_trial=0
+    job.info=JobInfo('JobState=STATE_UNDEFINED')
 
     __jobs[job.jid]=job
 
@@ -337,10 +367,7 @@ def slurm_status(jid):
     job=__jobs[jid]
     assert job.jid==jid
 
-    scontrolcmd='scontrol -od show job %d'%job.jid
-
-    e,o=__call_ssh(scontrolcmd)
-    job.info=JobInfo(o)
+    slurm_get_state(jid)
     return job.info
 
 def slurm_job_queue_walltime_exceded(jid):
@@ -442,24 +469,32 @@ def slurm_get_state(jid):
     # sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
     if not job.info.is_final():
-        e,o=__call_ssh(scontrolcmd)
+        job.status_trial += 1
+        try:
+            e,o=__call_ssh(scontrolcmd)
+            job.status_trial = 0
+        except:
+            if job.status_trial>200:
+                raise
+            pass
         st=''
         try:
-            jd=JobInfo(o)
-            st=jd.state
-            if st!=job.info.state:
-                pUtil.tolog("Job state changed to %s"  %  st)
+            if job.status_trial == 0:
+                jd=JobInfo(o)
+                st=jd.state
+                if st!=job.info.state:
+                    pUtil.tolog("Job state changed to %s"  %  st)
 
-            job.info=jd
+                job.info=jd
 
-            if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
-                pUtil.tolog("Job exceeded walltime, cancelling")
-                e,o=__call_ssh('scancel %d'%job.jid)
-                job.cancelling=True
-                job.info.state='CANCELLED'
+                if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
+                    pUtil.tolog("Job exceeded walltime, cancelling")
+                    e,o=__call_ssh('scancel %d'%job.jid)
+                    job.cancelling=True
+                    job.info.state='CANCELLED'
 
-            if job.info.is_final():
-                slurm_finalize(jid)
+                if job.info.is_final():
+                    slurm_finalize(jid)
 
 
             return job.info.state

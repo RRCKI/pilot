@@ -42,6 +42,8 @@ class SimpleFlock:
                 # Exceeded the user-specified timeout.
                 raise
              try:
+                 os.close(self._fd)
+                 self._fd = None
                  os.unlink(self._path)
              except:
                 pass

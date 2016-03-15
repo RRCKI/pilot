@@ -255,10 +255,11 @@ class RemoteMonitorStarter(object):
 
 if __name__ == "__main__":
     epic.ssh('ls -la;hostname>&2')
+    # jid=epic.slurm('ls -la;sleep 200;hostname>&2',1,24*60,True,wait_queued=30)
     # print("SLURM JID=%d"%jid)
     # epic.slurm_wait_queued(jid)
     # print("started")
     # epic.slurm_wait(jid)
-    print("ended")
+    # print("ended")
     # epic.state_parse('JobId=523525 Name=hfb4_run UserId=saper(1225) GroupId=g0051(1051) Priority=14000000 Nice=0 Account=g0051 QOS=ki JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 ExitCode=0:0 DerivedExitCode=0:0 RunTime=00:02:56 TimeLimit=03:00:00 TimeMin=N/A SubmitTime=2015-05-05T14:49:55 EligibleTime=2015-05-05T14:49:55 StartTime=2015-05-05T14:49:58 EndTime=2015-05-05T17:49:58 PreemptTime=None SuspendTime=None SecsPreSuspend=0 Partition=hpc2-16g-3d AllocNode:Sid=weed1:30204 ReqNodeList=(null) ExcNodeList=(null) NodeList=cn1084 BatchHost=cn1084 NumNodes=1 NumCPUs=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=65534   Nodes=cn1084 CPU_IDs=2 Mem=0 MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0 Features=(null) Gres=(null) Reservation=(null) Shared=OK Contiguous=0 Licenses=(null) Network=(null) Command=/s/ls2/users/saper/HFB/hfb4/hfb4_run WorkDir=/s/ls2/users/saper/HFB/hfb4 StdErr=/s/ls2/users/saper/HFB/hfb4/%j.err StdIn=/dev/null StdOut=/s/ls2/users/saper/HFB/hfb4/523525.out')
     quit()
