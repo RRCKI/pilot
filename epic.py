@@ -1,13 +1,11 @@
 """
-This is Exec Pilot In Cloud (EPIC) for SAGA
+This is Elementary Python Interface for Clouds (EPIC)
 Author: Daniel Drizhuk (d.drizhuk@gmail.com)
 
-This is simple yet handy way to push and pull files from a remote PC using SAGA
-It is also a way to run tasks and obtain results without a pain in a butt
+This is simple yet handy way to push and pull files from a remote PC
+It is also a way to run tasks and obtain results
 """
 
-
-import saga
 import os
 import commands
 import pipes
