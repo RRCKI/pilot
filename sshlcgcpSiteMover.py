@@ -30,7 +30,7 @@ class sshlcgcpSiteMover(SiteMover.SiteMover):
     has_md5sum = True
     has_chmod = False
     timeout = 3600
-    remote_prefix = "/s/ls2/groups/g0037/panda/"
+    remote_prefix = "~/data/" #remote data dir
 
     # private data members
     __saga_context = None
@@ -40,12 +40,12 @@ class sshlcgcpSiteMover(SiteMover.SiteMover):
     #__error = PilotErrors()                    # PilotErrors object
 
     # public members
-    ssh_user="poyda"
-    ssh_keypath="/home/apf/.ssh/sk_poyda_rsa"
+    ssh_user="guest"
+    ssh_keypath="~/.ssh/id_rsa"
     ssh_pass=""
-    ssh_server="ui2.computing.kiae.ru"
-    partition_comp = 'bamboo-1w'
-
+    ssh_server="localhost"
+    prefixpath="~/data" # remote path for stagein data - Is not used in current version
+    partition_comp = 'default' #remote batch j0b queue name
     PartitionWalltimePerNode=3200
 
     def initSaga(self):

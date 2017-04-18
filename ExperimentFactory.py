@@ -11,6 +11,7 @@ from CMSExperiment import CMSExperiment
 from OtherExperiment import OtherExperiment
 from AMSTaiwanExperiment import AMSTaiwanExperiment
 from NordugridATLASExperiment import NordugridATLASExperiment
+from BBPExperiment import BBPExperiment
 
 class ExperimentFactory(object):
 
@@ -85,3 +86,12 @@ if __name__ == "__main__":
         print 'got experiment:',si.getExperiment()
         del experimentClass
     
+    print "\nAttempting to get BBP"
+    try:
+        experimentClass = factory.newExperiment('BBP')
+    except Exception, e:
+        print e
+    else:
+        si = experimentClass()
+        print 'got experiment:',si.getExperiment()
+        del experimentClass

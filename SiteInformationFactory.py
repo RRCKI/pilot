@@ -11,6 +11,8 @@ from AMSTaiwanSiteInformation import AMSTaiwanSiteInformation
 from CMSSiteInformation import CMSSiteInformation
 from NordugridATLASSiteInformation import NordugridATLASSiteInformation
 from OtherSiteInformation import OtherSiteInformation
+from BBPSiteInformation import BBPSiteInformation
+
 
 class SiteInformationFactory(object):
 
@@ -89,6 +91,16 @@ if __name__ == "__main__":
     print "\nAttempting to get Dummy"
     try:
         siteInformationClass = factory.newSiteInformation('Dummy')
+    except Exception, e:
+        print e
+    else:
+        si = siteInformationClass()
+        print 'got experiment:',si.getExperiment()
+        del siteInformationClass
+    
+    print "\nAttempting to get BBP"
+    try:
+        siteInformationClass = factory.newSiteInformation('BBP')
     except Exception, e:
         print e
     else:

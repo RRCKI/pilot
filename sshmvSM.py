@@ -88,7 +88,6 @@ class sshmvSiteMover(SiteMover.SiteMover):
     getLocalFileInfo = staticmethod(getLocalFileInfo)
 
     def getTier3Path(dsname, DN):
-        # return '/s/ls2/users/poyda/data/se'
         dsname = dsname.replace(':','/').replace('//','/')
         return os.path.join(hpcconf.SEpath,dsname)
     getTier3Path = staticmethod(getTier3Path)

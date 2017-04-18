@@ -135,7 +135,8 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
         dsname_remote_prefix=dsname_remote_prefix[dsname_remote_prefix.find(':')+1:]
         getfile = os.path.join(dsname_remote_prefix, lfn)
 
-        cmd='%s -X POST %s %s/file/%s/makereplica/RRC-KI-HPC' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,getfile)
+        cmd = '%s -X POST %s ' % (hpcconf.curl.cmd, hpcconf.curl.args)
+        cmd += pipes.quote('%s/file/%s/makereplica/RRC-KI-HPC' % (hpcconf.curl.server, getfile))
 
 
         tolog('Executing:'+cmd)
@@ -144,7 +145,8 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
         obj=json.loads(o)
         if 'task_id' in obj:
             task_id=obj['task_id']
-            cmd='%s %s %s/task/%s/info' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,task_id)
+            cmd = '%s %s ' % (hpcconf.curl.cmd, hpcconf.curl.args)
+            cmd += pipes.quote('%s/task/%s/info' % (hpcconf.curl.server, task_id))
 
             while True:
                 tolog('Executing:'+cmd)
@@ -209,13 +211,13 @@ class sshcurlmvSiteMover(SiteMover.SiteMover):
         dsname_remote_prefix=dsname_remote_prefix[dsname_remote_prefix.find(':')+1:]
         putfile = os.path.join(dsname_remote_prefix, filename)
 
-        cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/makereplica/RRC-KI-CLOUD' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,putfile)
-        ec,o=commands.getstatusoutput(cmd)
-        tolog("got file\n---------\n%s\n---------"% o)
-        if ec != 0:
-            tolog("!!WARNING!!2990!! Command failed: %s" % (cmd))
-            tolog('!!WARNING!!2990!! put_data failed: Status=%d Output=%s' % (ec, str(o)))
-            return self.put_data_retfail(error.ERR_STAGEOUTFAILED, pilotErrorDiag)
+        #cmd='%s -X POST %s --header "Content-Type:application/octet-stream" %s/file/%s/makereplica/RRC-KI-CLOUD' %(hpcconf.curl.cmd,hpcconf.curl.args,hpcconf.curl.server,putfile)
+        #ec,o=commands.getstatusoutput(cmd)
+        #tolog("got file\n---------\n%s\n---------"% o)
+        #if ec != 0:
+        #    tolog("!!WARNING!!2990!! Command failed: %s" % (cmd))
+        #    tolog('!!WARNING!!2990!! put_data failed: Status=%d Output=%s' % (ec, str(o)))
+        #    return self.put_data_retfail(error.ERR_STAGEOUTFAILED, pilotErrorDiag)
 
 
         return 0, pilotErrorDiag, putfile, fsize, fchecksum, ARCH_DEFAULT

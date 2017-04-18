@@ -27,6 +27,7 @@ from S3SiteMover import S3SiteMover                         # S3
 from sshlcgcpSiteMover import sshlcgcpSiteMover             # HPC KI
 from sshlcgcp2SM import sshlcgcp2SiteMover                  # HPC KI
 from sshmvSM import sshmvSiteMover                  # HPC KI Localv
+from sshmvBBP import sshmvSiteMover                  # BBP
 from sshcurlSM import sshcurlSiteMover                  # HPC KI Localc
 from slurmcurlSM import slurmcurlSiteMover                  # HPC KI Localc
 from sshcurlmvSM import sshcurlmvSiteMover                  # HPC KI Localc

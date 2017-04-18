@@ -497,11 +497,18 @@ def PFCxml(experiment, fname, fnlist=[], fguids=[], fntag=None, alog=None, alogg
                     fd.write('    <metadata att_name="fsizeAdditional" att_value=""/>\n')
                     fd.write('    <metadata att_name="csumtypetobesetAdditional" att_value=""/>\n')
             else:
+    		tolog("TERT: Changed fsize, checksum usage - fix it")
+    		
+                #if len(fsize) != 0:
+                #    fd.write('    <metadata att_name="fsize" att_value="%s"/>\n' % (fsize[i]))
+                #if len(checksum) != 0:
+                #    fd.write('    <metadata att_name="%s" att_value="%s"/>\n' %\
+                #             (SiteMover.getChecksumType(checksum[i]), checksum[i]))
                 if len(fsize) != 0:
-                    fd.write('    <metadata att_name="fsize" att_value="%s"/>\n' % (fsize[i]))
+                    fd.write('    <metadata att_name="fsize" att_value="1"/>\n')
                 if len(checksum) != 0:
                     fd.write('    <metadata att_name="%s" att_value="%s"/>\n' %\
-                             (SiteMover.getChecksumType(checksum[i]), checksum[i]))
+                    (SiteMover.getChecksumType("ZZZZZZZZ"), "ZZZZZZZZ"))
             fd.write("  </File>\n")
         fd.write("</POOLFILECATALOG>\n")
         fd.close()
@@ -1899,8 +1906,8 @@ class _Curl:
         # verification of the host certificate
         self._verifyHost = True
         # modified for Titan test
-        if ('HPC_' in readpar("catchall")) or ('ORNL_Titan_install' in readpar("nickname")):
-            self._verifyHost = False
+        #if ('HPC_' in readpar("catchall")) or ('ORNL_Titan_install' in readpar("nickname")):
+        #    self._verifyHost = False
 
         # request a compressed response
         self.compress = True

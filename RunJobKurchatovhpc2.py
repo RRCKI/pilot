@@ -13,7 +13,7 @@ import traceback
 import atexit, signal
 import saga
 import epic
-import MySQLdb
+#import MySQLdb
 
 # Pilot modules
 import Site, pUtil, Job, Node, RunJobUtilities
@@ -24,6 +24,7 @@ from PilotErrors import PilotErrors
 from datetime import datetime
 import Mover as mover
 import hpcconf
+from RunJobKurchatovhpc2_pl import launcherDB
 
 from Configuration import Configuration
 import environment
@@ -51,7 +52,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
     ssh_keypath="~/.ssh/id_rsa"
     ssh_pass=""
     ssh_server="localhost"
-    prefixpath='/s/ls2/users/poyda/data'
+    prefixpath="~/data" # remote path for stagein data - Is not used in current version 
 
     PartitionWalltimePerNode=3200
 
@@ -288,20 +289,6 @@ class RunJobKurchatovhpc2(RunJobHPC):
                     epic.push_file(os.path.join(job.workdir,name))
             return
         
-    #poyda
-    def update_record_status(self, pid, status):
-        try:
-            sql = "UPDATE pilots SET status=\'%s\' WHERE id=%d"%(status,pid)
-            conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
-            cur = conn.cursor()
-            cur.execute(sql, {})
-            conn.commit()
-            cur.close()
-            conn.close()
-        except Exception, e:
-            pilotErrorDiag = "Coudn't update record in DB: %s" % str(e)
-            tolog("!!WARNING!! %s" % (pilotErrorDiag))
-	    
 
     def executePayload(self, thisExperiment, runCommandList, job, repeat_num = 0):
         """ execute the payload """
@@ -367,7 +354,7 @@ class RunJobKurchatovhpc2(RunJobHPC):
                 #trial
 
                 #jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
-                jid=epic.slurm(to_script,cpu_number,24*60,True,wait_queued=30)
+                jid=epic.slurm(to_script,cpu_number,24*60,True,wait_queued=120)
                 tolog("Local Job ID: %s" % jid)
                 epic.slurm_wait_queued(jid)
                 if not epic.slurm_job_queue_walltime_exceded(jid):
@@ -492,22 +479,9 @@ class RunJobKurchatovhpc2(RunJobHPC):
             outsDict = {}
 
         return ec, pilotErrorDiag, outs, outsDict
-	
-    
-    #poyda
-    def create_record(self, pid, status, cpu=0, mem=0, hdd=0):
-        try:
-            sql = "INSERT INTO pilots (id, status, cpu, mem, hdd, server) VALUES (%d, '%s', %d, %d, %d, '%s')"%(pid, status, cpu, mem, hdd, hpcconf.ssh.server)
-            conn = MySQLdb.connect(host='127.0.0.1', db='pilot1', user='pilot', passwd='pandapilot')
-            cur = conn.cursor()
-            cur.execute(sql, {})
-            conn.commit()
-            cur.close()
-            conn.close()
-        except Exception, e:
-            pilotErrorDiag = "Coudn't add record in DB: %s" % str(e)
-            tolog("!!WARNING!! %s" % (pilotErrorDiag))
-    
+
+    def update_record_status(pid, status):
+        pass	
 
 if __name__ == "__main__":
 
@@ -517,9 +491,11 @@ if __name__ == "__main__":
 
     # Get runJobbject
     runJob = RunJobKurchatovhpc2()
+     
+    # Setup HPC specific parameters
     
-    # Setup HPC specific parameters for Titan
-    
+    launcherDB = launcherDB()
+    runJob.update_record_status=launcherDB.update_record_status 
     #runJob.cpu_number_per_node = 16
     runJob.cpu_number_per_node = 8 #Poyda: IKI - 8 cores
     runJob.walltime = 120 #Poyda: ?? no change?
@@ -539,7 +515,7 @@ if __name__ == "__main__":
     #runJob.coreCount = cpu_required #temporary
     mem_required = 0
     hdd_required = 0
-    runJob.create_record(my_pid, 'runned', cpu_required, mem_required, hdd_required)
+    launcherDB.create_record(my_pid, 'runned', cpu_required, mem_required, hdd_required)
     
     # Define a new parent group
     os.setpgrp()
@@ -797,7 +773,6 @@ if __name__ == "__main__":
                     epic.push_file(job.logFile)
 
                 # stage-out output files
-
                 ec, job, rf, latereg = runJob.stageOut(job, jobSite, outs, analysisJob, dsname, datasetDict, outputFileInfo)
                 # error handling
                 if job.result[0] == "finished" or ec == error.ERR_PUTFUNCNOCALL:

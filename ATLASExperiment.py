@@ -383,7 +383,7 @@ class ATLASExperiment(Experiment):
                 cmd += ";" + cmd3
             # cmd2 and MAKEFLAGS can add an extra ;-sign, remove it
             cmd = cmd.replace(';;',';')
-            #poyda
+            
             if 'HPC_' in readpar("catchall"):
         	cmd = {"interpreter": "",
                        "payload": ("%s"%cmd),
@@ -439,7 +439,7 @@ class ATLASExperiment(Experiment):
                 else:
                     tolog("asetup not needed (no special homePackage)")
                 
-                #poyda
+                
                 if 'HPC_' in readpar("catchall"):
                     cmd = {"interpreter": "",
                            "payload": ("%s"%cmd),

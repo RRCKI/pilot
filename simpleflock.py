@@ -45,8 +45,9 @@ class SimpleFlock:
                  os.close(self._fd)
                  self._fd = None
                  os.unlink(self._path)
-             except:
-                pass
+             except Exception, e:
+                err_msg='Exception in simpleflock: %s'%(e)
+                tolog(err_msg)
 
          
          # TODO It would be nice to avoid an arbitrary sleep here, but spinning
@@ -56,9 +57,13 @@ class SimpleFlock:
    def __exit__(self, *args):
         if self._obtained_time is not False:
             tolog("lock was set for %s seconds"%(time.time()-self._obtained_time))
-        fcntl.flock(self._fd, fcntl.LOCK_UN)
-        os.close(self._fd)
-        self._fd = None
+        try:
+    	    fcntl.flock(self._fd, fcntl.LOCK_UN)
+    	    os.close(self._fd)
+    	except Exception, e:
+    	    err_msg='Exception in simpleflock in exit: %s'%(e)
+    	    tolog(err_msg)
+    	self._fd = None
 
         # Try to remove the lock file, but don't try too hard because it is
         # unnecessary. This is mostly to help the user see whether a lock

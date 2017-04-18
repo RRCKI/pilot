@@ -6,6 +6,7 @@ This is simple yet handy way to push and pull files from a remote PC
 It is also a way to run tasks and obtain results
 """
 
+#import saga
 import os
 import commands
 import pipes
@@ -30,11 +31,13 @@ saga_context = None
 saga_session = None
 
 queue=hpcconf.queue
+sbatch_params = hpcconf.sbatch_params
 
 ssh_user=hpcconf.ssh.user
 ssh_pass=hpcconf.ssh.passwd
 ssh_keypath=hpcconf.ssh.keypath
 ssh_server=hpcconf.ssh.server
+ssh_port=hpcconf.ssh.port
 ssh_remote_home=hpcconf.ssh.remote_home
 ssh_remote_temp=hpcconf.ssh.remote_temp
 ssh_remote_path=None
@@ -131,12 +134,12 @@ def ssh_ident():
 
 
 def ssh_command(with_ident=True):
-    global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,ssh_remote_home,ssh_remote_temp,ssh_server
+    global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,ssh_remote_home,ssh_remote_temp,ssh_server,ssh_port
     usr=ssh_user
     if type(ssh_pass) is str and ssh_pass!='':
         usr=usr+':'+ssh_pass
 
-    cmd="ssh"
+    cmd="ssh -p "+ssh_port
 
     # cmd+=" -o \"ControlMaster auto\" -S \"~/.ssh/controlmasters/"+ssh_ident()+("_%d"%session)+"\" -o \"ControlPersist 10s\""
     if with_ident:
@@ -308,15 +311,28 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
     hours   = walltime / 60
     minutes = walltime % 60
 
+    #'#SBATCH -D '+pipes.quote(ssh_remote_path)+'\n'+\
+
     job.cmd_file,job.out_fn,job.err_fn=__COE()
-    cmd = '#!/bin/sh\n#SBATCH -o '+pipes.quote(job.out_fn)+'\n'+\
-          '#SBATCH -e '+pipes.quote(job.err_fn)+'\n'+\
-          '#SBATCH -D '+pipes.quote(ssh_remote_path)+'\n'+\
-          '#SBATCH -p '+pipes.quote(queue)+'\n'+\
-          ('#SBATCH --cpus-per-task %d\n'%long(cpucount))+\
-          ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes)))+\
-          cmd
-          
+    header = '#!/bin/bash\n'
+    header += '#SBATCH -o ' + pipes.quote(job.out_fn) + '\n'
+    header += '#SBATCH -e '+pipes.quote(job.err_fn) + '\n'
+    header += '#SBATCH -p '+pipes.quote(queue)+'\n'
+    header += '#SBATCH -D '+pipes.quote(ssh_remote_path)+'\n'
+    header += ('#SBATCH -n %d\n' % long(cpucount))
+              #('#SBATCH --cpus-per-task %d\n'%long(cpucount))
+    header += ('#SBATCH -t %02d:%02d:00\n' % (long(hours),long(minutes)))
+    for param in sbatch_params:
+        header += '#SBATCH ' + param +'\n'
+    #cmd = '#!/bin/bash\n#SBATCH -o ' + pipes.quote(job.out_fn) + '\n' + \
+    #      '#SBATCH -e '+pipes.quote(job.err_fn) + '\n' + \
+    #      '#SBATCH -A proj63'+'\n' + \
+    #      '#SBATCH -p '+pipes.quote(queue)+'\n'+\
+    #      ('#SBATCH -n %d\n'%long(cpucount))+\
+    #      ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes))+\
+    #      cmd
+    cmd = header + cmd
+      
     pUtil.tolog('EPIC executing script: %s'%cmd)
     write(job.cmd_file,cmd)
 
@@ -392,11 +408,25 @@ def slurm_wait_queued(jid):
         pUtil.tolog("Wait time: %d"%job.wait_time)
         while True:
             st=slurm_get_state(jid)
-
+	    
             if st=='RUNNING' and not job.waiting or job.info.is_final():
-                job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%Y-%m-%dT%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
+        	try:
+        	    pUtil.tolog("TERT: trying to parse date")
+            	    job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%Y-%m-%dT%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
+            	except:
+            	    pUtil.tolog("TERT: exception")
+            	    #job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
+            	    job.endtime = datetime.datetime.strptime(job.info.se("StartTime"),"%H:%M:%S")
+            	    job.endtime = job.endtime.replace(year=datetime.datetime.utcnow().year, 
+            	                        month=datetime.datetime.utcnow().month, 
+            	                        day=datetime.datetime.utcnow().day)
+            	    job.endtime += datetime.timedelta(0,job.walltime*60)
+            	
+            	pUtil.tolog("TERT: " + str(job.endtime))
                 job.waiting=True
                 break
+            
+            
 
             if job.time_waisted>(job.wait_time*60)>0 and not job.waiting:
                 pUtil.tolog("Job is pending for too long, aborting")
@@ -422,6 +452,7 @@ def slurm_finalize(jid):
     pUtil.tolog("Job ended with state %s"%job.info.state)
     pUtil.tolog("Exit code: %s"%job.info.ec())
 
+    pUtil.tolog("Ruslan:"+job.out_fn+" "+job.err_fn)
     if job.info.state=='WRONG_ID':
         job.output=''
         job.error='Wrong SLURM job ID returned'
@@ -484,6 +515,9 @@ def slurm_get_state(jid):
                     pUtil.tolog("Job state changed to %s"  %  st)
 
                 job.info=jd
+                
+                pUtil.tolog("TERT endtime: {et}".format(et=str(job.endtime)))
+                pUtil.tolog("TERT now: {et}".format(et=str(datetime.datetime.now())))
 
                 if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
                     pUtil.tolog("Job exceeded walltime, cancelling")
@@ -552,8 +586,9 @@ def fetch_file(original,local='./',remove=False):
     local,ldn,lfn=__L(local,rfn)
 
     cmd="rsync -e "+pipes.quote(ssh_command(False))+' -rtpL '
-    if remove:
-        cmd+='--remove-sent-files --remove-source-files '
+    #TERT __2commented
+    #if remove:
+    #    cmd+='--remove-sent-files --remove-source-files '
 
     s,o=commands.getstatusoutput('mkdir -p '+pipes.quote(ldn))
 
@@ -568,7 +603,7 @@ def fetch_file(original,local='./',remove=False):
             e = OSError("fetching file failed")
             e.errno=errno.ENOENT
             raise e
-        # time.sleep(random.random()+0.2)
+        #time.sleep(random.random()+0.2)
         pUtil.tolog("fetching iteration %d" % iteration)
         with SimpleFlock(lock_fn,lock_timeout,number_locks):
             s, o = commands.getstatusoutput(cmd)
@@ -593,9 +628,10 @@ def ls(dir=".",extended=False):
     #     ret.append(str(f))
     # fp.close()
     cmd="rsync -e "+pipes.quote(ssh_command(False))+" --list-only "+pipes.quote(ssh_ident()+":"+dir+"/")
-    # print(cmd)
+    pUtil.tolog("TERT: " + cmd)
     with SimpleFlock(lock_fn,lock_timeout,number_locks):
         s, o = commands.getstatusoutput(cmd)
+    pUtil.tolog("TERT: " + o)
     reader = csv.DictReader(o.decode('ascii').splitlines(),
                         delimiter=' ', skipinitialspace=True,
                         fieldnames=['permissions', 'size',
@@ -606,6 +642,7 @@ def ls(dir=".",extended=False):
     for f in reader:
         if f['name'] != '.':
             ret.append(f['name'])
+    pUtil.tolog("TERT: " + str(ret))
     return ret
 
 def delete(remote):
