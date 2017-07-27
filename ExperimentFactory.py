@@ -6,11 +6,7 @@
 
 from types import TypeType
 from Experiment import Experiment
-from ATLASExperiment import ATLASExperiment
-from CMSExperiment import CMSExperiment
 from OtherExperiment import OtherExperiment
-from AMSTaiwanExperiment import AMSTaiwanExperiment
-from NordugridATLASExperiment import NordugridATLASExperiment
 from BBPExperiment import BBPExperiment
 
 class ExperimentFactory(object):
@@ -36,39 +32,9 @@ if __name__ == "__main__":
 
     factory = ExperimentFactory()
 
-    print "\nAttempting to get ATLAS"
-    try:
-        experimentClass = factory.newExperiment('ATLAS')
-    except Exception, e:
-        print e
-    else:
-        si = experimentClass()
-        print 'got experiment:',si.getExperiment()
-        del experimentClass
-    
-    print "\nAttempting to get Nordugrid-ATLAS"
-    try:
-        experimentClass = factory.newExperiment('Nordugrid-ATLAS')
-    except Exception, e:
-        print e
-    else:
-        si = experimentClass()
-        print 'got experiment:',si.getExperiment()
-        del experimentClass
-
     print "\nAttempting to get Other"
     try:
         experimentClass = factory.newExperiment('Other')
-    except Exception, e:
-        print e
-    else:
-        si = experimentClass()
-        print 'got experiment:',si.getExperiment()
-        del experimentClass
-    
-    print "\nAttempting to get AMSTaiwan"
-    try:
-        experimentClass = factory.newExperiment('AMSTaiwan')
     except Exception, e:
         print e
     else:

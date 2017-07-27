@@ -24,7 +24,7 @@ from PilotErrors import PilotErrors
 from datetime import datetime
 import Mover as mover
 import hpcconf
-#from RunJobKurchatovhpc2_pl import launcherDB
+#from RunJobPl import launcherDB
 if users_switch_wrapper in hpcconf: #ssh_remote_home/../bin/runme
     users_switch_wrapper=hpcconf.users_switch_wrapper
 else:

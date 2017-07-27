@@ -11,6 +11,7 @@ ssh.port = ''
 ssh.remote_home = '/s/ls2/groups/g0037/panda'
 ssh.remote_temp = '/s/ls2/groups/g0037/tmp'
 ssh.remote_bin = '/s/ls2/groups/g0037/bin'
+#users_switch_wrapper=ssh.remote_home/../bin/runme
 
 MYDB={
     'host':'127.0.0.1',

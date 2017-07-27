@@ -2,56 +2,30 @@ from futil import *
 from pUtil import tolog
 
 from SiteMover import SiteMover                             # OU_OCHEP_SWT2
-from dCacheSiteMover import dCacheSiteMover                 # ANALY_AGLT2
-from BNLdCacheSiteMover import BNLdCacheSiteMover           # None
-from xrootdSiteMover import xrootdSiteMover                 # SLAC, GLOW-ATLAS
-from xrdcpSiteMover import xrdcpSiteMover                   # ANALY_CERN_XROOTD
-from CastorSiteMover import CastorSiteMover                 #
-from dCacheLFCSiteMover import dCacheLFCSiteMover           # UBC
 from lcgcpSiteMover import lcgcpSiteMover                   # LYON, CERN, MANC, LANCS, FZK
 from lcgcp2SiteMover import lcgcp2SiteMover                 # US sites; AGLT2 
-from stormSiteMover import stormSiteMover                   # Bologna
 from mvSiteMover import mvSiteMover                         # NDGF
-from HUSiteMover import HUSiteMover                         # None
 from rfcpLFCSiteMover import rfcpLFCSiteMover               # GLASGOW (works for all DPM sites)
-from castorSvcClassSiteMover import castorSvcClassSiteMover # RAL (needs extra configuation to map space tokens to service classes)
 from LocalSiteMover import LocalSiteMover                   # HU, MWT2 
-from ChirpSiteMover import ChirpSiteMover                   # Munich
 from curlSiteMover import curlSiteMover                     # ASGC
 from FAXSiteMover import FAXSiteMover                       # CVMFS sites
 from objectstoreSiteMover import objectstoreSiteMover       #
-from aria2cSiteMover import aria2cSiteMover                 #
 from GFAL2SiteMover import GFAL2SiteMover                   # GFAL2
 from GSIftpSiteMover import GSIftpSiteMover                 # HPC sites
 from S3SiteMover import S3SiteMover                         # S3
 from sshlcgcpSiteMover import sshlcgcpSiteMover             # HPC KI
 from sshlcgcp2SM import sshlcgcp2SiteMover                  # HPC KI
-from sshmvSM import sshmvSiteMover                  # HPC KI Localv
 from sshmvBBP import sshmvSiteMover                  # BBP
-from sshcurlSM import sshcurlSiteMover                  # HPC KI Localc
-from slurmcurlSM import slurmcurlSiteMover                  # HPC KI Localc
-from sshcurlmvSM import sshcurlmvSiteMover                  # HPC KI Localc
 
 mover_selector = {
     SiteMover.copyCommand : SiteMover,
-    dCacheSiteMover.copyCommand : dCacheSiteMover,
-    BNLdCacheSiteMover.copyCommand : BNLdCacheSiteMover,
-    xrootdSiteMover.copyCommand : xrootdSiteMover,
-    xrdcpSiteMover.copyCommand : xrdcpSiteMover,
-    CastorSiteMover.copyCommand : CastorSiteMover,
-    dCacheLFCSiteMover.copyCommand : dCacheLFCSiteMover,
     lcgcpSiteMover.copyCommand : lcgcpSiteMover,
     lcgcp2SiteMover.copyCommand : lcgcp2SiteMover,
-    stormSiteMover.copyCommand : stormSiteMover,
     mvSiteMover.copyCommand : mvSiteMover,
-    HUSiteMover.copyCommand : HUSiteMover,
     rfcpLFCSiteMover.copyCommand : rfcpLFCSiteMover,
-    castorSvcClassSiteMover.copyCommand : castorSvcClassSiteMover,
     LocalSiteMover.copyCommand : LocalSiteMover,
-    ChirpSiteMover.copyCommand : ChirpSiteMover,
     curlSiteMover.copyCommand : curlSiteMover,
     FAXSiteMover.copyCommand : FAXSiteMover,
-    aria2cSiteMover.copyCommand : aria2cSiteMover,
     objectstoreSiteMover.copyCommand : objectstoreSiteMover,
     GFAL2SiteMover.copyCommand : GFAL2SiteMover,
     GSIftpSiteMover.copyCommand : GSIftpSiteMover,
@@ -59,9 +33,6 @@ mover_selector = {
     sshlcgcpSiteMover.copyCommand : sshlcgcpSiteMover,
     sshlcgcp2SiteMover.copyCommand : sshlcgcp2SiteMover,
     sshmvSiteMover.copyCommand : sshmvSiteMover,
-    sshcurlSiteMover.copyCommand : sshcurlSiteMover,
-    slurmcurlSiteMover.copyCommand : slurmcurlSiteMover,
-    sshcurlmvSiteMover.copyCommand : sshcurlmvSiteMover
     }
 
 def getSiteMover(sitemover, setup_file='', *args, **kwrds):
