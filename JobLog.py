@@ -161,6 +161,9 @@ class JobLog:
             else:
                 updateFileState(job.logFile, site.workdir, job.jobId, mode="file_state", state="not_transferred")
             dumpFileStates(site.workdir, job.jobId)
+            # Tertychnyy 17.05.04
+	    tolog("17.05.04: Added createLockFile")
+	    createLockFile(self.__env['jobrec'], site.workdir, lockfile="LOGFILECOPIED") 
             return status, job
 
         # see if it's an analysis job or not
@@ -344,7 +347,8 @@ class JobLog:
         else:
             if pilotErrorDiag != "" and pilotErrorDiag != None:
                 job.pilotErrorDiag = "Log put error: " + pilotErrorDiag
-
+	
+	
         return status, job
 
     def buildLogExtracts(self, job, workdir, analyJob):

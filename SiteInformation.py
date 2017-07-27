@@ -290,7 +290,7 @@ class SiteInformation(object):
             filename = filename_dat
         else:
             filename = self.getQueuedataFileName(check=False, alt=alt)
-
+        tolog(filename) #TERT 17.05.04
         if os.path.exists(filename) and not forceDownload:
             tolog("Queuedata has already been downloaded by pilot wrapper script (will confirm validity)")
             hasQueuedata = self.verifyQueuedata(queuename, filename, 1, 1, "(see batch log for url)")

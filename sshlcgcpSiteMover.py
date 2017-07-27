@@ -45,7 +45,7 @@ class sshlcgcpSiteMover(SiteMover.SiteMover):
     ssh_pass=""
     ssh_server="localhost"
     prefixpath="~/data" # remote path for stagein data - Is not used in current version
-    partition_comp = 'default' #remote batch j0b queue name
+    partition_comp = 'default' #remote batch job queue name
     PartitionWalltimePerNode=3200
 
     def initSaga(self):
