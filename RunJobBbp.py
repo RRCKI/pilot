@@ -25,6 +25,10 @@ from datetime import datetime
 import Mover as mover
 import hpcconf
 #from RunJobKurchatovhpc2_pl import launcherDB
+if users_switch_wrapper in hpcconf: #ssh_remote_home/../bin/runme
+    users_switch_wrapper=hpcconf.users_switch_wrapper
+else:
+    users_switch_wrapper=None
 
 from Configuration import Configuration
 import environment
@@ -322,6 +326,14 @@ class RunJobBbp(RunJobHPC):
 	    if job.coreCount is 'NULL':
             	job.coreCount = 1
             cpu_number = job.coreCount
+	    
+            if users_switch_wrapper:
+	        # Impersonation trick
+                username = cmd["parameters"].split(" ")[0]
+                payload = " ".join(cmd["parameters"].split(" ")[1:])
+            else:
+                username=None
+                payload = cmd["parameters"]
 	
             nodes, walltime, d = self.get_hpc_resources(self.partition_comp, self.max_nodes, int(job.coreCount), self.min_walltime)
 
@@ -334,7 +346,8 @@ class RunJobBbp(RunJobHPC):
             ''' Temporary, for multi-thread testing  '''
             if cmd['interpreter']== 'bash':
             	#to_script = "%s\nbash -c '%s'" % (to_script, cmd["parameters"]) #test
-            	to_script = "%s\n%s" % (to_script, cmd["parameters"]) #test
+            	#to_script = "%s\n%s" % (to_script, cmd["parameters"]) #test
+            	to_script = "%s\n%s" % (to_script, payload)
             else:
             	to_script = "%s\npython %s %s %s" % (to_script, cmd["payload"], job.attemptNr, cmd["parameters"]) #test
 
@@ -348,7 +361,7 @@ class RunJobBbp(RunJobHPC):
                 #trial
 
                 #jid=epic.slurm(to_script,cpu_number,walltime,True,wait_queued=5)
-                jid=epic.slurm(to_script,cpu_number,1*60,True,wait_queued=120)
+                jid=epic.slurm(to_script,cpu_number,1*60,True,wait_queued=120,username=username)
                 tolog("Local Job ID: %s" % jid)
                 epic.slurm_wait_queued(jid)
                 if not epic.slurm_job_queue_walltime_exceded(jid):

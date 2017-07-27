@@ -42,11 +42,16 @@ ssh_port=hpcconf.ssh.port
 ssh_remote_home=hpcconf.ssh.remote_home
 ssh_remote_temp=hpcconf.ssh.remote_temp
 ssh_remote_path=None
+
 if verbose in hpcconf:
     #param for loglevel: 1 = standart (ERROR); 3 ~= WARN; 5 =INFO; 7=DEBUG (for example, on it - ssh command print)   
     verbose=hpcconf.verbose
 else:
     verbose=1
+if users_switch_wrapper in hpcconf: #ssh_remote_home/../bin/runme
+    users_switch_wrapper=hpcconf.users_switch_wrapper
+else:
+    users_switch_wrapper=None
 
 __jobs={}
 
@@ -308,7 +313,7 @@ class JobInfo(object):
     def has_output(self):
         return not JobInfo.state_no_output(self.state)
 
-def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 10000 min ~= 1 week
+def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0, username=None): # 10000 min ~= 1 week
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
     if verbose>=5: 
         pUtil.tolog("*********EPIC*********")
@@ -342,8 +347,11 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
     if verbose>=5: pUtil.tolog('EPIC executing script: %s'%cmd)
     write(job.cmd_file,cmd)
 
-    sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)
-
+    sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';'
+    if users_switch_wrapper:#username:
+        sshcmd += ' {d} {username} {cmd}'.format(d=users_switch_wrapper, username=username, cmd=pipes.quote(job.cmd_file))
+    else:
+        sshcmd += 'sbatch {cmd}'.format(cmd=pipes.quote(job.cmd_file))
 
     e,o=__call_ssh(sshcmd)
     o1=o
