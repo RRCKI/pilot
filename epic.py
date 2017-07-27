@@ -6,6 +6,7 @@ This is simple yet handy way to push and pull files from a remote PC
 It is also a way to run tasks and obtain results
 """
 
+
 #import saga
 import os
 import commands
@@ -41,6 +42,11 @@ ssh_port=hpcconf.ssh.port
 ssh_remote_home=hpcconf.ssh.remote_home
 ssh_remote_temp=hpcconf.ssh.remote_temp
 ssh_remote_path=None
+if verbose in hpcconf:
+    #param for loglevel: 1 = standart (ERROR); 3 ~= WARN; 5 =INFO; 7=DEBUG (for example, on it - ssh command print)   
+    verbose=hpcconf.verbose
+else:
+    verbose=1
 
 __jobs={}
 
@@ -160,19 +166,19 @@ def __call_ssh(cmd):
         sshcmd=ssh_command()
         iteration = 0
         sshcmd += ' '+pipes.quote("echo 'ssh: OK'\n" + cmd)
-        print sshcmd
+        if verbose==7: print sshcmd
         while iteration<10:
 
             o = "\n"
             exit_code = -1
             ret = ''
             iteration += 1
-            pUtil.tolog("Executing SSH call, trial %d" % iteration)
+            if verbose>=5: pUtil.tolog("Executing SSH call, trial %d" % iteration)
             with SimpleFlock(lock_fn,lock_timeout,number_locks):
                 exit_code,o=commands.getstatusoutput(sshcmd)
                 exit_code,exit_code_ssh=divmod(exit_code,256)
                 # pUtil.tolog("Exit code: %s"%exit_code)
-                pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
+                if verbose>=5: pUtil.tolog("Exit code: %s, %s, %s"%(exit_code,exit_code_ssh,o))
             lines = o.split("\n",1)
             if len(lines)>1:
                 ret = lines[1]
@@ -197,16 +203,16 @@ def __call_ssh(cmd):
                     pass
 
             cmd="sudo /usr/sbin/lsof -p %s"%os.getpid()
-            pUtil.tolog("Too many pipes opened. Calling %s"%cmd)
+            if verbose>=5: pUtil.tolog("Too many pipes opened. Calling %s"%cmd)
             exit_code,o=commands.getstatusoutput(cmd)
-            pUtil.tolog(o)
+            if verbose>=5: pUtil.tolog(o)
         raise
     # return exit_code,lines[1]
 
 def ssh(cmd):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,error,output,state,exit_code,ssh_remote_home
-    pUtil.tolog("*********EPIC*********")
-    pUtil.tolog("Executing external command: %s"%cmd)
+    if verbose>=5: pUtil.tolog("*********EPIC*********")
+    if verbose>=5: pUtil.tolog("Executing external command: %s"%cmd)
     init_epic()
 
     # sshcmd=ssh_command()
@@ -223,16 +229,17 @@ def ssh(cmd):
 
     output=read(out_fn,True)
     error=read(err_fn,True)
-    pUtil.tolog("Output file:\n"+\
+    if verbose>=5: 
+        pUtil.tolog("Output file:\n"+\
                 "-----------------------------------------------------------------------------------------------------\n"+\
                 output+\
                 "\n-----------------------------------------------------------------------------------------------------")
-    pUtil.tolog("Error file:\n"+\
+        pUtil.tolog("Error file:\n"+\
                 "-----------------------------------------------------------------------------------------------------\n"+\
                 error+\
                 "\n-----------------------------------------------------------------------------------------------------")
 
-    pUtil.tolog("*********END**********")
+        pUtil.tolog("*********END**********")
 
 class JobInfo(object):
     failcounter=0
@@ -303,8 +310,9 @@ class JobInfo(object):
 
 def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 10000 min ~= 1 week
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
-    pUtil.tolog("*********EPIC*********")
-    pUtil.tolog("Executing external command: %s"%cmd)
+    if verbose>=5: 
+        pUtil.tolog("*********EPIC*********")
+        pUtil.tolog("Executing external command: %s"%cmd)
     init_epic()
     job=NakedObject()
 
@@ -317,13 +325,11 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
     header = '#!/bin/bash\n'
     header += '#SBATCH -o ' + pipes.quote(job.out_fn) + '\n'
     header += '#SBATCH -e '+pipes.quote(job.err_fn) + '\n'
-    header += '#SBATCH -p '+pipes.quote(queue)+'\n'
-    header += '#SBATCH -D '+pipes.quote(ssh_remote_path)+'\n'
-    header += ('#SBATCH -n %d\n' % long(cpucount))
-              #('#SBATCH --cpus-per-task %d\n'%long(cpucount))
-    header += ('#SBATCH -t %02d:%02d:00\n' % (long(hours),long(minutes)))
     for param in sbatch_params:
         header += '#SBATCH ' + param +'\n'
+    header += '#SBATCH -p '+pipes.quote(queue)+'\n'
+    header += ('#SBATCH -n %d\n' % long(cpucount))
+    header += ('#SBATCH -t %02d:%02d:00\n' % (long(hours),long(minutes)))
     #cmd = '#!/bin/bash\n#SBATCH -o ' + pipes.quote(job.out_fn) + '\n' + \
     #      '#SBATCH -e '+pipes.quote(job.err_fn) + '\n' + \
     #      '#SBATCH -A proj63'+'\n' + \
@@ -332,8 +338,8 @@ def slurm(cmd,cpucount=1,walltime=10000,nonblocking=False,wait_queued=0): # 1000
     #      ('#SBATCH -t %02d:%02d:00\n'%(long(hours),long(minutes))+\
     #      cmd
     cmd = header + cmd
-      
-    pUtil.tolog('EPIC executing script: %s'%cmd)
+          
+    if verbose>=5: pUtil.tolog('EPIC executing script: %s'%cmd)
     write(job.cmd_file,cmd)
 
     sshcmd='export HOME=' + pipes.quote(ssh_remote_home) +';sbatch '+pipes.quote(job.cmd_file)
@@ -404,17 +410,18 @@ def slurm_wait_queued(jid):
         job.wait_time=job_wait_pending
 
     if not job.info.is_final() and not job.waiting:
-        pUtil.tolog("Waiting in queue")
-        pUtil.tolog("Wait time: %d"%job.wait_time)
+        if verbose>=5: 
+            pUtil.tolog("Waiting in queue")
+            pUtil.tolog("Wait time: %d"%job.wait_time)
         while True:
             st=slurm_get_state(jid)
 	    
             if st=='RUNNING' and not job.waiting or job.info.is_final():
         	try:
-        	    pUtil.tolog("TERT: trying to parse date")
+        	    if verbose>=5: pUtil.tolog("TERT: trying to parse date")
             	    job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%Y-%m-%dT%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
             	except:
-            	    pUtil.tolog("TERT: exception")
+            	    if verbose>=5: pUtil.tolog("TERT: exception")
             	    #job.endtime=datetime.datetime.strptime(job.info.se("StartTime"),"%H:%M:%S")+datetime.timedelta(0,job.walltime*60)
             	    job.endtime = datetime.datetime.strptime(job.info.se("StartTime"),"%H:%M:%S")
             	    job.endtime = job.endtime.replace(year=datetime.datetime.utcnow().year, 
@@ -422,7 +429,7 @@ def slurm_wait_queued(jid):
             	                        day=datetime.datetime.utcnow().day)
             	    job.endtime += datetime.timedelta(0,job.walltime*60)
             	
-            	pUtil.tolog("TERT: " + str(job.endtime))
+            	if verbose>=5: pUtil.tolog("TERT: " + str(job.endtime))
                 job.waiting=True
                 break
             
@@ -449,10 +456,11 @@ def slurm_finalize(jid):
 
     assert job.info.is_final()
 
-    pUtil.tolog("Job ended with state %s"%job.info.state)
-    pUtil.tolog("Exit code: %s"%job.info.ec())
+    if verbose>=3: 
+        pUtil.tolog("Job ended with state %s"%job.info.state)
+        pUtil.tolog("Exit code: %s"%job.info.ec())
 
-    pUtil.tolog("Ruslan:"+job.out_fn+" "+job.err_fn)
+        pUtil.tolog("Ruslan:"+job.out_fn+" "+job.err_fn)
     if job.info.state=='WRONG_ID':
         job.output=''
         job.error='Wrong SLURM job ID returned'
@@ -469,12 +477,12 @@ def slurm_finalize(jid):
             delete(job.out_fn)
             delete(job.err_fn)
 
-
-        pUtil.tolog("Output file:\n"+\
+        if verbose>=5:
+            pUtil.tolog("Output file:\n"+\
                     "-----------------------------------------------------------------------------------------------------\n"+\
                     job.output+\
                     "\n-----------------------------------------------------------------------------------------------------")
-        pUtil.tolog("Error file:\n"+\
+            pUtil.tolog("Error file:\n"+\
                     "-----------------------------------------------------------------------------------------------------\n"+\
                     job.error+\
                     "\n-----------------------------------------------------------------------------------------------------")
@@ -483,8 +491,8 @@ def slurm_finalize(jid):
 
     if job.cancelling:
         exit_code=-100
-
-    pUtil.tolog("*********END**********")
+    
+    if verbose>=5: pUtil.tolog("*********END**********")
 
 def slurm_get_state(jid):
     global saga_session,saga_context,ssh_user,ssh_keypath,ssh_pass,ssh_remote_path,queue,error,output,state,exit_code,job_wait_pending,job_wait_time,ssh_remote_home,__jobs
@@ -512,12 +520,13 @@ def slurm_get_state(jid):
                 jd=JobInfo(o)
                 st=jd.state
                 if st!=job.info.state:
-                    pUtil.tolog("Job state changed to %s"  %  st)
+                    if verbose>=5: pUtil.tolog("Job state changed to %s"  %  st)
 
                 job.info=jd
                 
-                pUtil.tolog("TERT endtime: {et}".format(et=str(job.endtime)))
-                pUtil.tolog("TERT now: {et}".format(et=str(datetime.datetime.now())))
+                if verbose>=5:
+                    pUtil.tolog("TERT endtime: {et}".format(et=str(job.endtime)))
+                    pUtil.tolog("TERT now: {et}".format(et=str(datetime.datetime.now())))
 
                 if isinstance(job.endtime,datetime.datetime) and job.endtime<datetime.datetime.now():
                     pUtil.tolog("Job exceeded walltime, cancelling")
@@ -550,7 +559,7 @@ def slurm_wait(jid):
     sshcmd=ssh_command()+' '+pipes.quote(scontrolcmd)
 
     if not job.info.is_final():
-        pUtil.tolog("Waiting for job to end")
+        if verbose>=5: pUtil.tolog("Waiting for job to end")
         while True:
             slurm_get_state(jid)
 
@@ -586,7 +595,6 @@ def fetch_file(original,local='./',remove=False):
     local,ldn,lfn=__L(local,rfn)
 
     cmd="rsync -e "+pipes.quote(ssh_command(False))+' -rtpL '
-    #TERT __2commented
     #if remove:
     #    cmd+='--remove-sent-files --remove-source-files '
 
@@ -594,20 +602,20 @@ def fetch_file(original,local='./',remove=False):
 
     cmd+=pipes.quote(ssh_ident()+":"+original)+" "+pipes.quote(local)
 
-    # print(cmd)
+    if verbose==7: print(cmd)
     iteration = 0
     while not os.path.isfile(local):
         iteration += 1
         if iteration>5:
-            pUtil.tolog("too much fetching trials")
+            pUtil.tolog("Too much fetching trials failed")
             e = OSError("fetching file failed")
             e.errno=errno.ENOENT
             raise e
         #time.sleep(random.random()+0.2)
-        pUtil.tolog("fetching iteration %d" % iteration)
+        if verbose>=5: pUtil.tolog("fetching iteration %d" % iteration)
         with SimpleFlock(lock_fn,lock_timeout,number_locks):
             s, o = commands.getstatusoutput(cmd)
-            pUtil.tolog("rsync returned %d: %s"%(s,o))
+            if verbose>=5: pUtil.tolog("rsync returned %d: %s"%(s,o))
 
     return local
 
@@ -628,10 +636,10 @@ def ls(dir=".",extended=False):
     #     ret.append(str(f))
     # fp.close()
     cmd="rsync -e "+pipes.quote(ssh_command(False))+" --list-only "+pipes.quote(ssh_ident()+":"+dir+"/")
-    pUtil.tolog("TERT: " + cmd)
+    if verbose==7: pUtil.tolog("TERT: " + cmd)
     with SimpleFlock(lock_fn,lock_timeout,number_locks):
         s, o = commands.getstatusoutput(cmd)
-    pUtil.tolog("TERT: " + o)
+    if verbose==7: pUtil.tolog("TERT: " + o)
     reader = csv.DictReader(o.decode('ascii').splitlines(),
                         delimiter=' ', skipinitialspace=True,
                         fieldnames=['permissions', 'size',
@@ -642,7 +650,7 @@ def ls(dir=".",extended=False):
     for f in reader:
         if f['name'] != '.':
             ret.append(f['name'])
-    pUtil.tolog("TERT: " + str(ret))
+    if verbose==7: pUtil.tolog("TERT: " + str(ret))
     return ret
 
 def delete(remote):
@@ -651,7 +659,7 @@ def delete(remote):
 
     remote,rdn,rfn=__R(remote)
 
-    pUtil.tolog("Deleting remote file: %s"%remote)
+    if verbose>=5: pUtil.tolog("Deleting remote file: %s"%remote)
     # cmd=ssh_command()+"
     s, o = __call_ssh("rm -rf "+pipes.quote(remote))
 
@@ -667,7 +675,7 @@ def push_file(original,remote='./'):
 
     cmd+=pipes.quote(original)+" "+pipes.quote(ssh_ident()+":"+remote)
 
-    # print(cmd)
+    if verbose==7: print(cmd)
     with SimpleFlock(lock_fn,lock_timeout,number_locks):
         s, o = commands.getstatusoutput(cmd)
 
@@ -675,17 +683,17 @@ def push_file(original,remote='./'):
 
 def read(original,delete=False):
     tmpname=mymktemp()
-    pUtil.tolog("Using temporary name: %s"%tmpname)
+    if verbose==7: pUtil.tolog("Using temporary name: %s"%tmpname)
     fetch_file(original,tmpname,delete)
-    pUtil.tolog("Reading tmp file")
+    if verbose==7: pUtil.tolog("Reading tmp file")
     ret=open(tmpname).read()
-    pUtil.tolog("Removing tmp file")
+    if verbose==7: pUtil.tolog("Removing tmp file")
     os.remove(tmpname)
     return ret
 
 def write(filename,str,append=False):
     tmpname=mymktemp()
-    pUtil.tolog("Using temporary name: %s"%tmpname)
+    if verbose==7: pUtil.tolog("Using temporary name: %s"%tmpname)
     if append:
         prepend=read(filename)
     f=open(tmpname,"w+")
@@ -694,7 +702,7 @@ def write(filename,str,append=False):
     f.write(str)
     f.close()
     ret=push_file(tmpname,filename)
-    pUtil.tolog("Removing tmp file")
+    if verbose==7: pUtil.tolog("Removing tmp file")
     os.remove(tmpname)
     return ret
 

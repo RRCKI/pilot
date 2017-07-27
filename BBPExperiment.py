@@ -485,7 +485,8 @@ class BBPExperiment(Experiment):
                     "OutPutFileCatalog.xml",
                     "jobReportExtract.pickle",
                     "metadata-*.xml",
-                    "PoolFileCatalog.xml"]
+                    "PoolFileCatalog.xml",
+                    "file_temp_test_lock*.txt"]
 
         for _dir in dir_list:
             files = glob(os.path.join(workdir, _dir))
