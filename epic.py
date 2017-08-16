@@ -43,12 +43,12 @@ ssh_remote_home=hpcconf.ssh.remote_home
 ssh_remote_temp=hpcconf.ssh.remote_temp
 ssh_remote_path=None
 
-if verbose in hpcconf:
+if hasattr(hpcconf,'verbose'):
     #param for loglevel: 1 = standart (ERROR); 3 ~= WARN; 5 =INFO; 7=DEBUG (for example, on it - ssh command print)   
     verbose=hpcconf.verbose
 else:
     verbose=1
-if users_switch_wrapper in hpcconf: #ssh_remote_home/../bin/runme
+if hasattr(hpcconf,'users_switch_wrapper'): #ssh_remote_home/../bin/runme
     users_switch_wrapper=hpcconf.users_switch_wrapper
 else:
     users_switch_wrapper=None
