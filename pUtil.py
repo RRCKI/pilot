@@ -2166,9 +2166,6 @@ def toServer(baseURL, cmd, data, path, experiment):
 
             # create the parameter list from the dispatcher response
             data, response = parseDispatcherResponse(response)
-            # update the dispatcher data for Event Service merge jobs
-            if experiment != "": # experiment is only set for GETJOB, skip this otherwise
-                data = updateDispatcherData4ES(data, experiment, path)
 
             status = int(data['StatusCode'])
             if status != 0:
@@ -2334,73 +2331,6 @@ def updateJobPars(jobPars, fnames):
         tolog("%s: %s" % (identifier, fnames[identifier]))
     jobPars = jobPars.replace("--inputHitsFile=", "")
     return jobPars
-
-def updateDispatcherData4ES(data, experiment, path):
-    """ Update the input file list for Event Service merge jobs """
-
-    # For Event Service merge jobs, the input file list will not arrive in the inFiles
-    # list as usual, but in the writeToFile field, so inFiles need to be corrected
-    # path = pilot_init dir, so we know where the file list files are written
-    # data = data={'jobsetID': '2235472772', .. }
-
-    # Is this an event service merge job? If so, the input file list should be updated
-    if data.has_key('eventServiceMerge'):
-        if data['eventServiceMerge'].lower() == "true":
-            # Remove any --postInclude=RecJobTransforms/UseFrontierFallbackDBRelease.py from the jobPars
-            #if "--postInclude=RecJobTransforms/UseFrontierFallbackDBRelease.py" in data['jobPars']:
-            #    data['jobPars'] = data['jobPars'].replace("--postInclude=RecJobTransforms/UseFrontierFallbackDBRelease.py", "")
-            #    tolog("Removed \'--postInclude=RecJobTransforms/UseFrontierFallbackDBRelease.py\' from jobPars")
-
-            if data.has_key('writeToFile'):
-                writeToFile = data['writeToFile']
-                esFileDictionary, orderedFnameList = createESFileDictionary(writeToFile)
-                tolog("esFileDictionary=%s" % (esFileDictionary))
-                tolog("orderedFnameList=%s" % (orderedFnameList))
-                if esFileDictionary != {}:
-                    """
-                    # Replace the @inputFor* directorive with the file list
-                    for name in orderedFnameList:
-                        tolog("Replacing @%s with %s" % (name, esFileDictionary[name]))
-                        data['jobPars'] = data['jobPars'].replace("@%s" % (name), esFileDictionary[name])
-                    """
-
-                    # Remove the autoconf
-                    if "--autoConfiguration=everything " in data['jobPars']:
-                        data['jobPars'] = data['jobPars'].replace("--autoConfiguration=everything ", " ")
-                    # Write event service file lists to the proper input file
-                    #ec, fnames = writeToInputFile(path, esFileDictionary, orderedFnameList)
-                    ec = 0
-                    if ec == 0:
-                        #inputFiles = getESInputFiles(esFileDictionary)
-
-                        # Update the inFiles list (not necessary??)
-                        #data['inFiles'] = inputFiles
-
-                        # Correct the dsname?
-                        # filesize and checksum? not known (no file catalog)
-
-                        # Replace the NULL valued guids for the ES files
-                        data['GUID'] = updateESGUIDs(data['GUID'])
-
-                        # Replace the @identifiers in the jobParameters
-                        #data['jobPars'] = updateJobPars(data['jobPars'], fnames)
-
-                        # Update the copytoolin (should use the proper objectstore site mover)
-                        si = getSiteInformation(experiment)
-                        ec = si.replaceQueuedataField("copytoolin", "objectstore")
-
-                    else:
-                        tolog("Cannot continue with event service merge job")
-                else:
-                    tolog("Empty event range dictionary")
-            else:
-                tolog("writeToFile not present in job def")
-        else:
-            tolog("eventServiceMerge = %s" % (data['eventServiceMerge']))
-    #else:
-    #    tolog("Not an event service merge job")
-
-    return data
 
 def parseDispatcherResponse(response):
     """ Create the parameter list from the dispatcher response """
@@ -4356,30 +4286,6 @@ def extractPattern(source, pattern):
         extracted = _extracted[0]
 
     return extracted
-
-def getEventService(experiment):
-    """ Return a reference to an EventService class """
-
-    # The EventServiceFactory ensures that the returned object is a Singleton
-    # Usage:
-    #    _exp = getEventService(readpar('experiment')) # or from pilot option
-    #    if _exp:
-    #        _exp.somemethod("Hello")
-    #    else:
-    #        tolog("!!WARNING!!1111!! Failed to instantiate EventService class")
-
-    from EventServiceFactory import EventServiceFactory
-    factory = EventServiceFactory()
-    _exp = None
-
-    try:
-        eventServiceClass = factory.newEventService(experiment)
-    except Exception, e:
-        tolog("!!WARNING!!1114!! EventService factory threw an exception: %s" % (e))
-    else:
-        _exp = eventServiceClass()
-
-    return _exp
 
 def isValidGUID(guid):
     """ Verify the GUID generated with uuidgen """

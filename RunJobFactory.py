@@ -6,11 +6,10 @@
 
 from types import TypeType
 from RunJob import RunJob
-from RunJobEvent import RunJobEvent
+#from RunJobEvent import RunJobEvent
 from RunJobHPC import RunJobHPC
 from RunJobTitan import RunJobTitan
-from RunJobNormal import RunJobNormal
-from RunJobHpcEvent import RunJobHpcEvent
+#from RunJobHpcEvent import RunJobHpcEvent
 
 class RunJobFactory(object):
 
@@ -37,7 +36,7 @@ if __name__ == "__main__":
 
     factory = RunJobFactory()
 
-    types = ['Normal', 'Normal2', 'RunJobEvent', 'HPC', 'Mira', 'Titan', 'Dummy']
+    types = ['HPC', 'Titan', 'Dummy']
 
     for t in types:
         print "\nAttempting to get class for type", t

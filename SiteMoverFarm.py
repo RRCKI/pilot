@@ -2,34 +2,17 @@ from futil import *
 from pUtil import tolog
 
 from SiteMover import SiteMover                             # OU_OCHEP_SWT2
-from lcgcpSiteMover import lcgcpSiteMover                   # LYON, CERN, MANC, LANCS, FZK
-from lcgcp2SiteMover import lcgcp2SiteMover                 # US sites; AGLT2 
 from mvSiteMover import mvSiteMover                         # NDGF
-from rfcpLFCSiteMover import rfcpLFCSiteMover               # GLASGOW (works for all DPM sites)
 from LocalSiteMover import LocalSiteMover                   # HU, MWT2 
 from curlSiteMover import curlSiteMover                     # ASGC
-from objectstoreSiteMover import objectstoreSiteMover       #
-from GFAL2SiteMover import GFAL2SiteMover                   # GFAL2
-from GSIftpSiteMover import GSIftpSiteMover                 # HPC sites
-from S3SiteMover import S3SiteMover                         # S3
-from sshlcgcpSiteMover import sshlcgcpSiteMover             # HPC KI
 from sshlcgcp2SM import sshlcgcp2SiteMover                  # HPC KI
 from sshmvBBP import sshmvSiteMover                  # BBP
 
 mover_selector = {
     SiteMover.copyCommand : SiteMover,
-    lcgcpSiteMover.copyCommand : lcgcpSiteMover,
-    lcgcp2SiteMover.copyCommand : lcgcp2SiteMover,
     mvSiteMover.copyCommand : mvSiteMover,
-    rfcpLFCSiteMover.copyCommand : rfcpLFCSiteMover,
     LocalSiteMover.copyCommand : LocalSiteMover,
     curlSiteMover.copyCommand : curlSiteMover,
-    objectstoreSiteMover.copyCommand : objectstoreSiteMover,
-    GFAL2SiteMover.copyCommand : GFAL2SiteMover,
-    GSIftpSiteMover.copyCommand : GSIftpSiteMover,
-    S3SiteMover.copyCommand : S3SiteMover,
-    sshlcgcpSiteMover.copyCommand : sshlcgcpSiteMover,
-    sshlcgcp2SiteMover.copyCommand : sshlcgcp2SiteMover,
     sshmvSiteMover.copyCommand : sshmvSiteMover,
     }
 

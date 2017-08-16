@@ -1,6 +1,22 @@
 Complete change log for PanDA Pilot version PICARD 59a
 ------------------------------------------------------
 
+60a mod:
+REMOVED:
+Other Experiments:
+AMSTaiwanExperiment.py CMSExperiment.py NordugridATLASExperiment.py ATLASExperiment.py
+ATLASSiteInformation.py AMSTaiwanSiteInformation.py CMSSiteInformation.py NordugridATLASSiteInformation.py
+Other SiteMovers:
+aria2cSiteMover.py BNLdCacheSiteMover.py CastorSiteMover.py castorSvcClassSiteMover.py ChirpSiteMover.py dCache* FAXSiteMover.py HUSiteMover.py sshlcgcpSiteMover_back.py sshlcgcpSiteMover_poyda.py stormSiteMover.py xrdcpSiteMover.py xrootdObjectstoreSiteMover.py xrootdSiteMover.py 
+sshcurlSM.py sshcurlmvSM.py sshmvSM.py slurmcurlSM.py
+GFAL2SiteMover.py GSIftpSiteMover.py lcgcp2SiteMover.py lcgcpSiteMover.py rfcpLFCSiteMover.py S3ObjectstoreSiteMover.py S3SiteMover.py sshlcgcpSiteMover.py objectstoreSiteMover.py
+Mover2.py
+Other RunJob:
+RunJobHopper.py RunJobEdison.py RunJobAnselm.py RunJobMira.py RunJobNormal.py RunJobKurchatov*
+Event services:
+ATLASEventService.py EventService.py EventServiceFactory.py EventRanges.py PilotYamplServer.py; modified pUtils.py
+HPC stuff:
+from HPC subdir.
 
 60a:
 

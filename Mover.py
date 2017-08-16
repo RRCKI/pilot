@@ -3,8 +3,6 @@
 
 import os
 import sys
-import traceback
-
 import commands
 import re
 import urllib
@@ -145,8 +143,6 @@ def get_data(job, jobSite, ins, stageinTries, analysisJob=False, usect=True, pin
     except Exception, e:
         pilotErrorDiag = "Get function can not be called for staging input files: %s" % str(e)
         tolog("!!FAILED!!3000!! Exception caught: %s" % (pilotErrorDiag))
-        print traceback.format_exc()
-        #tolog(" \n*** Backtrace:\n %s" % e.traceback)
         if str(e).find("No space left on device") >= 0:
             tolog("!!FAILED!!3000!! Get error: No space left on local disk (%s)" % (pinitdir))
             ec = error.ERR_NOLOCALSPACE
@@ -154,7 +150,7 @@ def get_data(job, jobSite, ins, stageinTries, analysisJob=False, usect=True, pin
             ec = error.ERR_GETDATAEXC
 
         # write traceback info to stderr
-        #import traceback
+        import traceback
         exc, msg, tb = sys.exc_info()
         traceback.print_tb(tb)
 
@@ -651,8 +647,6 @@ def getFileInfo(region, ub, guids, dsname, dsdict, lfns, pinitdir, analysisJob, 
 #                se_path = sitemover.getRucioPath(file_nr, tokens, scope_dict, lfn, path, analysisJob)
 #            else:
 #                se_path = os.path.join(path, lfn)
-	    print path
-	    print lfn
             se_path = os.path.join(path, lfn)
 
             # get the file info
@@ -4226,11 +4220,11 @@ def verifyAvailableSpace(sitemover, totalFileSize, path, error):
     doVerification = sitemover.doFileVerifications()
     
     # are we wihin the limit?
-    #if (_neededSpace > _availableSpace) and doVerification:
-    #    pilotErrorDiag = "Not enough local space for staging input files and run the job (need %d B, but only have %d B)" %\
-    #                     (_neededSpace, _availableSpace)
-    #    tolog("!!FAILED!!2999!! %s" % (pilotErrorDiag))
-    #    ec = error.ERR_NOLOCALSPACE
+    if (_neededSpace > _availableSpace) and doVerification:
+        pilotErrorDiag = "Not enough local space for staging input files and run the job (need %d B, but only have %d B)" %\
+                         (_neededSpace, _availableSpace)
+        tolog("!!FAILED!!2999!! %s" % (pilotErrorDiag))
+        ec = error.ERR_NOLOCALSPACE
 
     return ec, pilotErrorDiag
 
