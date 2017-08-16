@@ -8,7 +8,6 @@ from mvSiteMover import mvSiteMover                         # NDGF
 from rfcpLFCSiteMover import rfcpLFCSiteMover               # GLASGOW (works for all DPM sites)
 from LocalSiteMover import LocalSiteMover                   # HU, MWT2 
 from curlSiteMover import curlSiteMover                     # ASGC
-from FAXSiteMover import FAXSiteMover                       # CVMFS sites
 from objectstoreSiteMover import objectstoreSiteMover       #
 from GFAL2SiteMover import GFAL2SiteMover                   # GFAL2
 from GSIftpSiteMover import GSIftpSiteMover                 # HPC sites
@@ -25,7 +24,6 @@ mover_selector = {
     rfcpLFCSiteMover.copyCommand : rfcpLFCSiteMover,
     LocalSiteMover.copyCommand : LocalSiteMover,
     curlSiteMover.copyCommand : curlSiteMover,
-    FAXSiteMover.copyCommand : FAXSiteMover,
     objectstoreSiteMover.copyCommand : objectstoreSiteMover,
     GFAL2SiteMover.copyCommand : GFAL2SiteMover,
     GSIftpSiteMover.copyCommand : GSIftpSiteMover,
